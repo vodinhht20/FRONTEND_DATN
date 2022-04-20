@@ -24,9 +24,9 @@ const MenuBottom = () => {
           <FileZipOutlined/>
           <span className="nav-name">Đơn hàng</span>
         </NavLink>
-        <NavLink to={"/diemdanh"} className="nav-item">
+        <NavLink to={"/cham-cong"} className="nav-item">
           <CheckCircleOutlined/>
-          <span className="nav-name">Điểm danh</span>
+          <span className="nav-name">Chấm công</span>
         </NavLink>
         <NavLink to={"/more"} className="nav-item">
           <MenuOutlined/>

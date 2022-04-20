@@ -13,9 +13,6 @@
     width: 130px;
     object-fit: cover;
 }
-.content-wrapper{
-    height: 85.5vh;
-}
 .ant-row{
     margin: 0 !important;
 }
@@ -27,6 +24,7 @@
     min-width: 100%;
     height: 100px;
     background-color: #fff;
+    z-index: 100;
 }
 .nav-bottom .nav-item .anticon{
     font-size: 3vw;
@@ -65,3 +63,22 @@
         font-size: 13px;
     }
 }
+.events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .events .ant-badge-status {
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .notes-month {
+    font-size: 28px;
+    text-align: center;
+  }
+  .notes-month section {
+    font-size: 28px;
+  }
