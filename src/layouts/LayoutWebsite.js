@@ -1,4 +1,4 @@
-import { Layout, PageHeader } from "antd";
+import { Col, Layout, PageHeader, Row } from "antd";
 import { Outlet } from "react-router-dom";
 import Head from "../components/Head";
 import MenuBottom from "../components/MenuBottom";
@@ -13,7 +13,11 @@ const LayoutWebsite = () => {
           <Head />
         </Header>
         <Content className="content-wrapper">
-          <Outlet />
+          <Row justify="center">
+            <Col span="20">
+              <Outlet />
+            </Col>
+          </Row>
         </Content>
         <MenuBottom />
       </Layout>
