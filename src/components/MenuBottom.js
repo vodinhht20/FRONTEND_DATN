@@ -22,9 +22,9 @@ const MenuBottom = () => {
         <FileZipOutlined />
         <span>Đơn hàng</span>
       </NavLink>
-      <NavLink to={"/diemdanh"}>
+      <NavLink to={"/cham-cong"}>
         <CheckCircleOutlined />
-        <span>Điểm danh</span>
+        <span>Chấm công</span>
       </NavLink>
       <NavLink to={"/"}>
         <MenuOutlined />
