@@ -10,40 +10,75 @@
     justify-content: center;
 }
 .head .logo img{
-    width: 6.2vw;
-}
-.content-wrapper{
-    height: 85.5vh;
+    width: 130px;
+    object-fit: cover;
 }
 .ant-row{
     margin: 0 !important;
 }
-.menu-bottom {
+.nav-bottom {
+    bottom: 0;
+    box-shadow: 1px 1px 10px rgb(216, 211, 211);
     position: fixed;
     bottom: 0;
-    width: 100%;
-    height: 4vw;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 3vw 16vw;
-    box-shadow: 1px 1px 10px #000;
+    min-width: 100%;
+    height: 100px;
+    background-color: #fff;
+    z-index: 100;
 }
-.menu-bottom a{
-    color: #50535a;
-    text-decoration: none;
+.nav-bottom .nav-item .anticon{
+    font-size: 3vw;
 }
-.menu-bottom a.active{
+.nav-bottom .active{
     color: #096dd9;
 }
-.menu-bottom a span{
+.nav-bottom .wrap-item {
     display: flex;
-    width: 100%;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    margin: .5vw 0;
+    max-width: 1200px;
+
 }
-.menu-bottom a span:nth-child(1){
-    font-size: 2vw;
+.nav-bottom .nav-item {
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    grid-row-gap: 10px;
 }
+.wrap-item .anticon svg {
+    font-size: 40px;
+}
+.wrap-item a{
+    color: #50535a;
+}
+@media (max-width: 768px) {
+    .wrap-item .anticon svg {
+        font-size: 30px;
+    }
+    .wrap-item .nav-item {
+        min-width: 40px;
+    }
+    .wrap-item .nav-name {
+        font-size: 13px;
+    }
+}
+.events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .events .ant-badge-status {
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .notes-month {
+    font-size: 28px;
+    text-align: center;
+  }
+  .notes-month section {
+    font-size: 28px;
+  }
