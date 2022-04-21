@@ -3,6 +3,9 @@
     margin: 0;
     padding: 0;
 }
+
+/* css head  */
+
 .head{
     width: 100%;
     height: 100%;
@@ -31,6 +34,20 @@
 }
 .nav-bottom .active{
     color: #096dd9;
+    position: relative;
+}
+.nav-bottom .active::after{
+    content: "";
+    background-color: #096dd9;
+    height: 1vw;
+    bottom: -1vw;
+    position: absolute;
+    width: 100%;
+}
+@media (min-width: 1200px) {
+    .nav-bottom .active::after{
+        height: 10px;
+    }
 }
 .nav-bottom .wrap-item {
     display: flex;
@@ -63,22 +80,42 @@
         font-size: 13px;
     }
 }
+
+/* end css head */
+
+/* css home */
+.home {
+    height: 100vh;
+}
+/* end css home */
+
+/* css more */
+.more {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5vw;
+    flex-direction: column;
+}
+/* end css more */
+
 .events {
     margin: 0;
     padding: 0;
     list-style: none;
-  }
+}
   .events .ant-badge-status {
     width: 100%;
     overflow: hidden;
     font-size: 12px;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
-  .notes-month {
+}
+.notes-month {
     font-size: 28px;
     text-align: center;
-  }
-  .notes-month section {
+}
+.notes-month section {
     font-size: 28px;
-  }
+}
