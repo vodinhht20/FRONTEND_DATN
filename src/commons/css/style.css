@@ -98,6 +98,14 @@
 .dashboard {
     height: 100vh;
 }
+.dashboard .ant-col{
+    padding: 0 !important;
+}
+.dashboard-container .info-count {
+    color: #ff9d36;
+    font-size: 16px;
+    font-weight: 600;
+}
 /* css more */
 .more {
     height: 100vh;
