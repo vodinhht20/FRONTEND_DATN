@@ -9,6 +9,10 @@
     margin: 0 auto;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 /* css head  */
 
 .head{

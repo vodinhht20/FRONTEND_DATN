@@ -12,7 +12,7 @@ const LayoutWebsite = () => {
         <Header>
           <Head />
         </Header>
-        <Content className="content-wrapper">
+        <Content className="content-wrapper" style={{ marginBottom: '100px'}}>
           <Row justify="center">
             <Col xs={24} md={22} lg={20}>
               <Outlet />
