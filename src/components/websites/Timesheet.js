@@ -153,37 +153,37 @@ const Timesheet = (value) => {
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
-                <Card title="Về sớm" bordered={false} loading={loading} active>
+                <Card title="Về sớm" bordered={false} loading={loading}>
                   <span className="text-info">{dataTimeSheet.early} phút / {dataTimeSheet.countEarly} lần</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
-                <Card title="Công nghỉ phép" bordered={false} loading={loading} active>
+                <Card title="Công nghỉ phép" bordered={false} loading={loading}>
                   <span className="text-info">{dataTimeSheet.leave} ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
-                <Card title="Công giờ OT" bordered={false} loading={loading} active>
+                <Card title="Công giờ OT" bordered={false} loading={loading}>
                   <span className="text-info">{dataTimeSheet.OT} giờ</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
-                <Card title="Công nghỉ lễ" bordered={false} loading={loading} active>
+                <Card title="Công nghỉ lễ" bordered={false} loading={loading}>
                   <span className="text-info">{dataTimeSheet.holiday} ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
-                <Card title="Công công tác" bordered={false} loading={loading} active>
+                <Card title="Công công tác" bordered={false} loading={loading}>
                   <span className="text-info">{dataTimeSheet.workingUnit} ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
-                <Card title="Công nghỉ không lương" bordered={false} loading={loading} active>
+                <Card title="Công nghỉ không lương" bordered={false} loading={loading}>
                   <span className="text-info">{dataTimeSheet.unpaidLeave} ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
-                <Card title="Công work from home" bordered={false} loading={loading} active>
+                <Card title="Công work from home" bordered={false} loading={loading}>
                   <span className="text-info">{dataTimeSheet.WFH} ngày</span>
                 </Card>
               </Col>
