@@ -14,7 +14,7 @@ const LayoutWebsite = () => {
         </Header>
         <Content className="content-wrapper">
           <Row justify="center">
-            <Col span="20">
+            <Col xs={24} md={22} lg={20}>
               <Outlet />
             </Col>
           </Row>

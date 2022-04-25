@@ -4,6 +4,11 @@
     padding: 0;
 }
 
+.wr-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 /* css head  */
 
 .head{
@@ -44,10 +49,9 @@
     position: absolute;
     width: 100%;
 }
-@media (min-width: 1200px) {
-    .nav-bottom .active::after{
-        height: 10px;
-    }
+.nav-bottom .active::after{
+    height: 7px;
+    border-radius: 3px;
 }
 .nav-bottom .wrap-item {
     display: flex;
@@ -64,7 +68,7 @@
     grid-row-gap: 10px;
 }
 .wrap-item .anticon svg {
-    font-size: 40px;
+    font-size: 35px;
 }
 .wrap-item a{
     color: #50535a;
@@ -78,6 +82,9 @@
     }
     .wrap-item .nav-name {
         font-size: 13px;
+    }
+    .nav-bottom .active::after{
+        height: 5px;
     }
 }
 
@@ -120,4 +127,31 @@
 }
 .notes-month section {
     font-size: 28px;
+}
+
+/* style timesheet */
+.timesheet .ant-page-header {
+    box-shadow: 1px 1px 7px rgb(212, 209, 209);
+}
+.statistical-work-month {
+    margin-bottom: 20px;
+}
+.timesheet .statistical-work-month .ant-card{
+    background: #f4f4f4 !important;
+    box-shadow: 1px 1px 8px #d7d7d7;
+    border-radius: 3px;
+}
+.timesheet .statistical-work-month .ant-card-head {
+    min-height: unset;
+}
+.timesheet .statistical-work-month .ant-card-head .ant-card-head-title{
+    padding: 0;
+}
+.timesheet .statistical-work-month .ant-card-body {
+    padding: 10px 24px;
+}
+.timesheet .text-info {
+    color: #ff9d36;
+    font-size: 16px;
+    font-weight: 600;
 }
