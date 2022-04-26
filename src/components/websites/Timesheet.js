@@ -49,7 +49,7 @@ const Timesheet = (value) => {
     switch (formatDate(value, 'DD-MM')) {
       case '30-04':
         listData = [
-          { type: 'success', content: 'Nghĩ lễ 30/4' },
+          { type: 'success', content: 'Nghỉ lễ 30/4' },
         ];
         break;
       case '01-05':
@@ -206,7 +206,6 @@ const Timesheet = (value) => {
               })
             }}
           />
-          ;
         </PageHeader>
       </div>
     </>
