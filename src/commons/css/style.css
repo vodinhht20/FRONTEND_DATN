@@ -164,3 +164,27 @@
     font-size: 16px;
     font-weight: 600;
 }
+.timesheet .ant-card-loading-content .ant-row:nth-child(-n+3) {
+    display: none;
+}
+@media (max-width: 768px){
+    .timesheet .ant-page-header-heading-title {
+        font-size: 18px !important;
+    }
+}
+@media (max-width: 375px) {
+    .timesheet .statistical-work-month .ant-card-head .ant-card-head-title {
+        font-size: 15px;
+    }
+    .timesheet .statistical-work-month .ant-card-body {
+        padding: 10px 0;
+    }
+    .timesheet .statistical-work-month .ant-card-body .text-info{
+        font-size: 15px;
+    }
+    .timesheet .ant-page-header-heading-left {
+        flex-direction: column;
+        align-items: unset;
+    }
+
+}
