@@ -1,5 +1,5 @@
 import moment from "moment";
-import { ExclamationCircleOutlined, MoreOutlined } from "@ant-design/icons";
+import { MoreOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { formatDate } from "../../commons/services/Library";
 import {
@@ -20,10 +20,7 @@ const Timesheet = (value) => {
   const [dataTimeSheet, setDataTimeSheet] = useState({});
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState('Content of the modal');
   const [form] = Form.useForm();
-  const { confirm } = Modal;
   useEffect(() => {
     // call api set data
     setDataTimeSheet({
@@ -151,7 +148,7 @@ const Timesheet = (value) => {
           <div className="site-card-wrapper statistical-work-month">
             <Row gutter={[12,12]}>
               <Col xs={12} md={8} lg={6}>
-                <Card title="Đi muộn" bordered={false} loading={loading}>
+                <Card title="Đi muộn" bordered={false} loading={loading} active>
                   <span className="text-info">{dataTimeSheet.late} phút / {dataTimeSheet.countLate} lần</span>
                 </Card>
               </Col>
@@ -162,32 +159,32 @@ const Timesheet = (value) => {
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công nghỉ phép" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.leave}</span>
+                  <span className="text-info">{dataTimeSheet.leave} ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công giờ OT" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.OT}</span>
+                  <span className="text-info">{dataTimeSheet.OT} giờ</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công nghỉ lễ" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.holiday}</span>
+                  <span className="text-info">{dataTimeSheet.holiday} ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công công tác" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.workingUnit}</span>
+                  <span className="text-info">{dataTimeSheet.workingUnit} ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công nghỉ không lương" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.unpaidLeave}</span>
+                  <span className="text-info">{dataTimeSheet.unpaidLeave} ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công work from home" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.WFH}</span>
+                  <span className="text-info">{dataTimeSheet.WFH} ngày</span>
                 </Card>
               </Col>
             </Row>
@@ -203,10 +200,10 @@ const Timesheet = (value) => {
                 dayFormat: moment.updateLocale("vn", {
                   weekdaysMin: ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7" ]
                 }),
-                monthFormat: moment.updateLocale("vn", {
-                  monthsShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12' ]
-                })
               },
+              monthFormat: moment.updateLocale("vn", {
+                monthsShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12' ]
+              })
             }}
           />
           ;
