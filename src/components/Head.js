@@ -3,7 +3,7 @@ import logo from "../commons/images/logo.png";
 const Head = () => {
     return (
         <div className="head">
-            <Link to={"/"} className="logo"><img src={"https://caodang.fpt.edu.vn/wp-content/uploads/logo-3.png"} /></Link>
+            <Link to={"/"} className="logo"><img src={logo} /></Link>
         </div>
     )
 }
