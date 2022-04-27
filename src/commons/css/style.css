@@ -5,6 +5,7 @@
 }
 :root {
     --color-orange: #ff9d36;
+    --color-blue: #096dd9;
 }
 .wr-container {
     max-width: 1200px;
@@ -192,7 +193,7 @@
 }
 /* style Timekeep page */
 .icon-change-workpace svg{
-    font-size: 23px;
+    font-size: 20px;
     color: var(--color-orange);
     cursor: pointer;
     margin-left: 5px;
@@ -200,4 +201,5 @@
 }
 .icon-change-workpace:hover svg{
     opacity: 0.9;
+    color: var(--color-blue);
 }
