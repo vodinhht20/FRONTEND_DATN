@@ -203,3 +203,6 @@
     opacity: 0.9;
     color: var(--color-blue);
 }
+.main-clock time{
+    color: var(--color-blue);
+}
