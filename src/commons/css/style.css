@@ -129,7 +129,7 @@
     padding: 0;
     list-style: none;
 }
-  .events .ant-badge-status {
+.events .ant-badge-status {
     width: 100%;
     overflow: hidden;
     font-size: 12px;
@@ -167,29 +167,72 @@
     font-size: 16px;
     font-weight: 600;
 }
-.timesheet .ant-card-loading-content .ant-row:nth-child(-n+3) {
-    display: none;
-}
-@media (max-width: 768px){
-    .timesheet .ant-page-header-heading-title {
-        font-size: 18px !important;
-    }
-}
-@media (max-width: 375px) {
-    .timesheet .statistical-work-month .ant-card-head .ant-card-head-title {
-        font-size: 15px;
-    }
-    .timesheet .statistical-work-month .ant-card-body {
-        padding: 10px 0;
-    }
-    .timesheet .statistical-work-month .ant-card-body .text-info{
-        font-size: 15px;
-    }
-    .timesheet .ant-page-header-heading-left {
-        flex-direction: column;
-        align-items: unset;
-    }
 
+/* CreateOrder */
+.CreateOrder{
+    height: 100%;
+}
+.CreateOrder .ant-col{
+    padding: 0 !important;
+}
+.CreateOrder-container .info-count {
+    color: #ff9d36;
+    font-size: 16px;
+    font-weight: 600;
+}
+.form-create-order{
+    width: 100%;
+}
+
+.form-create-order .form-input{
+    height: 46px;
+    border: none;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    margin-top: 1.5rem;
+    background: rgba(235, 237, 242, 0.4);
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    color: #333;
+}
+.form-create-order .form-input:focus{
+    border: #ff9d36 solid 1px;
+}
+.form-create-order .form-input.lydo{
+    padding-top: 1vw;
+    height: 100%;
+}
+.form-create-order .sex {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    grid-column-gap: 2vw;
+    align-items: center;
+    justify-content: start;
+    background: rgba(235, 237, 242, 0.4);
+    height: 46px;
+}
+.form-create-order .sex .radio-check{
+    display: flex;
+    align-items: center;
+    grid-column-gap: .5vw;
+}
+
+.form-create-order .date{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    flex-direction: column;
+}
+.form-create-order .date .date-small{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.form-create-order .date .date-small .form-input{
+    padding: 5px;
+    margin: 5px;
 }
 /* style Timekeep page */
 .icon-change-workpace svg{
@@ -205,4 +248,41 @@
 }
 .main-clock time{
     color: var(--color-blue);
+}
+.btn {
+    display: block;
+    color: #fff;
+    border-color: var(--ant-primary-color);
+    background: rgb(8, 111, 170);
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px #0000000b;
+    margin-right: 8px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    line-height: 1.5715;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    box-shadow: 0 2px #00000004;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 4px 15px;
+    font-size: 14px;
+    border-radius: 2px;
+    color: #000000d9;
+    border-color: #d9d9d9;
+    background: #fff;
+}
+.checkbox{
+    width: 20px;
+    height: 16px;
+    cursor: pointer;
 }

@@ -1,5 +1,5 @@
 import { InfoCircleOutlined, SwapOutlined } from '@ant-design/icons';
-import { Card, Col, ConfigProvider, Form, Row, Select, Tooltip} from 'antd';
+import { Card as CardAntd, Col, ConfigProvider, Form, Row, Select, Tooltip} from 'antd';
 import { Option } from 'antd/lib/mentions';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { green } from '@mui/material/colors';
-import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
 import Fab from '@mui/material/Fab';
 import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
@@ -70,7 +70,7 @@ const Timekeep = () => {
 
   return (
     <>
-      <Card size="small" >
+      <CardAntd size="small" >
         <Form  labelCol={{ span: 6 }} wrapperCol={{ span: 17 }}>
           <Form.Item label="Cơ sở làm việc" >
               <Row align='middle'>
@@ -90,8 +90,8 @@ const Timekeep = () => {
               </Row>
           </Form.Item>
         </Form>
-      </Card>
-      <Card>
+      </CardAntd>
+      <CardAntd>
         <Row justify="center">
             <Col xs={24} md={20} lg={16} style={{ textAlign: 'center' }}>
               <Title level={2}>Công ty cổ phần TOPCV</Title>
@@ -135,9 +135,20 @@ const Timekeep = () => {
               </Box>
               <Title level={5}>Địa điểm làm việc</Title>
               <Text>{location.name}</Text>
+              <Row>
+                <Col xs={7} md={7} lg={7}>
+                  <Card variant="outlined" sx={{ minWidth: 275 }}>dsdasd</Card>
+                </Col>
+                <Col xs={7} md={7} lg={7}>
+                  <Card variant="outlined" sx={{ minWidth: 275 }}>dsdasd</Card>
+                </Col>
+                <Col xs={7} md={7} lg={7}>
+                  <Card variant="outlined" sx={{ minWidth: 275 }}>dsdasd</Card>
+                </Col>
+              </Row>
             </Col>
         </Row>
-      </Card>
+      </CardAntd>
     </>
   );
 }
