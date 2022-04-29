@@ -1,4 +1,5 @@
 import {
+  FileTextOutlined,
   QrcodeOutlined,
   SettingOutlined,
   UserOutlined,
@@ -15,7 +16,7 @@ import {
   Row,
 } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../commons/css/avatar-style.css";
 const style = {
   textAlign: "center",
@@ -77,12 +78,13 @@ const More = () => {
           />
         </Col>
         <Col style={style} className="gutter-row" span={6}>
-          <Avatar
-            shape="square"
-            className="icon-app-style"
-            icon={<UserOutlined />}
-            onClick={openMessage}
-          />
+          <Link to={"create-order"}>
+            <Avatar
+              shape="square"
+              className="icon-app-style"
+              icon={<FileTextOutlined />}
+            />
+          </Link>
         </Col>
         <Col style={style} className="gutter-row" span={6}>
           <Avatar
