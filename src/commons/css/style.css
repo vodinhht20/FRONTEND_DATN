@@ -197,7 +197,8 @@
     border: #ff9d36 solid 1px;
 }
 .form-create-order .form-input.lydo{
-    padding-top: .8rem;
+    padding-top: 1vw;
+    height: 100%;
 }
 .form-create-order .sex {
     width: 100%;
@@ -262,4 +263,9 @@
     color: #000000d9;
     border-color: #d9d9d9;
     background: #fff;
+}
+.checkbox{
+    width: 20px;
+    height: 16px;
+    cursor: pointer;
 }

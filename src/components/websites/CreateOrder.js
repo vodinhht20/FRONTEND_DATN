@@ -80,8 +80,8 @@ const CreateOrder = () => {
                         {errors.date_time_to && <Alert message="Trường này không được để trống" type="error" showIcon />}
                     </div>
                 </div>
-                <textarea {...register("lydo", {required: true})} className="form-input lydo" placeholder="Lý do"/>
-                <Checkbox {...register("dongy", {required: true})} >Tôi xác nhận những điều tôi khai phía trên là đúng sự thật. tôi xin hoàn toàn chịu trách nhiệm với bất cứ sai sót nào</Checkbox>
+                <textarea {...register("lydo", {required: true})} rows="5" className="form-input lydo" placeholder="Lý do"/>
+                <input type="checkbox" className="checkbox" {...register("dongy", {required: true})}/> Tôi xác nhận những điều tôi khai phía trên là đúng sự thật. tôi xin hoàn toàn chịu trách nhiệm với bất cứ sai sót nào
                 {errors.dongy && <Alert message="Vui lòng tích vào ô xác nhận" type="error" showIcon />}
                 <input className="btn" type="submit" />
               </form>
