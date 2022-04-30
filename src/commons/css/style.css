@@ -7,6 +7,13 @@
     --color-orange: #ff9d36;
     --color-blue: #096dd9;
 }
+@font-face {
+    font-family: fontRadioCanada;
+    src: url(../font/RadioCanada-Light.ttf);
+}
+body {
+    font-family: fontRadioCanada !important;
+}
 .wr-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -167,7 +174,89 @@
     font-size: 16px;
     font-weight: 600;
 }
+.timesheet .ant-card-loading-content .ant-row:nth-child(-n+3) {
+    display: none;
+}
+@media (max-width: 768px){
+    .timesheet .ant-page-header-heading-title {
+        font-size: 18px !important;
+    }
+}
+@media (max-width: 375px) {
+    .timesheet .statistical-work-month .ant-card-head .ant-card-head-title {
+        font-size: 15px;
+    }
+    .timesheet .statistical-work-month .ant-card-body {
+        padding: 10px 0;
+    }
+    .timesheet .statistical-work-month .ant-card-body .text-info{
+        font-size: 15px;
+    }
+    .timesheet .ant-page-header-heading-left {
+        flex-direction: column;
+        align-items: unset;
+    }
 
+}
+/* style Timekeep page */
+.time-keep .icon-change-workpace svg{
+    font-size: 20px;
+    color: var(--color-orange);
+    cursor: pointer;
+    margin-left: 5px;
+    transition: 0.3s;
+}
+.time-keep .icon-change-workpace:hover svg{
+    opacity: 0.9;
+    color: var(--color-blue);
+}
+.time-keep .main-clock {
+    margin: 10px 0;
+}
+.time-keep .main-clock time{
+    color: var(--color-blue);
+}
+.time-keep .icon-antd-clock {
+    font-size: 30px;
+}
+.time-keep .icon-antd-flat {
+    font-size: 33px;
+}
+.time-keep .time-item h3{
+    margin-bottom: unset;
+    margin-top: 10px;
+}
+.time-keep .time-item .ant-card-body {
+    padding: 0 !important;
+    padding-bottom: 5px !important;
+}
+.time-keep .wrap-time-statistic {
+    margin-top: 20px !important;
+}
+.time-keep .box-button-time-keep .lable-button{
+    display: block;
+    color: #fff;
+}
+.time-keep .button-content {
+    flex-direction: column;
+}
+.time-keep .button-content .button-icon {
+    font-size: 50px;
+}
+.time-keep .location-address {
+    margin-top: 10px;
+}
+.time-keep .wrap-time-statistic .ant-row:nth-child(-n+2) {
+    display: none;
+}
+.time-keep .wrap-time-statistic .ant-row {
+    padding: 0 20px;
+}
+@media (max-width: 768px) {
+    .time-keep .wrap-time-statistic .time-item h3{
+        font-size: 20px;
+    }
+}
 /* CreateOrder */
 .CreateOrder{
     height: 100%;
@@ -233,21 +322,6 @@
 .form-create-order .date .date-small .form-input{
     padding: 5px;
     margin: 5px;
-}
-/* style Timekeep page */
-.icon-change-workpace svg{
-    font-size: 20px;
-    color: var(--color-orange);
-    cursor: pointer;
-    margin-left: 5px;
-    transition: 0.3s;
-}
-.icon-change-workpace:hover svg{
-    opacity: 0.9;
-    color: var(--color-blue);
-}
-.main-clock time{
-    color: var(--color-blue);
 }
 .btn {
     display: block;
