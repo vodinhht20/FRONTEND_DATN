@@ -256,6 +256,9 @@ body {
     .time-keep .wrap-time-statistic .time-item h3{
         font-size: 20px;
     }
+    .time-keep .wrap-time-statistic .ant-row {
+        padding: 0 10px;
+    }
 }
 /* CreateOrder */
 .CreateOrder{
