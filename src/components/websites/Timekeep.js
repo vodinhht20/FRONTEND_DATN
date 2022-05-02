@@ -1,20 +1,19 @@
+import { useEffect, useState } from 'react';
 import { EnvironmentOutlined, InfoCircleOutlined, SwapOutlined } from '@ant-design/icons';
 import { Card as CardAntd, Col, ConfigProvider, Form, message, Row, Select, Space, Tooltip} from 'antd';
 import { Option } from 'antd/lib/mentions';
-import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
 import { orange } from '@mui/material/colors';
-import Card from '@mui/material/Card';
+import { Typography, notification } from 'antd';
+import * as React from 'react';
+import axios from 'axios';
+import moment from "moment";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
+import LogoutIcon from '@mui/icons-material/Logout';
+import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import Clock from "react-live-clock";
 import viVN from 'antd/lib/locale/vi_VN';
-import { Typography } from 'antd';
-import FingerprintIcon from '@mui/icons-material/Fingerprint';
-import LogoutIcon from '@mui/icons-material/Logout';
-import moment from "moment";
 
 const Timekeep = () => {
 
@@ -22,11 +21,12 @@ const Timekeep = () => {
   const [location, setLocation] = useState({});
   const [workSpace, setWorkSpace] = useState();
   const [disableSelect, setDisableSelect] = useState(true);
-  const [typeCircleLoading, setCircleLoading] = useState(false);
+  const [circleLoading, setCircleLoading] = useState(false);
   const [statusRes, setStatusRes] = useState(true);
   const { Title, Text } = Typography;
   const [loading, setLoading] = useState(false);
   moment.locale('vn'); 
+
   useEffect(() => {
 
     // call API location
@@ -76,13 +76,26 @@ const Timekeep = () => {
     },
   }
 
+  const openNotification = (type, title, messsage) => {
+    const data = {
+      message: title,
+      description: messsage,
+      placement: 'topRight',
+    }
+    if (type == 'success') {
+      notification.success(data);
+    } else {
+      notification.error(data);
+    }
+  };
+
   const handleButtonTimekeep = () => {
     if(statusRes) {
       setCircleLoading(true);
+      let timeCurrent = `${moment().format('HH:mm')}`;
       if (dataTimekeep.type) {
-        let checkout = `${moment().format('HH:mm')}`;
         let startTime = moment(dataTimekeep.checkin, 'HH:mm');
-        let endTime = moment(checkout, 'HH:mm');
+        let endTime = moment(timeCurrent, 'HH:mm');
         let workingTime = endTime.diff(startTime, 'hours', true);
         if(workingTime) {
           workingTime = workingTime.toFixed(1);
@@ -97,9 +110,10 @@ const Timekeep = () => {
           setStatusRes(true);
           setDataTimekeep({
             ...dataTimekeep,
-            checkout,
+            checkout: timeCurrent,
             working_time: workingTime
-          })
+          });
+          openNotification('success', 'Checkout thành công !', `Bạn đã checkout vào lúc ${timeCurrent}`);
         }, 2000)
       } else {
         // call api
@@ -111,8 +125,9 @@ const Timekeep = () => {
           setDataTimekeep({
             ...dataTimekeep,
             type: 1,
-            checkin: `${moment().format('HH:mm')}`
-          })
+            checkin: timeCurrent
+          });
+          openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
         }, 2000);
       }
     } else {
@@ -129,18 +144,18 @@ const Timekeep = () => {
     }),
   };
 
-  const circleLoading = {
+  const circleLoadingStype = {
     ...(dataTimekeep.type && {
         color: `${orange[500]} !important`
     }),
     position: 'absolute',
     top: -6,
     left: -6,
-    zIndex: 1,
+    zIndex: 1
   }
 
   return (
-    <div className="time-keep">
+    <div className="time-keep" id="time-keep-location">
       <CardAntd size="small" >
         <Form  labelCol={{ span: 6 }} wrapperCol={{ span: 17 }}>
           <Form.Item label="Cơ sở làm việc" >
@@ -176,7 +191,7 @@ const Timekeep = () => {
                   format={"HH:mm:ss"}
                 />
               </Title>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="box-button-time-keep">
+              <Box className="box-button-time-keep">
                 <Box sx={{ m: 1, position: 'relative' }}>
                   <Fab
                     aria-label="save"
@@ -198,7 +213,7 @@ const Timekeep = () => {
                       </Space>
                     }
                   </Fab>
-                  {typeCircleLoading && <CircularProgress size={173} sx={circleLoading} />}
+                  {circleLoading && <CircularProgress size={173} sx={circleLoadingStype} className="around-circle-loading"/>}
                 </Box>
               </Box>
               <div className="location-address">

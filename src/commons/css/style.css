@@ -28,15 +28,49 @@ body {
 .head{
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
 }
 .head .logo img{
     width: 130px;
     object-fit: cover;
 }
-.ant-row{
+.head .icon-nav-top {
+    color: #fff;
+}
+.head .ant-layout-header {
+    line-height: unset !important;
+}
+.head .nav-top-right {
+    display: flex;
+    justify-content: end;
+}
+
+.ant-dropdown {
+    top: 45px !important;
+}
+.ant-row {
     margin: 0 !important;
+}
+#scrollable-notify {
+    background: #fff;
+    width: 300px;
+    height: 300px;
+    overflow: auto;
+    padding: 0 16px;
+    border: 1px solid rgba(140, 140, 140, 0.35);
+}
+.dropdown-account {
+    width: 180px;
+}
+.dropdown-account .icon-dropdown {
+    font-size: 20px;
+    margin-right: 10px;
+}
+.ant-list-item-meta-content .ant-list-item-meta-title a {
+    color: var(--color-orange);
+    transition: .3s;
+}
+.ant-list-item-meta-content .ant-list-item-meta-title a:hover {
+    color: var(--color-blue);
 }
 .nav-bottom {
     bottom: 0;
@@ -101,7 +135,6 @@ body {
         height: 5px;
     }
 }
-
 /* end css head */
 
 /* css home */
@@ -149,6 +182,14 @@ body {
 }
 .notes-month section {
     font-size: 28px;
+}
+.ant-select-item-option-content a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.ant-select-dropdown {
+    z-index: 2 !important;
 }
 
 /* style timesheet */
@@ -232,6 +273,11 @@ body {
 }
 .time-keep .wrap-time-statistic {
     margin-top: 20px !important;
+}
+.time-keep .box-button-time-keep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .time-keep .box-button-time-keep .lable-button{
     display: block;
