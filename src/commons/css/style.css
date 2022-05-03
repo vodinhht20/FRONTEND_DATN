@@ -57,7 +57,11 @@ body {
         grid-column-gap: 5px;
     }
 }
-
+@media (max-width: 375px) {
+    .head .account-dropdown {
+        display: none;
+    }
+}
 .ant-dropdown {
     top: 45px !important;
 }
@@ -321,6 +325,9 @@ body {
     }
     .time-keep .wrap-time-statistic .ant-row {
         padding: 0 10px;
+    }
+    .ant-notification-topRight {
+        top: 70px !important;
     }
 }
 /* CreateOrder */

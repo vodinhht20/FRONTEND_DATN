@@ -113,20 +113,20 @@ const Head = () => {
                     <InputSearch />
                 </Col>
                 <Col xs={12} md={12} lg={7} className="nav-top-right">
-                    <Dropdown overlay={listNotify} placement="bottomRight" arrow={{ pointAtCenter: true }}>
+                    <IconButton size="large" aria-label="show 4 new mails" color="warning">
+                        <Badge badgeContent={4} color="warning">
+                            <MailIcon className="icon-nav-top"/>
+                        </Badge>
+                    </IconButton>
+                    <Dropdown overlay={listNotify} placement="bottomLeft" arrow={{ pointAtCenter: true }}>
                         <IconButton size="large" aria-label="show 4 new mails" color="warning">
                             <Badge badgeContent={4} color="warning">
                                 <NotificationsIcon className="icon-nav-top"/>
                             </Badge>
                         </IconButton>
                     </Dropdown>
-                    <IconButton size="large" aria-label="show 4 new mails" color="warning">
-                        <Badge badgeContent={4} color="warning">
-                            <MailIcon className="icon-nav-top"/>
-                        </Badge>
-                    </IconButton>
                     <Dropdown overlay={navAccount} placement="bottomRight" arrow={{ pointAtCenter: true }}>
-                        <IconButton size="large">
+                        <IconButton size="large" className="account-dropdown">
                             <MaterialAvatar sx={{ width: 32, height: 32 }} src="https://lh3.googleusercontent.com/a-/AOh14GiJHaBSsAqGvMR7dcgJicEvaGNyAcqjR-mcrNO9wQ=s96-c"></MaterialAvatar>
                         </IconButton>
                     </Dropdown>
