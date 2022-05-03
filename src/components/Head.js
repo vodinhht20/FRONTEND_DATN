@@ -106,13 +106,13 @@ const Head = () => {
     return (
         <div className="head wr-container">
             <Row justify="space-between" align="middle">
-                <Col span="7">
+                <Col xs={12} md={12} lg={7}>
                     <Link to={"/"} className="logo"><img src={logo} /></Link>
                 </Col>
-                <Col span="10">
+                <Col xs={0} md={0} lg={10}>
                     <InputSearch />
                 </Col>
-                <Col span="7" className="nav-top-right">
+                <Col xs={12} md={12} lg={7} className="nav-top-right">
                     <Dropdown overlay={listNotify} placement="bottomRight" arrow={{ pointAtCenter: true }}>
                         <IconButton size="large" aria-label="show 4 new mails" color="warning">
                             <Badge badgeContent={4} color="warning">

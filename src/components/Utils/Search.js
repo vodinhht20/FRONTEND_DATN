@@ -61,11 +61,11 @@ class SearchInput extends React.Component {
   };
 
   render() {
-    const options = this.state.data.map(dataItem => <Option key={dataItem.value}><Link to='/'>{dataItem.text}</Link></Option>);
+    const options = this.state.data.map(dataItem => <Option key={dataItem.value}><Link to={'/'+dataItem.text}>{dataItem.text}</Link></Option>);
     return (
       <Row>
         <Col span={4}>
-          <Text style={{ color: '#ffff' }}>Tìm kiếm</Text>
+          <Text style={{ color: '#ffff', minWidth: 'max-content' }}>Tìm kiếm</Text>
         </Col>
         <Col span={20}>
           <Select
