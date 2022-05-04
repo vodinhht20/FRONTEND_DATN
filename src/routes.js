@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Timekeep from "./components/websites/Timekeep";
+import Checkin from "./components/websites/Checkin";
 import Timesheet from "./components/websites/Timesheet";
 import Home from "./components/websites/Home";
 import LayoutWebsite from "./layouts/LayoutWebsite";
@@ -13,7 +13,7 @@ const Router = () => {
       <Route path="/" element={<LayoutWebsite />}>
         <Route index element={<Home />} />
         <Route path="bang-cong" element={<Timesheet />} />
-        <Route path="cham-cong" element={<Timekeep />} />
+        <Route path="cham-cong" element={<Checkin />} />
         <Route path="thong-ke" element={<Dashboard />} />
 
         {/* More router */}

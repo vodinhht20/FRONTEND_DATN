@@ -17,6 +17,7 @@ const CreateOrder = () => {
       console.log(data);
   };
   useEffect(() => {
+    document.title = "Đơn nghỉ phép";
     // call API data
     setTimeout(() => {
       setLoading(false);

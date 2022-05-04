@@ -10,6 +10,7 @@ const Dashboard = () => {
   const [dataRadar, setDataRadar] = useState([]);
 
   useEffect(() => {
+    document.title = "Thống kê";
     // call API data
     const data = [
       {
@@ -29,7 +30,7 @@ const Dashboard = () => {
         value: 4,
       },
     ];
-    
+
     setDataPie(data);
     setDataRadar(data);
 

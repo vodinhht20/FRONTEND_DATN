@@ -22,6 +22,7 @@ const Timesheet = (value) => {
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
   useEffect(() => {
+    document.title = "Bảng công";
     // call api set data
     setDataTimeSheet({
       date: formatDate(value, "MM/Y"),
