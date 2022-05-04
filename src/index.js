@@ -7,7 +7,7 @@ import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+      <App />
   </BrowserRouter>,
   document.getElementById('root')
 );

@@ -3,7 +3,17 @@
     margin: 0;
     padding: 0;
 }
-
+:root {
+    --color-orange: #ff9d36;
+    --color-blue: #096dd9;
+}
+@font-face {
+    font-family: fontRadioCanada;
+    src: url(../font/RadioCanada-Light.ttf);
+}
+body {
+    font-family: fontRadioCanada !important;
+}
 .wr-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -18,15 +28,67 @@
 .head{
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
 }
 .head .logo img{
     width: 130px;
     object-fit: cover;
 }
-.ant-row{
+.head .icon-nav-top {
+    color: #fff;
+}
+.head .ant-layout-header {
+    line-height: unset !important;
+}
+.ant-layout-header .css-e30pdq-MuiButtonBase-root-MuiIconButton-root{
+    padding: 9px !important;
+}
+.head .nav-top-right {
+    display: flex;
+    justify-content: end;
+    grid-column-gap: 15px;
+    align-items: flex-end;
+}
+
+@media (max-width: 768px) {
+    .ant-layout-header {
+        padding: 0 10px !important  ;
+    }
+    .head .nav-top-right {
+        grid-column-gap: 5px;
+    }
+}
+@media (max-width: 375px) {
+    .head .account-dropdown {
+        display: none;
+    }
+}
+.ant-dropdown {
+    top: 45px !important;
+}
+.ant-row {
     margin: 0 !important;
+}
+#scrollable-notify {
+    background: #fff;
+    width: 300px;
+    height: 300px;
+    overflow: auto;
+    padding: 0 16px;
+    border: 1px solid rgba(140, 140, 140, 0.35);
+}
+.dropdown-account {
+    width: 180px;
+}
+.dropdown-account .icon-dropdown {
+    font-size: 20px;
+    margin-right: 10px;
+}
+.ant-list-item-meta-content .ant-list-item-meta-title a {
+    color: var(--color-orange);
+    transition: .3s;
+}
+.ant-list-item-meta-content .ant-list-item-meta-title a:hover {
+    color: var(--color-blue);
 }
 .nav-bottom {
     bottom: 0;
@@ -41,7 +103,7 @@
 .nav-bottom .nav-item .anticon{
     font-size: 3vw;
 }
-.nav-bottom .active{
+.nav-bottom .nav-item.active{
     color: #096dd9;
     position: relative;
 }
@@ -49,12 +111,12 @@
     content: "";
     background-color: #096dd9;
     height: 1vw;
-    bottom: -1vw;
+    bottom: -5px;
     position: absolute;
     width: 100%;
 }
 .nav-bottom .active::after{
-    height: 7px;
+    height: 5px;
     border-radius: 3px;
 }
 .nav-bottom .wrap-item {
@@ -69,29 +131,28 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    grid-row-gap: 10px;
+    grid-row-gap: 5px;
 }
-.wrap-item .anticon svg {
+.nav-bottom .wrap-item .anticon svg {
     font-size: 35px;
 }
-.wrap-item a{
+.nav-bottom .wrap-item a{
     color: #50535a;
 }
 @media (max-width: 768px) {
-    .wrap-item .anticon svg {
+    .nav-bottom .wrap-item .anticon svg {
         font-size: 30px;
     }
-    .wrap-item .nav-item {
+    .nav-bottom .wrap-item .nav-item {
         min-width: 40px;
     }
-    .wrap-item .nav-name {
+    .nav-bottom .wrap-item .nav-name {
         font-size: 13px;
     }
     .nav-bottom .active::after{
         height: 5px;
     }
 }
-
 /* end css head */
 
 /* css home */
@@ -100,13 +161,13 @@
 }
 /* end css home */
 .dashboard {
-    height: 100vh;
+    /* height: 100vh; */ /* Đoạn này set cứng height bị lỗi giao diện nên Định tạm thời comment */ 
 }
 .dashboard .ant-col{
     padding: 0 !important;
 }
 .dashboard-container .info-count {
-    color: #ff9d36;
+    color: var(--color-orange);
     font-size: 16px;
     font-weight: 600;
 }
@@ -140,6 +201,14 @@
 .notes-month section {
     font-size: 28px;
 }
+.ant-select-item-option-content a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.ant-select-dropdown {
+    z-index: 2 !important;
+}
 
 /* style timesheet */
 .statistical-work-month {
@@ -164,7 +233,103 @@
     font-size: 16px;
     font-weight: 600;
 }
+.timesheet .ant-card-loading-content .ant-row:nth-child(-n+3) {
+    display: none;
+}
+.ant-picker-content th, .ant-picker-content td {
+    z-index: 1 !important;
+}
+@media (max-width: 768px){
+    .timesheet .ant-page-header-heading-title {
+        font-size: 18px !important;
+    }
+}
+@media (max-width: 375px) {
+    .timesheet .statistical-work-month .ant-card-head .ant-card-head-title {
+        font-size: 15px;
+    }
+    .timesheet .statistical-work-month .ant-card-body {
+        padding: 10px 0;
+    }
+    .timesheet .statistical-work-month .ant-card-body .text-info{
+        font-size: 15px;
+    }
+    .timesheet .ant-page-header-heading-left {
+        flex-direction: column;
+        align-items: unset;
+    }
 
+}
+/* style Timekeep page */
+.time-keep .icon-change-workpace svg{
+    font-size: 20px;
+    color: var(--color-orange);
+    cursor: pointer;
+    margin-left: 5px;
+    transition: 0.3s;
+}
+.time-keep .icon-change-workpace:hover svg{
+    opacity: 0.9;
+    color: var(--color-blue);
+}
+.time-keep .main-clock {
+    margin: 10px 0;
+}
+.time-keep .main-clock time{
+    color: var(--color-blue);
+}
+.time-keep .icon-antd-clock {
+    font-size: 30px;
+}
+.time-keep .icon-antd-flat {
+    font-size: 33px;
+}
+.time-keep .time-item h3{
+    margin-bottom: unset;
+    margin-top: 10px;
+}
+.time-keep .time-item .ant-card-body {
+    padding: 0 !important;
+    padding-bottom: 5px !important;
+}
+.time-keep .wrap-time-statistic {
+    margin-top: 20px !important;
+}
+.time-keep .box-button-time-keep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.time-keep .box-button-time-keep .lable-button{
+    display: block;
+    color: #fff;
+}
+.time-keep .button-content {
+    flex-direction: column;
+}
+.time-keep .button-content .button-icon {
+    font-size: 50px;
+}
+.time-keep .location-address {
+    margin-top: 10px;
+}
+.time-keep .wrap-time-statistic .ant-row:nth-child(-n+2) {
+    display: none;
+}
+.time-keep .wrap-time-statistic .ant-row {
+    padding: 0 20px;
+}
+@media (max-width: 768px) {
+    .time-keep .wrap-time-statistic .time-item h3{
+        font-size: 20px;
+    }
+    .time-keep .wrap-time-statistic .ant-row {
+        padding: 0 10px;
+    }
+    .ant-notification-topRight {
+        top: 70px !important;
+    }
+}
 /* CreateOrder */
 .CreateOrder{
     height: 100%;
@@ -231,7 +396,6 @@
     padding: 5px;
     margin: 5px;
 }
-
 .btn {
     display: block;
     color: #fff;
