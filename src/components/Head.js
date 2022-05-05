@@ -22,7 +22,7 @@ const navAccount = (
                 label: (
                     <>
                         <UserOutlined className="icon-dropdown"/>
-                        <Link target="_blank" rel="noopener noreferrer" to={"/"}>
+                        <Link to={"/profile"}>
                             Profile
                         </Link>
                     </>

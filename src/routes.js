@@ -6,6 +6,7 @@ import LayoutWebsite from "./layouts/LayoutWebsite";
 import More from "./components/websites/More";
 import Dashboard from "./components/websites/Dashboard";
 import CreateOrder from "./components/websites/CreateOrder";
+import Profile from "./components/websites/Profile";
 
 const Router = () => {
   return (
@@ -15,6 +16,7 @@ const Router = () => {
         <Route path="bang-cong" element={<Timesheet />} />
         <Route path="cham-cong" element={<Checkin />} />
         <Route path="thong-ke" element={<Dashboard />} />
+        <Route path="profile" element={<Profile />} />
 
         {/* More router */}
         <Route path="more">

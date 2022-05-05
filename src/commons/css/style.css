@@ -12,7 +12,7 @@
     src: url(../font/RadioCanada-Light.ttf);
 }
 body {
-    font-family: fontRadioCanada !important;
+    /* font-family: fontRadioCanada !important; */
 }
 .wr-container {
     max-width: 1200px;
@@ -435,4 +435,49 @@ body {
     width: 20px;
     height: 16px;
     cursor: pointer;
+}
+
+/* profile page */
+.profile-page {
+    min-height: calc(100vh - 100px);
+}
+.profile-page .ant-tabs-tab {
+    justify-content: center;
+}
+.profile-page .ant-tabs-tab-btn {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 3px;
+}
+.profile-page .tab-icon {
+    font-size: 30px;
+    margin-right: 0 !important;
+}
+.profile-page .avatar-profile-around {
+    width: 150px;
+}
+.profile-page .avatar-profile-around img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile-page .avatar-profile-around .ant-image-mask {
+    border-radius: 50%;
+}
+.profile-page .btn-change-avatar {
+    background: var(--color-orange);
+    margin-top: 20px;
+    border: none;
+}
+.profile-page .btn-change-avatar span svg{
+    font-size: 18px;
+}
+.profile-page .box-profile-avatar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+@media (max-width: 768px) {
+    .profile-page .ant-tabs-tab {
+        padding: 0 10px !important;
+    }
 }
