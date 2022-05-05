@@ -161,7 +161,7 @@ body {
 }
 /* end css home */
 .dashboard {
-    /* height: 100vh; */ /* Đoạn này set cứng height bị lỗi giao diện nên Định tạm thời comment */ 
+    /* height: 100vh; */ /* Đoạn này set cứng height bị lỗi giao diện nên Định tạm thời comment */
 }
 .dashboard .ant-col{
     padding: 0 !important;
@@ -260,7 +260,10 @@ body {
     }
 
 }
-/* style Timekeep page */
+/* style timekeep (Checkin) page */
+.time-keep .time-keep-main {
+    min-height: calc(100vh - 100px);
+}
 .time-keep .icon-change-workpace svg{
     font-size: 20px;
     color: var(--color-orange);

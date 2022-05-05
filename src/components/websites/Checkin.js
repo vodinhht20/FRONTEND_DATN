@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { EnvironmentOutlined, InfoCircleOutlined, SwapOutlined } from '@ant-design/icons';
-import { Card as CardAntd, Col, ConfigProvider, Form, message, Row, Select, Space, Tooltip} from 'antd';
+import { Card as CardAntd, Col, Form, message, Row, Select, Space, Tooltip} from 'antd';
 import { Option } from 'antd/lib/mentions';
 import { orange } from '@mui/material/colors';
 import { Typography, notification } from 'antd';
@@ -13,11 +13,10 @@ import Fab from '@mui/material/Fab';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import Clock from "react-live-clock";
-import viVN from 'antd/lib/locale/vi_VN';
 
-const Timekeep = () => {
+const Checkin = () => {
 
-  const [dataTimekeep, setDataTimekeep] = useState({});
+  const [dataCheckin, setDataCheckin] = useState({});
   const [location, setLocation] = useState({});
   const [workSpace, setWorkSpace] = useState();
   const [disableSelect, setDisableSelect] = useState(true);
@@ -25,29 +24,29 @@ const Timekeep = () => {
   const [statusRes, setStatusRes] = useState(true);
   const { Title, Text } = Typography;
   const [loading, setLoading] = useState(false);
-  moment.locale('vn'); 
+  moment.locale('vn');
 
   useEffect(() => {
-
+    document.title = "Chấm công";
     // call API location
     axios.get('https://api.ipdata.co?api-key=01001158f72f23884238b6b0828bc1edd14985729325a008b06d6670').then(res => {
       setLocation(res.data.asn)
     });
 
-    // call API timekeep
-    setDataTimekeep({
+    // call API Checkin
+    setDataCheckin({
       type: 0, // trạng thái checkin 0 chưa checkin, 1 đã checkin
       fullname: "Võ Văn Định",
       checkin: null, // thời gian checkin vd: 08:30 default null
       checkout: null, // thời gian checkout vd: 08:30 default null
-      working_time: null, // tổng thời gian làm 
+      working_time: null, // tổng thời gian làm
       date: "30/04/2022",
       work_space: '4' // id cơ sở làm việc
     });
   }, []);
 
   const propSelected = {
-    defaultValue: dataTimekeep.work_space || '1',
+    defaultValue: dataCheckin.work_space || '1',
     suffix: (
       <Tooltip title="Cơ sở bạn đang làm việc">
         <InfoCircleOutlined/>
@@ -63,12 +62,12 @@ const Timekeep = () => {
         setWorkSpace(e);
         setLoading(false);
         setCircleLoading(false);
-        setDataTimekeep({
+        setDataCheckin({
           type: 0, // trạng thái checkin 0 chưa checkin, 1 đã checkin
           fullname: "Võ Văn Định",
           checkin: null, // thời gian checkin vd: 08:30 default null
           checkout: null, // thời gian checkout vd: 08:30 default null
-          working_time: null, // tổng thời gian làm 
+          working_time: null, // tổng thời gian làm
           date: "30/04/2022",
           work_space: '4' // id cơ sở làm việc
         });
@@ -89,12 +88,12 @@ const Timekeep = () => {
     }
   };
 
-  const handleButtonTimekeep = () => {
+  const handleButtonCheckin = () => {
     if(statusRes) {
       setCircleLoading(true);
       let timeCurrent = `${moment().format('HH:mm')}`;
-      if (dataTimekeep.type) {
-        let startTime = moment(dataTimekeep.checkin, 'HH:mm');
+      if (dataCheckin.type) {
+        let startTime = moment(dataCheckin.checkin, 'HH:mm');
         let endTime = moment(timeCurrent, 'HH:mm');
         let workingTime = endTime.diff(startTime, 'hours', true);
         if(workingTime) {
@@ -102,14 +101,14 @@ const Timekeep = () => {
         } else {
           workingTime = null;
         }
-  
+
         // call api
         setStatusRes(false);
         setTimeout(() => {
           setCircleLoading(false);
           setStatusRes(true);
-          setDataTimekeep({
-            ...dataTimekeep,
+          setDataCheckin({
+            ...dataCheckin,
             checkout: timeCurrent,
             working_time: workingTime
           });
@@ -122,8 +121,8 @@ const Timekeep = () => {
         setTimeout(() => {
           setCircleLoading(false);
           setStatusRes(true);
-          setDataTimekeep({
-            ...dataTimekeep,
+          setDataCheckin({
+            ...dataCheckin,
             type: 1,
             checkin: timeCurrent
           });
@@ -136,7 +135,7 @@ const Timekeep = () => {
   };
 
   const buttonSx = {
-    ...(dataTimekeep.type && {
+    ...(dataCheckin.type && {
       bgcolor: orange[500],
       '&:hover': {
         bgcolor: orange[700],
@@ -145,7 +144,7 @@ const Timekeep = () => {
   };
 
   const circleLoadingStype = {
-    ...(dataTimekeep.type && {
+    ...(dataCheckin.type && {
         color: `${orange[500]} !important`
     }),
     position: 'absolute',
@@ -177,13 +176,13 @@ const Timekeep = () => {
           </Form.Item>
         </Form>
       </CardAntd>
-      <CardAntd>
+      <CardAntd className="time-keep-main">
         <Row justify="center">
             <Col xs={24} md={20} lg={16} style={{ textAlign: 'center' }}>
-              <Title level={3} style={{ marginBlock: '5px' }}>Công ty cổ phần TOPCV</Title>
-              <ConfigProvider locale={viVN}>
+              <Title level={3} style={{ marginBlock: '5px' }}>Công Ty Cổ phần Quản Lý Nhân Sự Camel</Title>
+              <Text>
                 Chúc bạn một ngày làm việc tốt lành 🎉
-              </ConfigProvider>
+              </Text>
               <Title level={3} className="main-clock">
                 <Clock
                   ticking={true}
@@ -197,16 +196,16 @@ const Timekeep = () => {
                     aria-label="save"
                     color="primary"
                     sx={buttonSx}
-                    onClick={handleButtonTimekeep}
+                    onClick={handleButtonCheckin}
                     style={{ width: "160px", height: "160px", zIndex: 2}}
                     loading={loading}
                   >
                     {
-                      dataTimekeep.type ? 
+                      dataCheckin.type ?
                       <Space className="button-content">
                         <LogoutIcon  className="button-icon"/>
                         <Text className="lable-button">Check out</Text>
-                      </Space> : 
+                      </Space> :
                       <Space className="button-content">
                           <FingerprintIcon fontSize='large' className="button-icon"/>
                           <Text className="lable-button">Check in</Text>
@@ -223,19 +222,19 @@ const Timekeep = () => {
               <Row gutter={[12,12]} className="wrap-time-statistic">
                 <Col span={8}>
                   <CardAntd variant="outlined" sx={{ width: "100%" }} className="time-item" loading={loading}>
-                    <Title level={3}>{dataTimekeep.checkin ? dataTimekeep.checkin : '--:--'}</Title>
+                    <Title level={3}>{dataCheckin.checkin ? dataCheckin.checkin : '--:--'}</Title>
                     <Text>Giờ vào</Text>
                   </CardAntd>
                 </Col>
                 <Col span={8}>
                   <CardAntd variant="outlined" sx={{ width: "100%" }} className="time-item" loading={loading}>
-                    <Title level={3}>{dataTimekeep.checkout ? dataTimekeep.checkout : '--:--'}</Title>
+                    <Title level={3}>{dataCheckin.checkout ? dataCheckin.checkout : '--:--'}</Title>
                     <Text>Giờ ra</Text>
                   </CardAntd>
                 </Col>
                 <Col span={8}>
                   <CardAntd variant="outlined" sx={{ width: "100%" }} className="time-item" loading={loading}>
-                    <Title level={3}>{dataTimekeep.working_time ? dataTimekeep.working_time : '0.0'}</Title>
+                    <Title level={3}>{dataCheckin.working_time ? dataCheckin.working_time : '0.0'}</Title>
                     <Text>Số giờ đã làm</Text>
                   </CardAntd>
                 </Col>
@@ -246,4 +245,4 @@ const Timekeep = () => {
     </div>
   );
 }
-export default Timekeep;
+export default Checkin;
