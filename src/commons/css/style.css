@@ -459,6 +459,8 @@ body {
 .profile-page .avatar-profile-around img {
     border-radius: 50%;
     object-fit: cover;
+    width: 150px;
+    height: 150px;
 }
 .profile-page .avatar-profile-around .ant-image-mask {
     border-radius: 50%;
@@ -478,6 +480,6 @@ body {
 }
 @media (max-width: 768px) {
     .profile-page .ant-tabs-tab {
-        padding: 0 10px !important;
+        padding: 10px !important;
     }
 }

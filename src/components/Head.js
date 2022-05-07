@@ -12,6 +12,8 @@ import { useState, useEffect } from 'react';
 import { List, Skeleton, Divider } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import InputSearch from './Utils/Search';
+import { initProfile } from "../recoil/profileAtom";
+import { useRecoilValue } from "recoil";
 
 const { Paragraph } = Typography;
 const navAccount = (
@@ -64,6 +66,7 @@ const navAccount = (
 
 const Head = () => {
     const [data, setData] = useState([]);
+    const profile = useRecoilValue(initProfile);
     const loadMoreData = () => {
 
         // call api notify
@@ -127,7 +130,7 @@ const Head = () => {
                     </Dropdown>
                     <Dropdown overlay={navAccount} placement="bottomRight" arrow={{ pointAtCenter: true }}>
                         <IconButton size="large" className="account-dropdown">
-                            <MaterialAvatar sx={{ width: 32, height: 32 }} src="https://lh3.googleusercontent.com/a-/AOh14GiJHaBSsAqGvMR7dcgJicEvaGNyAcqjR-mcrNO9wQ=s96-c"></MaterialAvatar>
+                            <MaterialAvatar sx={{ width: 32, height: 32 }} src={profile.avatar}></MaterialAvatar>
                         </IconButton>
                     </Dropdown>
                 </Col>

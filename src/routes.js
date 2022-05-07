@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import Checkin from "./components/websites/Checkin";
 import Timesheet from "./components/websites/Timesheet";
 import Home from "./components/websites/Home";
@@ -7,8 +8,26 @@ import More from "./components/websites/More";
 import Dashboard from "./components/websites/Dashboard";
 import CreateOrder from "./components/websites/CreateOrder";
 import Profile from "./components/websites/Profile";
+import { initProfile } from "./recoil/profileAtom";
+import { useSetRecoilState } from "recoil";
+import moment from "moment";
 
 const Router = () => {
+  const setProfile = useSetRecoilState(initProfile);
+  useEffect(() => {
+    
+    // call api profile
+    setProfile({
+      email: "vodinh2000ht@gmail.com",
+      fullname: "Võ Văn Định",
+      birth_day: moment('2000-02-03', "YYYY-MM-DD"),
+      avatar: "https://cdn.eva.vn/upload/4-2021/images/2021-10-29/new-project-550-1635505528-798-width800height700.jpg",
+      gender: "2",
+      phone: "+84329766459",
+      TIN: "246134578 "
+    });
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<LayoutWebsite />}>
