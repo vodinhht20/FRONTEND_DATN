@@ -1,6 +1,7 @@
 import { MoreOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Dropdown, PageHeader, Row } from "antd";
 import { useEffect, useState } from "react";
+import { getData } from "../../api/BaseAPI";
 import { DashboardPie, DashboardRadar } from "../../commons/chart/Dashboard";
 
 const Dashboard = () => {
@@ -12,31 +13,12 @@ const Dashboard = () => {
   useEffect(() => {
     document.title = "Thống kê";
     // call API data
-    const data = [
-      {
-        type: "Ngày nghỉ",
-        value: 5,
-      },
-      {
-        type: "Ngày làm việc",
-        value: 20,
-      },
-      {
-        type: "Nghỉ lễ",
-        value: 1,
-      },
-      {
-        type: "Nghỉ T7,CN",
-        value: 4,
-      },
-    ];
-
-    setDataPie(data);
-    setDataRadar(data);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    getData('dashboard')
+    .then(({data}) => {
+      setDataPie(data)
+      setDataRadar(data)
+    })
+    .then(() => setLoading(false));
   }, []);
 
   const DropdownMore = () => (

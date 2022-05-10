@@ -131,6 +131,7 @@ const More = () => {
               </Col>
             </Row>
           </Card>
+<<<<<<< Tien-see-more-page
         </Col>
 
         <Col xs={24} md={24} lg={24}>
@@ -254,15 +255,41 @@ const More = () => {
             icon={<UserOutlined />}
             onClick={openMessage}
           />
+=======
+>>>>>>> local
         </Col>
-        <Col style={style} className="gutter-row" span={6}>
-          <Avatar
-            shape="square"
-            className="icon-app-style"
-            icon={<UserOutlined />}
-            onClick={openMessage}
-          />
+
+        <Col xs={24} md={24} lg={24}>
+          <Card title="Chức năng thường dùng" bordered={true} loading={loading}>
+            <Row gutter={[12, 12]}>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+            </Row>
+          </Card>
         </Col>
+<<<<<<< Tien-see-more-page
         <Col style={style} className="gutter-row" span={6}>
           <Avatar
             shape="square"
@@ -271,6 +298,51 @@ const More = () => {
             onClick={openMessage}
           />
         </Col> */}
+=======
+
+        <Col xs={24} md={24} lg={24}>
+          <Card title="Hoạt động phần thưởng" bordered={true} loading={loading}>
+            <Row gutter={[12, 12]}>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+>>>>>>> local
       </Row>
 
       <Drawer
