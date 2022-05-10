@@ -173,12 +173,23 @@ body {
 }
 /* css more */
 .more {
-    height: 100vh;
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 5vw;
+    /* margin-top: 5vw; */
     flex-direction: column;
+}
+.more .ant-col{
+    padding: 0 !important;
+    text-align: center;
+    font-size: 16px;
+}
+.more .ant-avatar:hover{
+    opacity: .7;
+}
+.more .ant-card-head{
+    text-align: start;
 }
 /* end css more */
 
