@@ -27,12 +27,10 @@ const Profile = () => {
 
         //call api update profile
         setLoadingProfile(true);
-        console.log("11", profileData);
         setTimeout(() => {
             setProfileData({...profileData, ...values });
             setDisabledInput(true);
             setLoadingProfile(false);
-            console.log("22", profileData);
             //success
             notification.success({
                 message: "Cập nhật thành công !",

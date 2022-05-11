@@ -9,12 +9,14 @@ import Dashboard from "./components/websites/Dashboard";
 import CreateOrder from "./components/websites/CreateOrder";
 import Profile from "./components/websites/Profile";
 import { initProfile } from "./recoil/profileAtom";
+import { initLoad } from "./recoil/loadAtom";
 import { useSetRecoilState } from "recoil";
 import moment from "moment";
 import { getData } from "./api/BaseAPI";
 
 const Router = () => {
   const setProfile = useSetRecoilState(initProfile);
+  const setLoading = useSetRecoilState(initLoad);
   useEffect(() => {
     
     // call api profile
@@ -28,7 +30,10 @@ const Router = () => {
     //   TIN: "246134578 "
     // });
     getData('Profile')
-    .then(({data}) => setProfile(...data));
+      .then(({data}) => {
+        setProfile(...data); 
+        setLoading(false);
+      });
   }, []);
 
   return (
