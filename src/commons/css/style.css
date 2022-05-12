@@ -36,6 +36,12 @@ body {
 .head .icon-nav-top {
     color: #fff;
 }
+.ant-page-header.header-notification {
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .head .ant-layout-header {
     line-height: unset !important;
 }
@@ -71,10 +77,34 @@ body {
 #scrollable-notify {
     background: #fff;
     width: 300px;
-    height: 300px;
+    height: 400px;
     overflow: auto;
     padding: 0 16px;
     border: 1px solid rgba(140, 140, 140, 0.35);
+    border-radius: 0 0 10px 10px;
+}
+.scrollable-notify-footer{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 10px 0;
+    margin: 0;
+    justify-content: space-around;
+    width: 100%;
+    left: 0;
+    background-color: #F7F9F3;
+    border: 1px solid rgba(214, 214, 214, 0.5);
+    border-bottom: none;
+    color: #997FBF;
+    border-radius: 0 0 10px 10px;
+}
+.scrollable-notify-footer .mark-all, .scrollable-notify-footer .see-all{
+    cursor: pointer;
+}
+.scrollable-notify-footer .mark-all:hover, .scrollable-notify-footer .see-all:hover{
+    color: var(--color-orange);
 }
 .dropdown-account {
     width: 180px;
