@@ -9,14 +9,18 @@ const Home = () => {
 
   const boxCheckin = (
     <>
-      <Title level={4}>Hôm nay</Title>
-      <div><span><NodeExpandOutlined className="icon-checkin"/>Checkin</span> 08:00</div>
-      <div><span><NodeCollapseOutlined className="icon-checkin"/>Checkout</span> N/A</div>
+      <Title level={4} className="title-checkin-current">Hôm nay</Title>
+      <div className="ant-row ant-row-space-between"><span className="lable-item"><NodeExpandOutlined className="icon-checkin"/> Checkin</span><span className="content-item"> 08:00</span></div>
+      <div className="ant-row ant-row-space-between"><span className="lable-item"><NodeCollapseOutlined className="icon-checkin"/> Checkout</span><span className="content-item"> N/A</span></div>
     </>
   )
 
+  const boxWorktime = (
+    <Title level={4} className="title-worktime-current">Công tháng này</Title>
+  );
+
   const contentStyle = {
-    height: '160px',
+    height: '250px',
     color: '#fff',
     lineHeight: '160px',
     textAlign: 'center',
@@ -25,24 +29,25 @@ const Home = () => {
 
   return (
     <div className="home-page">
+      <div className="bg-home"></div>
       <Row gutter={[12,12]}>
         <Col xs={24} md={18} lg={8}>
-          <Row gutter={[12,12]}>
+          <Title level={3} className="title-home title-home-left">Xin chào <b>Võ Định</b></Title>
+          <Row gutter={[12,12]} className="box-section-left">
             <Col xs={24} md={18} lg={12}>
-              <Card title={boxCheckin}>
-              <div><span><FundProjectionScreenOutlined className="icon-checkin"/> Xếp hạng</span> 30 <RiseOutlined /></div>
+              <Card title={boxCheckin} className="section-content">
+              <div className="ant-row ant-row-space-between"><span className="lable-item"><FundProjectionScreenOutlined className="icon-checkin"/> Rank</span> <span className="content-item"> 20 <RiseOutlined className="rank-up"/></span></div>
               </Card>
             </Col>
             <Col xs={24} md={18} lg={12}>
-              <Card>
-                <Title level={4}>Công tháng này</Title>
+              <Card className="section-content" title={boxWorktime}>
                 <Progress type="circle" percent={workingTime/totalDay*100} format={ percent => `${workingTime}/${totalDay}`} />
               </Card>
             </Col>
           </Row>
         </Col>
         <Col xs={24} md={18} lg={16}>
-          <Card>
+            <Title level={3} className="title-home">Bảng tin</Title>
             <Carousel autoplay dots={{ className: "dotSlider" }}>
               <div>
                 <h3 style={contentStyle}>1</h3>
@@ -57,7 +62,6 @@ const Home = () => {
                 <h3 style={contentStyle}>4</h3>
               </div>
             </Carousel>
-          </Card>
         </Col>
       </Row>
     </div>

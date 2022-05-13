@@ -24,7 +24,10 @@ body {
 }
 
 /* css head  */
-
+header {
+    z-index: 1;
+    position: relative;
+}
 .head{
     width: 100%;
     height: 100%;
@@ -156,8 +159,68 @@ body {
 /* end css head */
 
 /* css home */
-.home {
-    height: 100vh;
+.home-page {
+    min-height: calc(100vh - 100px);
+    position: relative;
+}
+.home-page .title-home {
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    padding: 5px 0;
+}
+.home-page .bg-home {
+    background-image: url("https://c.wallhere.com/photos/4e/06/low_poly_orange_digital_art_shapes_lines_abstract-1366661.jpg!d");
+    border-radius: 50%;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: -57%;
+    z-index: 0;
+    left: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.home-page .section-content {
+    height: 100%;
+}
+.home-page .box-section-left {
+    height: 250px;
+}
+.home-page .box-section-left .ant-card-head, .home-page .box-section-left .ant-card-body {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+.home-page .lable-item {
+    font-size: 15px;
+    color: #9c9191;
+}
+.home-page .content-item {
+    font-size: 16px;
+    color: #9c9191;
+    color: var(--color-orange);
+    font-weight: 600;
+}
+.home-page .rank-up {
+    color: rgb(38, 158, 38);
+    background-color: rgba(38, 158, 38, 0.322);
+    border-radius: 50%;
+    padding: 3px;
+}
+.home-page .title-home-left{
+    padding-left: 12px;
+}
+.home-page .title-checkin-current, .home-page .title-worktime-current {
+    font-size: 15px;
+    text-align: center;
+}
+.home-page .icon-checkin {
+    color: var(--color-orange);
+    background-color: rgba(255, 166, 0, 0.212);
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 50%;
 }
 /* end css home */
 .dashboard {
