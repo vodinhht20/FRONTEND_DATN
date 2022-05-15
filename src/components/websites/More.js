@@ -20,11 +20,11 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../commons/css/avatar-style.css";
-import iconSetting from "../../commons/images/icons-svg/setting.svg";
-import iconFile from "../../commons/images/icons-svg/file.svg";
-import iconShare from "../../commons/images/icons-svg/share.svg";
-import iconPlus from "../../commons/images/icons-svg/plus.svg";
+import "~/commons/css/avatar-style.css";
+import iconSetting from "~/commons/images/icons-svg/setting.svg";
+import iconFile from "~/commons/images/icons-svg/file.svg";
+import iconShare from "~/commons/images/icons-svg/share.svg";
+import iconPlus from "~/commons/images/icons-svg/plus.svg";
 const style = {
   textAlign: "center",
   marginBottom: "8vw",

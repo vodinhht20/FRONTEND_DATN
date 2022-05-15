@@ -1,8 +1,8 @@
 import { MoreOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Dropdown, PageHeader, Row } from "antd";
 import { useEffect, useState } from "react";
-import { getData } from "../../api/BaseAPI";
-import { DashboardPie, DashboardRadar } from "../../commons/chart/Dashboard";
+import { getData } from "~/api/BaseAPI";
+import { DashboardPie, DashboardRadar } from "~/commons/chart/Dashboard";
 
 const Dashboard = () => {
   const [visible, setVisible] = useState(false);

@@ -1,7 +1,7 @@
 import moment from "moment";
 import { MoreOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
-import { formatDate } from "../../commons/services/Library";
+import { formatDate } from "~/commons/services/Library";
 import {
   PageHeader,
   Button,

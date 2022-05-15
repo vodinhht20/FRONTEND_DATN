@@ -1,7 +1,7 @@
 import { CheckOutlined, CloudUploadOutlined, EditOutlined, IdcardOutlined, KeyOutlined } from '@ant-design/icons';
 import { Button, Card, Col, DatePicker, Form, Image, Input, Radio, Row, Select, Spin, Tabs, Typography, notification, Upload } from 'antd';
 import React, { useEffect, useState, useRef } from 'react';
-import { initProfile } from "../../recoil/profileAtom";
+import { initProfile } from "~/recoil/profileAtom";
 import { useRecoilState } from "recoil";
 const { Title, Paragraph, Text } = Typography;
 const { TabPane } = Tabs;
@@ -40,7 +40,7 @@ const Profile = () => {
         }, 2000)
     }
 
-    // change avatar 
+    // change avatar
     const uploadAvatar = (event) => {
 
         setLoadUpImage(true);
@@ -98,12 +98,12 @@ const Profile = () => {
                                     onClick={() => inputAvatar.click()}
                                     htmlFor="input-file-avatar"
                                 >
-                                    Đổi ảnh đại diện 
+                                    Đổi ảnh đại diện
                                 </Button>
                         </Col>
                         <Col xs={24} md={16} lg={18}>
                             <Spin spinning={loadingProfile}>
-                                <Form layout="vertical" 
+                                <Form layout="vertical"
                                     onFinish={handleSubmitProfile}
                                     requiredMark={ !disabledInput ? true : "optional" }
                                     initialValues={profileData}
@@ -144,10 +144,10 @@ const Profile = () => {
                                                 }]}
                                             >
                                                 <Input placeholder="Nhập số điện thoại" disabled={ disabledInput }/>
-                                            </Form.Item>    
+                                            </Form.Item>
                                         </Col>
                                         <Col xs={24} md={24} lg={12}>
-                                            <Form.Item name="birth_day" label="Ngày sinh" 
+                                            <Form.Item name="birth_day" label="Ngày sinh"
                                                 rules={[{
                                                     required: true,
                                                     message: 'Vui lòng nhập ngày sinh'
@@ -186,7 +186,7 @@ const Profile = () => {
                                             >
                                                 {
                                                     disabledInput ? <>Chỉnh sửa</> : <>Xác nhận</>
-                                                } 
+                                                }
                                             </Button>
                                         </Col>
                                     </Row>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../commons/images/logo.png";
+import logo from "~/commons/images/logo.png";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
@@ -18,7 +18,7 @@ import { useState, useEffect } from "react";
 import { List, Skeleton, Divider } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import InputSearch from "./Utils/Search";
-import { initProfile } from "../recoil/profileAtom";
+import { initProfile } from "~/recoil/profileAtom";
 import { useRecoilValue } from "recoil";
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
