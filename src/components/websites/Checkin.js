@@ -154,7 +154,7 @@ const Checkin = () => {
   }
 
   return (
-    <div className="time-keep" id="time-keep-location">
+    <div className="wr-container time-keep" id="time-keep-location">
       <CardAntd size="small" >
         <Form  labelCol={{ span: 6 }} wrapperCol={{ span: 17 }}>
           <Form.Item label="Cơ sở làm việc" >

@@ -18,7 +18,7 @@ const Router = () => {
   const setProfile = useSetRecoilState(initProfile);
   const setLoading = useSetRecoilState(initLoad);
   useEffect(() => {
-    
+
     // call api profile
     // setProfile({
     //   email: "vodinh2000ht@gmail.com",
@@ -31,7 +31,10 @@ const Router = () => {
     // });
     getData('Profile')
       .then(({data}) => {
-        setProfile(...data); 
+        setProfile(...data);
+        setLoading(false);
+      })
+      .catch((err) => {
         setLoading(false);
       });
   }, []);

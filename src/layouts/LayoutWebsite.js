@@ -17,7 +17,7 @@ const LayoutWebsite = () => {
           <Head />
         </Header>
         <Content className="content-wrapper" style={{ marginBottom: '100px'}}>
-          <LinearProgress style={ !loading ? { display:  "none"} : {}}/>
+          <LinearProgress style={ !loading ? { display:  "none"} : {}} className="loading-bottom-head"/>
           <Row justify="center">
             <Col xs={24} md={22} lg={20}>
               <Outlet />
