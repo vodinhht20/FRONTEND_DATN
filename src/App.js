@@ -1,5 +1,5 @@
-import Router from './routes';
-import './commons/css/style.css';
+import Router from '~/routes';
+import '~/assets/css/style.css';
 function App() {
   return (
     <div className="App">

@@ -1,11 +1,4 @@
 import {
-  FileTextOutlined,
-  MoreOutlined,
-  QrcodeOutlined,
-  SettingOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import {
   Avatar,
   Badge,
   Button,
@@ -20,11 +13,11 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "~/commons/css/avatar-style.css";
-import iconSetting from "~/commons/images/icons-svg/setting.svg";
-import iconFile from "~/commons/images/icons-svg/file.svg";
-import iconShare from "~/commons/images/icons-svg/share.svg";
-import iconPlus from "~/commons/images/icons-svg/plus.svg";
+import "~/assets/css/avatar-style.css";
+import iconSetting from "~/assets/images/icons-svg/setting.svg";
+import iconFile from "~/assets/images/icons-svg/file.svg";
+import iconShare from "~/assets/images/icons-svg/share.svg";
+import iconPlus from "~/assets/images/icons-svg/plus.svg";
 const style = {
   textAlign: "center",
   marginBottom: "8vw",

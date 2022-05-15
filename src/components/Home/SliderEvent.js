@@ -13,9 +13,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { SkeletonCard } from "./SkeletonCard";
 
-import bannerBirthDay from "~/commons/images/banner/happy_birth_day.png";
-import bannerVaccine from "~/commons/images/banner/banner-vaccine.png";
-import bannerMeet from "~/commons/images/banner/banner_meet.png";
+import bannerBirthDay from "~/assets/images/banner/happy_birth_day.png";
+import bannerVaccine from "~/assets/images/banner/banner-vaccine.png";
+import bannerMeet from "~/assets/images/banner/banner_meet.png";
 
 export default function SliderEvent({ loading }) {
     const [widthScreen, setWidthScreen] = useState(window.innerWidth);

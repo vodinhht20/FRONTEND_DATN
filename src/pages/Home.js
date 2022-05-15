@@ -8,11 +8,11 @@ import {
 } from "@ant-design/icons";
 import { Row, Col, Card, Typography, Progress, Carousel } from "antd";
 
-import banner01 from "~/commons/images/banner/banner_01.png";
-import banner02 from "~/commons/images/banner/banner_02.png";
-import banner03 from "~/commons/images/banner/banner_03.png";
-import banner04 from "~/commons/images/banner/banner_04.png";
-import SliderEvent from "./SliderEvent";
+import banner01 from "~/assets/images/banner/banner_01.png";
+import banner02 from "~/assets/images/banner/banner_02.png";
+import banner03 from "~/assets/images/banner/banner_03.png";
+import banner04 from "~/assets/images/banner/banner_04.png";
+import SliderEvent from "~/components/Home/SliderEvent";
 const { Title } = Typography;
 
 const Home = () => {

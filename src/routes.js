@@ -1,22 +1,24 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import Checkin from "./components/websites/Checkin";
-import Timesheet from "./components/websites/Timesheet";
-import Home from "./components/websites/Home";
-import LayoutWebsite from "./layouts/LayoutWebsite";
-import More from "./components/websites/More";
-import Dashboard from "./components/websites/Dashboard";
-import CreateOrder from "./components/websites/CreateOrder";
-import Profile from "./components/websites/Profile";
-import { initProfile } from "./recoil/profileAtom";
-import { initLoad } from "./recoil/loadAtom";
+import Checkin from "~/pages/Checkin";
+import Timesheet from "~/pages/Timesheet";
+import Home from "~/pages/Home";
+import LayoutWebsite from "~/layouts/LayoutWebsite";
+import More from "~/pages/More";
+import Dashboard from "~/pages/Dashboard";
+import CreateOrder from "~/pages/CreateOrder";
+import Profile from "~/pages/Profile";
+import { initProfile } from "~/recoil/profileAtom";
+import { initLoad } from "~/recoil/loadAtom";
+import { initCheckin } from "~/recoil/checkinAtom";
 import { useSetRecoilState } from "recoil";
 import moment from "moment";
-import { getData } from "./api/BaseAPI";
+import { getData, getDataV2 } from "~/api/BaseAPI";
 
 const Router = () => {
   const setProfile = useSetRecoilState(initProfile);
   const setLoading = useSetRecoilState(initLoad);
+  const setCheckin = useSetRecoilState(initCheckin);
   useEffect(() => {
 
     // call api profile
@@ -37,6 +39,10 @@ const Router = () => {
       .catch((err) => {
         setLoading(false);
       });
+      getDataV2('checkin')
+      .then(({data}) => {
+        setCheckin(data[0]);
+      })
   }, []);
 
   return (

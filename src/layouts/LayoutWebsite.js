@@ -1,9 +1,9 @@
 import { LinearProgress } from "@mui/material";
 import { Col, Layout, PageHeader, Row } from "antd";
 import { Outlet } from "react-router-dom";
-import Head from "../components/Head";
-import MenuBottom from "../components/MenuBottom";
-import { initLoad } from "../recoil/loadAtom";
+import Head from "~/components/Header";
+import MenuBottom from "~/components/NavBottom";
+import { initLoad } from "~/recoil/loadAtom";
 import { useRecoilValue } from "recoil";
 
 const { Header, Footer, Sider, Content } = Layout;
