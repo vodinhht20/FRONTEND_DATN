@@ -2,7 +2,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import Typography from '@mui/material/Typography';
-import { FreeMode, Pagination, Navigation } from "swiper";
+import { FreeMode, Pagination, Navigation, Autoplay } from "swiper";
 import { Avatar, Card, Tooltip, Button } from "antd";
 import { GiftOutlined } from "@ant-design/icons";
 import { CardActionArea, CardActions } from '@mui/material';
@@ -21,20 +21,24 @@ export default function SliderEvent({ loading }) {
     const [widthScreen, setWidthScreen] = useState(window.innerWidth);
     useEffect(() => {
         window.addEventListener("resize", () => setWidthScreen(window.innerWidth));
-    }, [])
+    }, []);
   return (
     <>
       <Swiper
         slidesPerView={widthScreen < 992 ? (widthScreen < 600 ? 1 : 2) : 3}
         spaceBetween={30}
         freeMode={true}
+        autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+        }}
         pagination={{
             clickable: true,
             renderBullet: function (index, className) {
                 return '<span class="dot-circle ' + className + '">' + (index + 1) + "</span>";
             },
         }}
-        modules={[FreeMode, Pagination, Navigation]}
+        modules={[FreeMode, Pagination, Navigation, Autoplay]}
         className="box-home-event"
       >
         <SwiperSlide>

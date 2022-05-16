@@ -67,7 +67,7 @@ const More = () => {
   }, []);
 
   return (
-    <div className="more">
+    <div className="wr-container more">
       <Row gutter={[12, 12]}>
         <Col xs={24} md={24} lg={24}>
           <Card title="Được đề xuất" bordered={true} loading={loading}>

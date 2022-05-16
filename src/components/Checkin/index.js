@@ -20,7 +20,7 @@ const Checkin = ( { handleProps } ) => {
     setCircleLoading,
     loading,
     circleLoading
-] = handleProps;
+  ] = handleProps;
   const [statusRes, setStatusRes] = useState(true);
 
     const circleLoadingStype = {

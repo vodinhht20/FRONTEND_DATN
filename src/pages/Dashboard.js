@@ -33,7 +33,7 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="dashboard">
+    <div className="wr-container dashboard">
       <PageHeader
         ghost={false}
         title="Thống kê"

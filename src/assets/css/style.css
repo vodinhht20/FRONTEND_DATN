@@ -19,7 +19,7 @@ body {
 }
 .wr-container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto !important;
 }
 
 ::-webkit-scrollbar {
@@ -395,6 +395,9 @@ header {
 }
 .dashboard .ant-col{
     padding: 0 !important;
+}
+.dashboard-container {
+    margin: 0 !important;
 }
 .dashboard-container .info-count {
     color: var(--color-orange);
