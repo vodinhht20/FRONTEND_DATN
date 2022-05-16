@@ -34,7 +34,11 @@ const Router = () => {
     getData('Profile')
       .then(({data}) => {
         setProfile(...data);
-        setLoading(false);
+
+        // tạm thời để độ trễ 2s để test loading
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       })
       .catch((err) => {
         setLoading(false);

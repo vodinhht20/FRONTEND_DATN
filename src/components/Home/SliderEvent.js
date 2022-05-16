@@ -38,7 +38,7 @@ export default function SliderEvent({ loading }) {
                 return '<span class="dot-circle ' + className + '">' + (index + 1) + "</span>";
             },
         }}
-        modules={[FreeMode, Pagination, Navigation, Autoplay]}
+        modules={[FreeMode, Pagination , Navigation, Autoplay]}
         className="box-home-event"
       >
         <SwiperSlide>
