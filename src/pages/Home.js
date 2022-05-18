@@ -5,6 +5,8 @@ import {
   ReconciliationOutlined,
   RiseOutlined,
   SnippetsOutlined,
+  ArrowUpOutlined,
+  ArrowDownOutlined
 } from "@ant-design/icons";
 import Skeleton from '@mui/material/Skeleton';
 import { Row, Col, Card, Typography, Progress, Carousel, Avatar } from "antd";
@@ -13,8 +15,7 @@ import banner01 from "~/assets/images/banner/banner_01.png";
 import banner02 from "~/assets/images/banner/banner_02.png";
 import banner03 from "~/assets/images/banner/banner_03.png";
 import banner04 from "~/assets/images/banner/banner_04.png";
-import SliderEvent from "~/components/Home/SliderEvent";
-import SkeletonLine from "~/components/Home/SkeletonLine";
+import { SliderEvent, SkeletonLine, RankList } from "~/components/Home";
 import { initCheckin } from "~/recoil/checkinAtom";
 import { initLoad } from "~/recoil/loadAtom";
 import { initProfile } from "~/recoil/profileAtom";
@@ -145,6 +146,23 @@ const Home = () => {
                 </div>
               </Carousel>
             }
+        </Col>
+      </Row>
+      <Row gutter={[12,12]} className="box-rank-list mt-3">
+        <Col span={24} >
+          <Title level={3} className="title-home-top">Xếp hạng hôm nay</Title>
+          <Card>
+            <Row>
+              <Col xs={24} md={12} lg={12}>
+                <Title level={4} className="title-home-top">Top 5 đi sớm</Title>
+                <RankList />
+              </Col>
+              <Col xs={24} md={12} lg={12}>
+                <Title level={4} className="title-home-top">Top 5 đi muộn</Title>
+                <RankList />
+              </Col>
+            </Row>
+          </Card>
         </Col>
       </Row>
       <Row gutter={[12,12]} className="mt-3">
