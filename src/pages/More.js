@@ -196,6 +196,42 @@ const More = () => {
                   <p>Example</p>
                 </Badge>
               </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
+              <Col xs={6} md={6} lg={4}>
+                <Badge count={""}>
+                  <Avatar className="icon-app-style" src={iconPlus} />
+                  <p>Example</p>
+                </Badge>
+              </Col>
             </Row>
           </Card>
         </Col>

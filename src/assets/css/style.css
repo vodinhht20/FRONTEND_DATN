@@ -620,6 +620,41 @@ header {
     font-size: 16px;
     font-weight: 600;
 }
+.CreateOrder-container, .OrderPage-container{
+    margin: 0 !important;
+}
+.CreateOrder-container .one-order {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.5vw;
+    font-size: 14.5px;
+    font-weight: 450;
+    cursor: pointer;
+    margin-bottom: 1vw;
+    padding: 1.4vw 0;
+    padding-right: 5vw;
+    color: #000;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: #eee transparent;
+    transition: .3s linear;
+}
+@media (max-width: 768px) {
+    .CreateOrder-container .one-order{
+        margin-bottom: 3.6vw;
+        padding: 6vw 0;
+    }
+    .CreateOrder-container .ant-ribbon.ant-ribbon-placement-end{
+        display: none;
+    }
+}
+
+.CreateOrder-container .one-order:hover{
+    border-color: var(--color-orange) transparent;
+    background-color: rgba(216, 216, 216, 0.185);
+}
 .form-create-order{
     width: 100%;
 }
