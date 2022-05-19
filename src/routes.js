@@ -15,14 +15,17 @@ import { useSetRecoilState } from "recoil";
 import moment from "moment";
 import { getData, getDataV2 } from "~/api/BaseAPI";
 import { initDataChart } from "./recoil/dataChart";
+import { initListOrder } from "./recoil/listOrder";
+import CreateOrderLayout from "./layouts/CreateOrderLayout";
+import OrderPage from "./pages/OrderPage";
 
 const Router = () => {
   const setProfile = useSetRecoilState(initProfile);
   const setLoading = useSetRecoilState(initLoad);
   const setCheckin = useSetRecoilState(initCheckin);
   const setDataChart = useSetRecoilState(initDataChart);
+  const setlistOrder = useSetRecoilState(initListOrder);
   useEffect(() => {
-
     // call api profile
     // setProfile({
     //   email: "vodinh2000ht@gmail.com",
@@ -33,28 +36,29 @@ const Router = () => {
     //   phone: "+84329766459",
     //   TIN: "246134578 "
     // });
-    
-    getData('dashboard')
-    .then(({data}) => {
-      setDataChart(data)
-    })
+    getData("list-don").then(({ data }) => {
+      setlistOrder(data);
+    });
 
-    getData('Profile')
-      .then(({data}) => {
+    getData("dashboard").then(({ data }) => {
+      setDataChart(data);
+    });
+
+    getData("Profile")
+      .then(({ data }) => {
         setProfile(...data);
-        
+
         setTimeout(() => {
           setLoading(false);
-        },2000);
+        }, 2000);
       })
       .catch((err) => {
         setLoading(true);
       });
 
-      getDataV2('checkin')
-      .then(({data}) => {
-        setCheckin(data[0]);
-      })
+    getDataV2("checkin").then(({ data }) => {
+      setCheckin(data[0]);
+    });
   }, []);
 
   return (
@@ -68,8 +72,11 @@ const Router = () => {
 
         {/* More router */}
         <Route path="more">
-        <Route index element={<More />} />
-          <Route path="create-order" element={<CreateOrder />} />
+          <Route index element={<More />} />
+          <Route path="create-order" element={<CreateOrderLayout />} >
+            <Route index element={<CreateOrder />} />
+            <Route path="tao-don" element={<OrderPage />} />
+          </Route>
         </Route>
       </Route>
       <Route path="about" element={<h6>About</h6>} />
