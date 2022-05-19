@@ -5,7 +5,6 @@ import CarMUI from '@mui/material/Card';
 const SkeletonCard = () => {
     return (
         <>
-
             <CarMUI >
                 <CardActionArea>
                     <Skeleton sx={{ height: 160 }} animation="wave" variant="rectangular" />

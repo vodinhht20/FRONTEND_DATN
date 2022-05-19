@@ -3,47 +3,12 @@ import { List, message, Avatar } from 'antd';
 import VirtualList from 'rc-virtual-list';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 
-const data = [
-    {
-        "gender": "Nam",
-        "name": "Võ Định",
-        "role": "Kỹ sư phần mềm",
-        "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
-        "rank": 1,
-        "up_rank": 1
-    },
-    {
-        "gender": "Nam",
-        "name": "Võ Định",
-        "role": "Kỹ sư phần mềm",
-        "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
-        "rank": 2,
-        "up_rank": 0
-    },
-    {
-        "gender": "Nam",
-        "name": "Võ Định",
-        "role": "Kỹ sư phần mềm",
-        "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
-        "rank": 3,
-        "up_rank": 0
-    },
-    {
-        "gender": "Nam",
-        "name": "Võ Định",
-        "role": "Kỹ sư phần mềm",
-        "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
-        "rank": 4,
-        "up_rank": 1
-    }
-]
-
-const RankList = () => {
+const RankList = ({data}) => {
     return (
         <List>
             <VirtualList
                 data={data}
-                height={400}
+                height={300}
                 itemHeight={47}
                 itemKey="email"
             >

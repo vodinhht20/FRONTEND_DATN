@@ -373,10 +373,19 @@ header {
 .home-page .box-rank-list .user-item {
     padding: 10px 20px;
 }
+.home-page .box-rank-list .ant-card-body{
+    padding-top: 5px;
+}
 .home-page .box-rank-list .user-item .text-info {
     color: var(--color-orange);
     font-size: 14px;
     font-weight: 600;
+}
+.home-page .box-rank-list .bg-success {
+    background-color: #7deb7d;
+}
+.home-page .box-rank-list .bg-danger {
+    background-color: #7da9eb;
 }
 .home-page .box-rank-list .user-info {
     margin: 0 20px;
@@ -396,6 +405,16 @@ header {
 .home-page .box-rank-list .user-item .current-rank .icon-down {
     color: rgb(238, 20, 20);
     font-size: 16px;
+}
+.home-page .box-rank-list .box-title-tab {
+    padding: 10px 0;
+    text-align: center;
+}
+.home-page .box-rank-list .title-rank-tab {
+    padding: 5px 20px;
+    display: inline;
+    color: #ffff;
+    border-radius: 20px;
 }
 @media (max-width: 768px) {
     .home-page .box-content-right .home-slide .slider-item img, .home-page .box-content-right .skeleton-banner {

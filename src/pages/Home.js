@@ -28,6 +28,7 @@ const Home = () => {
   const loading = useRecoilValue(initLoad);
   const profileData = useRecoilValue(initProfile);
   const [dataHome, setDataHome] = useState({});
+  const [rankData, setrankData] = useState({});
   useEffect(() => {
     setDataHome({
       work_day: 5,
@@ -35,12 +36,97 @@ const Home = () => {
       percent_pr: 75,
       current_rank: 10,
       requests: 3
+    });
+    setrankData({
+      top_go_early: [
+        {
+          "gender": "Nam",
+          "name": "Võ Định",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 4,
+          "up_rank": 1
+        },
+        {
+          "gender": "Nam",
+          "name": "Võ Định",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 4,
+          "up_rank": 1
+        },
+        {
+          "gender": "Nam",
+          "name": "Võ Định",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 4,
+          "up_rank": 0
+        },
+        {
+          "gender": "Nam",
+          "name": "Võ Định",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 4,
+          "up_rank": 1
+        },
+        {
+          "gender": "Nam",
+          "name": "Võ Định",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 4,
+          "up_rank": 0
+        }
+      ],
+      top_go_late: [
+        {
+          "gender": "Nam",
+          "name": "Trần tiến",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 120,
+          "up_rank": 0
+        },
+        {
+          "gender": "Nam",
+          "name": "Trần tiến",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 121,
+          "up_rank": 0
+        },
+        {
+          "gender": "Nam",
+          "name": "Trần tiến",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 122,
+          "up_rank": 1
+        },
+        {
+          "gender": "Nam",
+          "name": "Trần tiến",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 123,
+          "up_rank": 0
+        },
+        {
+          "gender": "Nam",
+          "name": "Trần tiến",
+          "role": "Kỹ sư phần mềm",
+          "avatar": "https://randomuser.me/api/portraits/women/32.jpg",
+          "rank": 124,
+          "up_rank": 1
+        }
+      ]
     })
-  })
+  }, [])
   const boxWorktime = (
     <Title level={4} className="title-worktime-current">Hồ sơ nhân sự</Title>
   );
-  console.log("SkeletonLine", <SkeletonLine line={3} />);
   return (
     <div className="wr-container home-page">
       <div className="bg-home"></div>
@@ -152,14 +238,18 @@ const Home = () => {
         <Col span={24} >
           <Title level={3} className="title-home-top">Xếp hạng hôm nay</Title>
           <Card>
-            <Row>
+            <Row gutter={[12,12]}>
               <Col xs={24} md={12} lg={12}>
-                <Title level={4} className="title-home-top">Top 5 đi sớm</Title>
-                <RankList />
+                <div className="box-title-tab">
+                  <Title level={4} className="title-home-top title-rank-tab bg-success">Top Đến Sớm</Title>
+                </div>
+                <RankList data={rankData.top_go_early}/>
               </Col>
               <Col xs={24} md={12} lg={12}>
-                <Title level={4} className="title-home-top">Top 5 đi muộn</Title>
-                <RankList />
+                <div className="box-title-tab">
+                  <Title level={4} className="title-home-top title-rank-tab bg-danger">Top Đi Muộn</Title>
+                </div>
+                <RankList data={rankData.top_go_late}/>
               </Col>
             </Row>
           </Card>
