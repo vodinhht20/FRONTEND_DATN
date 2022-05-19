@@ -9,9 +9,9 @@
 }
 @media (min-width: 768px) {
     .icon-app-style{
-        height: 8vw !important;
-        width: 8vw !important;
-        line-height: 8vw !important;
+        height: 3vw !important;
+        width: 3vw !important;
+        line-height: 3vw !important;
         font-size: 4vw !important;
     }
 }
