@@ -4,22 +4,27 @@ import { useEffect, useState } from "react";
 import { getData } from "~/api/BaseAPI";
 import DashboardRadar from "~/components/Chart/DashboardRadar";
 import DashboardPie from "~/components/Chart/DashboardPie";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { initDataChart } from "~/recoil/dataChart";
+import { initLoad } from "~/recoil/loadAtom";
 
 const Dashboard = () => {
   const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [dataPie, setDataPie] = useState([]);
-  const [dataRadar, setDataRadar] = useState([]);
+  const loading = useRecoilValue(initLoad);
+  
+  // const [dataPie, setDataPie] = useRecoilState(initDataChart);
+  // const [dataRadar, setDataRadar] = useRecoilState(initDataChart);
+
+  const dataChart = useRecoilValue(initDataChart);
 
   useEffect(() => {
     document.title = "Thống kê";
     // call API data
-    getData('dashboard')
-    .then(({data}) => {
-      setDataPie(data)
-      setDataRadar(data)
-    })
-    .then(() => setLoading(false));
+    // getData('dashboard')
+    // .then(({data}) => {
+    //   setDataPie(data)
+    //   setDataRadar(data)
+    // })
   }, []);
 
   const DropdownMore = () => (
@@ -51,14 +56,14 @@ const Dashboard = () => {
         <Col xs={24} md={12} lg={12}>
           <Card title="Biểu đồ Pie" bordered={false} loading={loading}>
             <span className="text-info">
-              <DashboardPie data={dataPie} />
+              <DashboardPie data={dataChart} />
             </span>
           </Card>
         </Col>
         <Col xs={24} md={12} lg={12}>
           <Card title="Biểu đồ Xu hướng làm việc của bạn" bordered={false} loading={loading}>
             <span className="text-info">
-              <DashboardRadar data={dataRadar} />
+              <DashboardRadar data={dataChart} />
             </span>
           </Card>
         </Col>

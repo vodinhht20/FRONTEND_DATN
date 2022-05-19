@@ -14,11 +14,13 @@ import { initCheckin } from "~/recoil/checkinAtom";
 import { useSetRecoilState } from "recoil";
 import moment from "moment";
 import { getData, getDataV2 } from "~/api/BaseAPI";
+import { initDataChart } from "./recoil/dataChart";
 
 const Router = () => {
   const setProfile = useSetRecoilState(initProfile);
   const setLoading = useSetRecoilState(initLoad);
   const setCheckin = useSetRecoilState(initCheckin);
+  const setDataChart = useSetRecoilState(initDataChart);
   useEffect(() => {
 
     // call api profile
@@ -31,18 +33,24 @@ const Router = () => {
     //   phone: "+84329766459",
     //   TIN: "246134578 "
     // });
+    
+    getData('dashboard')
+    .then(({data}) => {
+      setDataChart(data)
+    })
+
     getData('Profile')
       .then(({data}) => {
         setProfile(...data);
-
-        // tạm thời để độ trễ 2s để test loading
+        
         setTimeout(() => {
           setLoading(false);
-        }, 2000);
+        },2000);
       })
       .catch((err) => {
-        setLoading(false);
+        setLoading(true);
       });
+
       getDataV2('checkin')
       .then(({data}) => {
         setCheckin(data[0]);
