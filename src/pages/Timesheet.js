@@ -193,6 +193,7 @@ const Timesheet = (value) => {
           <Calendar
             onChange={e => getDate(e)}
             dateCellRender={dateCellRender}
+            className="timesheet-calendar"
             locale={{
               lang: {
                 locale: "vi_VN",

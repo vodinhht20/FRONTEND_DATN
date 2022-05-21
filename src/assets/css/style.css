@@ -370,11 +370,22 @@ header {
 .home-page .css-bhp9pd-MuiPaper-root-MuiCard-root {
     box-shadow: 1px -1px 10px var(--color-box-shadow) !important;
 }
+.home-page .box-rank-list .section-content {
+    height: unset;
+}
 .home-page .box-rank-list .user-item {
     padding: 10px 20px;
+    transition: 0.3s;
+}
+.home-page .box-rank-list .user-item:hover {
+    background-color: #b0b2bf40;
 }
 .home-page .box-rank-list .ant-card-body{
     padding-top: 5px;
+}
+.home-page .box-rank-list .rank-list {
+    border-radius: 3px;
+    border: 1px dashed var(--color-box-shadow);
 }
 .home-page .box-rank-list .user-item .text-info {
     color: var(--color-orange);
@@ -382,13 +393,24 @@ header {
     font-weight: 600;
 }
 .home-page .box-rank-list .bg-success {
-    background-color: #7deb7d;
+    background-color: #6fcf6f;
 }
 .home-page .box-rank-list .bg-danger {
-    background-color: #7da9eb;
+    background-color: #faad14cc;
 }
 .home-page .box-rank-list .user-info {
     margin: 0 20px;
+}
+.home-page .box-rank-list .skeleton-list-rank-item {
+    padding: 0 20px;
+    margin: 12px 0px !important;
+}
+.home-page .box-rank-list .load-line-title {
+    width: 30%;
+    margin: 0 auto;
+}
+.home-page .box-rank-list .user-info a:hover  {
+    color: #1890ff;
 }
 .home-page .box-rank-list .user-item .checkin-time {
     background-color: rgba(230, 124, 11, 0.226);
@@ -420,6 +442,9 @@ header {
     .home-page .box-content-right .home-slide .slider-item img, .home-page .box-content-right .skeleton-banner {
         height: 200px;
     }
+    .home-page .box-rank-list .col-list-rank:nth-child(2) {
+        margin-top: 20px;
+    }
 }
 @media (max-width: 375px) {
     .home-page .box-content-left .section-content .ant-card-head, .home-page .box-content-left .section-content .ant-card-body {
@@ -437,6 +462,12 @@ header {
     }
     .home-page .box-content-right .home-slide .slider-item img, .home-page .box-content-right .skeleton-banner {
         height: 160px;
+    }
+    .home-page .box-rank-list .user-item {
+        padding: 10px 5px;
+    }
+    .home-page .box-rank-list .ant-card-body {
+        padding: 10px;
     }
 }
 /* end css home */
@@ -527,6 +558,13 @@ header {
     font-size: 16px;
     font-weight: 600;
 }
+.timesheet .timesheet-calendar .ant-picker-date-panel {
+    min-width: 992px;
+}
+.timesheet .timesheet-calendar .ant-picker-panel {
+    overflow-x: scroll;
+}
+
 .timesheet .ant-card-loading-content .ant-row:nth-child(-n+3) {
     display: none;
 }
@@ -656,7 +694,7 @@ header {
     padding: 10px;
     display: flex;
 }
-.OrderPage-container .text-area::placeholder{   
+.OrderPage-container .text-area::placeholder{
     line-height: 13vh;
     font-size: 14px;
 }
