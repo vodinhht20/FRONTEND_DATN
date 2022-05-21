@@ -334,9 +334,9 @@ header {
 .home-page .box-home-event .content-event .text-info {
     color: var(--color-orange)
 }
-.home-page .box-home-event .css-46bh2p-MuiCardContent-root {
-    padding: 10px 16px;
-    height: 110px;
+.home-page .box-home-event .box-card-content-event {
+    padding: 10px 16px !important;
+    height: 110px !important;
 }
 .home-page .box-home-event .btn-section-event {
     display: block;

@@ -54,7 +54,7 @@ const SliderEvent = ({ loading }) => {
                             image={bannerBirthDay}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                                 <div className="content-event">
                                 <div className="title-event"><GiftOutlined className="section-icon"/> <b>6 đồng nghiệp </b>sinh nhật hôm nay</div>
@@ -107,7 +107,7 @@ const SliderEvent = ({ loading }) => {
                             image={bannerVaccine}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                                 <div className="content-event">
                                     Nếu dữ liệu chưa cập nhật mới nhất, bạn vui lòng cập nhật thêm các mũi tiêm của mình,
@@ -137,7 +137,7 @@ const SliderEvent = ({ loading }) => {
                             image={bannerMeet}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                             <div className="content-event">
                                 <div className="title-event">Đào tạo quy trình làm việc cho thành viên mới</div>
@@ -170,7 +170,7 @@ const SliderEvent = ({ loading }) => {
                             image={bannerBirthDay}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                             <div className="content-event">
                             <div className="title-event"><GiftOutlined className="section-icon"/> <b>6 đồng nghiệp </b>sinh nhật hôm nay</div>
@@ -223,7 +223,7 @@ const SliderEvent = ({ loading }) => {
                             image={bannerVaccine}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                                 <div className="content-event">
                                     Nếu dữ liệu chưa cập nhật mới nhất, bạn vui lòng cập nhật thêm các mũi tiêm của mình,
@@ -253,7 +253,7 @@ const SliderEvent = ({ loading }) => {
                             image={bannerMeet}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                             <div className="content-event">
                                 <div className="title-event">Đào tạo quy trình làm việc cho thành viên mới</div>
