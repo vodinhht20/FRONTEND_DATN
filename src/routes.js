@@ -12,7 +12,7 @@ import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useSetRecoilState } from "recoil";
 import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic } from "~/recoil/atom";
-import { getData, getDataV2 } from "~/api/BaseAPI";
+import { getData } from "~/api/BaseAPI";
 import { notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 

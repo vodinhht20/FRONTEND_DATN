@@ -9,10 +9,10 @@ const SkeletonCustomiz = () => {
                 </Col>
                 <Col span={16}>
                     <Row gutter={[24, 0]}>
-                        <Col span={4}>
+                        <Col xs={6} md={4} lg={4}>
                             <Skeleton animation="wave" variant="circular" width={40} height={40} />
                         </Col>
-                        <Col span={20}>
+                        <Col xs={18} md={20} lg={20}>
                             <Skeleton />
                             <Skeleton style={{ width: "80%" }}/>
                         </Col>

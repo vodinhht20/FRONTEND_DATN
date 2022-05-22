@@ -231,6 +231,12 @@ header {
 .home-page .box-content-middle .section-content {
     height: 250px;
 }
+.home-page .box-content-middle .skeleton-personnel-record {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
 .home-page .box-content-left {
     padding-right: 4px;
 }
@@ -445,6 +451,10 @@ header {
     .home-page .box-rank-list .col-list-rank:nth-child(2) {
         margin-top: 20px;
     }
+    .home-page .box-content-middle .skeleton-personnel-record {
+        width: 90px;
+        height: 90px;
+    }
 }
 @media (max-width: 375px) {
     .home-page .box-content-left .section-content .ant-card-head, .home-page .box-content-left .section-content .ant-card-body {
@@ -468,6 +478,12 @@ header {
     }
     .home-page .box-rank-list .ant-card-body {
         padding: 10px;
+    }
+    .home-page .box-rank-list .user-item .checkin-time {
+        padding: 0 10px;
+    }
+    .home-page .box-rank-list .user-item .text-info {
+        font-size: 13px;
     }
 }
 /* end css home */
