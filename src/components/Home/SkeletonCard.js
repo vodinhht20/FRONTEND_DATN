@@ -2,10 +2,9 @@ import { Fragment } from 'react';
 import { CardActionArea, CardActions, CardContent, CardMedia, Skeleton, Typography } from '@mui/material';
 import CarMUI from '@mui/material/Card';
 
-export const SkeletonCard = () => {
+const SkeletonCard = () => {
     return (
         <>
-
             <CarMUI >
                 <CardActionArea>
                     <Skeleton sx={{ height: 160 }} animation="wave" variant="rectangular" />
@@ -25,3 +24,4 @@ export const SkeletonCard = () => {
         </>
     );
 }
+export default SkeletonCard;

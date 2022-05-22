@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import Workspace from "~/components/Checkin/Workspace";
 import ActionCheckin from "~/components/Checkin";
-import { initCheckin } from "~/recoil/checkinAtom";
+import { initCheckin } from "~/recoil/checkin";
 import { useRecoilState } from "recoil";
 const Checkin = () => {
 

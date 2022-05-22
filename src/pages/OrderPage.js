@@ -2,7 +2,7 @@ import { Avatar, Button, Card, Col, Form, List, message, Row, DatePicker, Spin, 
 import TextArea from "antd/lib/input/TextArea";
 import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { initLoad } from "~/recoil/loadAtom";
+import { initLoad } from "~/recoil/load";
 import { initOrder } from "~/recoil/order";
 import moment from 'moment';
 import 'moment/locale/vi';
@@ -42,7 +42,7 @@ const OrderPage = () => {
 
   const onFinish = (values) => {
     setLoading(true);
-    
+
     setTimeout(() => {
       setLoading(false);
       if (order) {
@@ -115,7 +115,7 @@ const OrderPage = () => {
               allowClear={false}
               onCalendarChange={CountTotal}
               showToday
-              disabledDate={disabledDate} 
+              disabledDate={disabledDate}
               format="DD/MM/YYYY"
               placeholder={["Ngày bắt đầu", "Ngày kết thúc"]}
               style={{ width: "100%", border: "none" }}

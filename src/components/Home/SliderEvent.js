@@ -11,13 +11,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import CarMUI from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { SkeletonCard } from "./SkeletonCard";
+import { SkeletonCard } from "~/components/Home";
 
 import bannerBirthDay from "~/assets/images/banner/happy_birth_day.png";
 import bannerVaccine from "~/assets/images/banner/banner-vaccine.png";
 import bannerMeet from "~/assets/images/banner/banner_meet.png";
 
-export default function SliderEvent({ loading }) {
+const SliderEvent = ({ loading }) => {
     const [widthScreen, setWidthScreen] = useState(window.innerWidth);
     useEffect(() => {
         window.addEventListener("resize", () => setWidthScreen(window.innerWidth));
@@ -54,7 +54,7 @@ export default function SliderEvent({ loading }) {
                             image={bannerBirthDay}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                                 <div className="content-event">
                                 <div className="title-event"><GiftOutlined className="section-icon"/> <b>6 đồng nghiệp </b>sinh nhật hôm nay</div>
@@ -107,7 +107,7 @@ export default function SliderEvent({ loading }) {
                             image={bannerVaccine}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                                 <div className="content-event">
                                     Nếu dữ liệu chưa cập nhật mới nhất, bạn vui lòng cập nhật thêm các mũi tiêm của mình,
@@ -137,7 +137,7 @@ export default function SliderEvent({ loading }) {
                             image={bannerMeet}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                             <div className="content-event">
                                 <div className="title-event">Đào tạo quy trình làm việc cho thành viên mới</div>
@@ -170,7 +170,7 @@ export default function SliderEvent({ loading }) {
                             image={bannerBirthDay}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                             <div className="content-event">
                             <div className="title-event"><GiftOutlined className="section-icon"/> <b>6 đồng nghiệp </b>sinh nhật hôm nay</div>
@@ -223,7 +223,7 @@ export default function SliderEvent({ loading }) {
                             image={bannerVaccine}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                                 <div className="content-event">
                                     Nếu dữ liệu chưa cập nhật mới nhất, bạn vui lòng cập nhật thêm các mũi tiêm của mình,
@@ -253,7 +253,7 @@ export default function SliderEvent({ loading }) {
                             image={bannerMeet}
                             alt="banner"
                         />
-                        <CardContent>
+                        <CardContent className="box-card-content-event">
                             <Typography variant="body2" color="text.secondary">
                             <div className="content-event">
                                 <div className="title-event">Đào tạo quy trình làm việc cho thành viên mới</div>
@@ -277,3 +277,4 @@ export default function SliderEvent({ loading }) {
     </>
   );
 }
+export default SliderEvent;

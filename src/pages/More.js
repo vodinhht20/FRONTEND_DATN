@@ -14,10 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "~/assets/css/avatar-style.css";
-import iconSetting from "~/assets/images/icons-svg/setting.svg";
-import iconFile from "~/assets/images/icons-svg/file.svg";
-import iconShare from "~/assets/images/icons-svg/share.svg";
-import iconPlus from "~/assets/images/icons-svg/plus.svg";
+import { iconSetting, iconFile, iconShare, iconPlus} from "~/components/images";
 const style = {
   textAlign: "center",
   marginBottom: "8vw",

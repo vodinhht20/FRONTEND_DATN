@@ -8,16 +8,13 @@ import More from "~/pages/More";
 import Dashboard from "~/pages/Dashboard";
 import CreateOrder from "~/pages/CreateOrder";
 import Profile from "~/pages/Profile";
-import { initProfile } from "~/recoil/profileAtom";
-import { initLoad } from "~/recoil/loadAtom";
-import { initCheckin } from "~/recoil/checkinAtom";
-import { useSetRecoilState } from "recoil";
-import moment from "moment";
-import { getData, getDataV2 } from "~/api/BaseAPI";
-import { initDataChart } from "./recoil/dataChart";
-import { initListOrder } from "./recoil/listOrder";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
+import { useSetRecoilState } from "recoil";
+import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic } from "~/recoil/atom";
+import { getData, getDataV2 } from "~/api/BaseAPI";
+import { notification } from "antd";
+import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 
 const Router = () => {
   const setProfile = useSetRecoilState(initProfile);
@@ -25,40 +22,38 @@ const Router = () => {
   const setCheckin = useSetRecoilState(initCheckin);
   const setDataChart = useSetRecoilState(initDataChart);
   const setlistOrder = useSetRecoilState(initListOrder);
+  const setRankCheckin = useSetRecoilState(initRankCheckin);
+  const setHomeStatistic = useSetRecoilState(initHomeStatistic);
   useEffect(() => {
-    // call api profile
-    // setProfile({
-    //   email: "vodinh2000ht@gmail.com",
-    //   fullname: "Võ Văn Định",
-    //   birth_day: moment('2000-02-03', "YYYY-MM-DD"),
-    //   avatar: "https://cdn.eva.vn/upload/4-2021/images/2021-10-29/new-project-550-1635505528-798-width800height700.jpg",
-    //   gender: "2",
-    //   phone: "+84329766459",
-    //   TIN: "246134578 "
-    // });
-    getData("list-don").then(({ data }) => {
-      setlistOrder(data);
-    });
+    (async () => {
+      try {
 
-    getData("dashboard").then(({ data }) => {
-      setDataChart(data);
-    });
+        let orderData = await getData("list-don");
+        setlistOrder(orderData.data);
 
-    getData("Profile")
-      .then(({ data }) => {
-        setProfile(...data);
+        let dashboardData = await getData("dashboard");
+        setDataChart(dashboardData.data);
 
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
-      })
-      .catch((err) => {
+        let profileData = await getData("Profile");
+        setProfile(...profileData.data);
+
+        setCheckin(checkinData);
+
+        setRankCheckin(rankListData);
+
+        setHomeStatistic(homeStatisticData);
+
+        // when all call api success then set loading is false
+        setLoading(false);
+      } catch (error) {
         setLoading(true);
-      });
-
-    getDataV2("checkin").then(({ data }) => {
-      setCheckin(data[0]);
-    });
+        notification['error']({
+          message: 'Đã có lỗi xảy ra',
+          description: <>message: {error.message}<br/>code: {error.code}<br/></>
+        });
+        throw error;
+      }
+    })()
   }, []);
 
   return (

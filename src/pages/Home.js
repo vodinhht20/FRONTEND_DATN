@@ -4,20 +4,13 @@ import {
   NodeExpandOutlined,
   ReconciliationOutlined,
   RiseOutlined,
-  SnippetsOutlined,
+  SnippetsOutlined
 } from "@ant-design/icons";
 import Skeleton from '@mui/material/Skeleton';
 import { Row, Col, Card, Typography, Progress, Carousel, Avatar } from "antd";
-
-import banner01 from "~/assets/images/banner/banner_01.png";
-import banner02 from "~/assets/images/banner/banner_02.png";
-import banner03 from "~/assets/images/banner/banner_03.png";
-import banner04 from "~/assets/images/banner/banner_04.png";
-import SliderEvent from "~/components/Home/SliderEvent";
-import SkeletonLine from "~/components/Home/SkeletonLine";
-import { initCheckin } from "~/recoil/checkinAtom";
-import { initLoad } from "~/recoil/loadAtom";
-import { initProfile } from "~/recoil/profileAtom";
+import { banner01, banner02, banner03, banner04 } from "~/components/images";
+import { SliderEvent, SkeletonLine, RankList } from "~/components/Home";
+import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic } from "~/recoil/atom";
 import { useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";
 const { Title } = Typography;
@@ -26,20 +19,13 @@ const Home = () => {
   const checkinData = useRecoilValue(initCheckin);
   const loading = useRecoilValue(initLoad);
   const profileData = useRecoilValue(initProfile);
-  const [dataHome, setDataHome] = useState({});
+  const dataHome = useRecoilValue(initHomeStatistic);
+  const rankData = useRecoilValue(initRankCheckin);
   useEffect(() => {
-    setDataHome({
-      work_day: 5,
-      total_work_day: 26,
-      percent_pr: 75,
-      current_rank: 10,
-      requests: 3
-    })
-  })
+  }, [])
   const boxWorktime = (
     <Title level={4} className="title-worktime-current">Hồ sơ nhân sự</Title>
   );
-  console.log("SkeletonLine", <SkeletonLine line={3} />);
   return (
     <div className="wr-container home-page">
       <div className="bg-home"></div>
@@ -53,7 +39,7 @@ const Home = () => {
                   <Card className="section-content">
                     {
                       loading ?
-                      <SkeletonLine/>
+                      <SkeletonLine length={5}/>
                       :
                       <>
                         <Title level={4} className="title-checkin-current">Hôm nay</Title>
@@ -81,7 +67,7 @@ const Home = () => {
                   <Card className="section-content">
                           {
                             loading ?
-                              <SkeletonLine/>
+                              <SkeletonLine length={5}/>
                             :
                             <>
                               <div className="ant-row ant-row-space-between statistic-home-item">
@@ -145,6 +131,37 @@ const Home = () => {
                 </div>
               </Carousel>
             }
+        </Col>
+      </Row>
+      <Row gutter={[12,12]} className="box-rank-list mt-3">
+        <Col span={24} >
+          <Title level={3} className="title-home-top">Xếp hạng hôm nay</Title>
+          <Card className="section-content">
+            <Row gutter={[12,12]}>
+              <Col xs={24} md={12} lg={12} className="col-list-rank">
+                <div className="box-title-tab">
+                  {
+                    loading ?
+                    <Skeleton className="load-line-title"/>
+                    :
+                    <Title level={4} className="title-home-top title-rank-tab bg-success">Top Đến Sớm</Title>
+                  }
+                </div>
+                <RankList data={rankData.top_go_early} loading={loading} />
+              </Col>
+              <Col xs={24} md={12} lg={12} className="col-list-rank">
+                <div className="box-title-tab">
+                  {
+                    loading ?
+                    <Skeleton className="load-line-title"/>
+                    :
+                    <Title level={4} className="title-home-top title-rank-tab bg-danger">Top Đi Muộn</Title>
+                  }
+                </div>
+                <RankList data={rankData.top_go_late} loading={loading} />
+              </Col>
+            </Row>
+          </Card>
         </Col>
       </Row>
       <Row gutter={[12,12]} className="mt-3">

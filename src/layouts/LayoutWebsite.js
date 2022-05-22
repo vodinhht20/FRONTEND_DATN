@@ -3,7 +3,7 @@ import { Col, Layout, PageHeader, Row } from "antd";
 import { Outlet } from "react-router-dom";
 import Head from "~/components/Header";
 import MenuBottom from "~/components/NavBottom";
-import { initLoad } from "~/recoil/loadAtom";
+import { initLoad } from "~/recoil/load";
 import { useRecoilValue } from "recoil";
 
 const { Header, Footer, Sider, Content } = Layout;

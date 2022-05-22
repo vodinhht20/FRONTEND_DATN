@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { initListOrder } from "~/recoil/listOrder";
-import { initLoad } from "~/recoil/loadAtom";
+import { initLoad } from "~/recoil/load";
 import { initOrder } from "~/recoil/order";
 
 const CreateOrder = () => {
@@ -23,7 +23,7 @@ const CreateOrder = () => {
         </Col>
         <Col xs={24} md={24} lg={24}>
           <Card title="Vui lòng chọn loại đơn" bordered={false} loading={loading}>
-            {listOrder && listOrder.map(item => 
+            {listOrder && listOrder.map(item =>
               <Badge.Ribbon text="Đang mở">
                 <Link onClick={() => setOrder(item.name)} key={item.id} to={item.link} className="one-order">
                   <div className="title-order">{item.name}</div>
