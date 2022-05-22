@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const instance = axios.create({
-    baseURL: 'https://627a1d1273bad5068582bcba.mockapi.io/polyf/'
-});
+const baseURL = process.env.REACT_APP_API_URL;
+const instance = axios.create({baseURL});
 
 export default instance;

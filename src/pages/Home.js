@@ -23,7 +23,7 @@ const Home = () => {
   const rankData = useRecoilValue(initRankCheckin);
   useEffect(() => {
   }, [])
-  const boxWorktime = (
+  const personnelRecord = (
     <Title level={4} className="title-worktime-current">Hồ sơ nhân sự</Title>
   );
   return (
@@ -89,14 +89,12 @@ const Home = () => {
               </Row>
             </Col>
             <Col span={12}  className="box-content-middle">
-              <Card className="section-content" title={boxWorktime}>
+              <Card className="section-content" title={personnelRecord}>
                   {
                     loading ?
                     <>
-                      <Skeleton variant="circular">
-                        <Progress type="circle" className="progress-home" percent={dataHome ? dataHome.percent_pr : 0} format={ percent => `${percent}%`} />
-                        <p className="note-pr">Cần bổ sung hồ sơ nhân sự</p>
-                      </Skeleton>
+                      <Skeleton variant="circular" className="skeleton-personnel-record"></Skeleton>
+                      <SkeletonLine length={1}/>
                     </>
                     :
                     <>
