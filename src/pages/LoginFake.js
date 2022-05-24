@@ -1,13 +1,33 @@
-import { Button, Card, Checkbox, Form, Input } from "antd";
+import { Button, Card, Checkbox, Form, Input, message } from "antd";
+import { GetDataFake, Login } from "~/api/BaseAPI";
 
 const LoginFake = () => {
   const onFinish = (values) => {
-    console.log("Success:", values);
+    // console.log("Success:", values);
+    Login(values)
+    .then(({ data }) => {
+      localStorage.setItem("user", JSON.stringify(data));
+    })
+    .then(() => message.success('Đăng nhập thành công'))
+    .catch((error) => message.warning(error.response.data.message));
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  const GetDataFakeFunc = () => {
+    let accessToken;
+    if (JSON.parse(localStorage.getItem("user"))) {
+        accessToken = 'Bearer '+ JSON.parse(localStorage.getItem("user")).access_token;
+    }
+    GetDataFake({ headers: { Authorization: accessToken } })
+    .then(({ data }) => {
+        console.log(data);
+        message.success('Lấy data thành công');
+    })
+    .catch((error) => message.warning(error.response.data.message));
+  }
 
   return (
     <div className="wr-container home-page">
@@ -28,12 +48,12 @@ const LoginFake = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Username"
-            name="username"
+            label="email"
+            name="email"
             rules={[
               {
                 required: true,
-                message: "Please input your username!",
+                message: "Please input your email!",
               },
             ]}
           >
@@ -75,6 +95,7 @@ const LoginFake = () => {
             </Button>
           </Form.Item>
         </Form>
+        <Button type="primary" onClick={GetDataFakeFunc}>Lấy dữ liệu</Button>
       </Card>
     </div>
   );
