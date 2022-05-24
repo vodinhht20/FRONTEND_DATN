@@ -1,7 +1,9 @@
-import { Button, Card, Checkbox, Form, Input, message } from "antd";
+import { Button, Card, Checkbox, Form, Input, message, Table } from "antd";
+import { useState } from "react";
 import { GetDataFake, Login } from "~/api/BaseAPI";
 
 const LoginFake = () => {
+    const [data, setData] = useState([]);
   const onFinish = (values) => {
     // console.log("Success:", values);
     Login(values)
@@ -24,10 +26,24 @@ const LoginFake = () => {
     GetDataFake({ headers: { Authorization: accessToken } })
     .then(({ data }) => {
         console.log(data);
+        setData(data.payload.data);
         message.success('Lấy data thành công');
     })
     .catch((error) => message.warning(error.response.data.message));
   }
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'email',
+      dataIndex: 'email',
+      key: 'email',
+    }
+  ];
 
   return (
     <div className="wr-container home-page">
@@ -96,6 +112,7 @@ const LoginFake = () => {
           </Form.Item>
         </Form>
         <Button type="primary" onClick={GetDataFakeFunc}>Lấy dữ liệu</Button>
+        {data && <Table dataSource={data} columns={columns} />}
       </Card>
     </div>
   );
