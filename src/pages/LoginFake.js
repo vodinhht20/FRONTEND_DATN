@@ -1,6 +1,6 @@
 import { Button, Card, Checkbox, Form, Input, message, Table } from "antd";
 import { useState } from "react";
-import { GetDataFake, Login } from "~/api/BaseAPI";
+import { GetDataFake, Login, Logout } from "~/api/BaseAPI";
 
 const LoginFake = () => {
     const [data, setData] = useState([]);
@@ -30,6 +30,22 @@ const LoginFake = () => {
         message.success('Lấy data thành công');
     })
     .catch((error) => message.warning(error.response.data.message));
+  }
+
+  const LogoutFunc = () => {
+    let accessToken;
+    if (JSON.parse(localStorage.getItem("user"))) {
+        accessToken = 'Bearer '+ JSON.parse(localStorage.getItem("user")).access_token;
+    }
+    Logout({ headers: { Authorization: accessToken } })
+    .then(({ data }) => {
+        console.log(data);
+        localStorage.removeItem("user");
+    })
+    .then(() => {
+        message.success('Đã đăng xuất');
+    })
+    .catch((error) => message.warning(error.response.data.message))
   }
 
   const columns = [
@@ -112,6 +128,7 @@ const LoginFake = () => {
           </Form.Item>
         </Form>
         <Button type="primary" onClick={GetDataFakeFunc}>Lấy dữ liệu</Button>
+        <Button type="primary" onClick={LogoutFunc}>Thoát</Button>
         {data && <Table dataSource={data} columns={columns} />}
       </Card>
     </div>

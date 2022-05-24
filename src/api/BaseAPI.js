@@ -15,3 +15,9 @@ export const GetDataFake = (accessToken) => {
     const url = 'users';
     return instance2.get(url, accessToken);
 };
+
+export const Logout = (accessToken) => {
+    console.log(accessToken);
+    const url = 'logout';
+    return instance2.post(url, [] ,accessToken);
+};
