@@ -1,9 +1,10 @@
-import { Button, Col, Row, Form, Input, Checkbox, Card, message } from "antd";
+import { Button, Col, Row, Form, Input, Checkbox, Card, message, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { imageLogin } from "~/components/images";
 import { initAccess_token } from "~/recoil/access_token";
 import { LoginApi } from "~/api/BaseAPI";
+import "~/assets/css/loading.css";
 
 const styleForm = {
     marginLeft: '15px',
@@ -44,13 +45,16 @@ const Login = () => {
     const setAccess_token = useSetRecoilState(initAccess_token);
     let navigate = useNavigate();
     const onFinish = (values) => {
+        document.querySelector('.container').classList.add('active');
     LoginApi(values)
     .then(({ data }) => {
         setAccess_token(data);
     })
     .then(() => message.success('Đăng nhập thành công'))
     .then(() => navigate('/'))
-    .catch((error) => message.warning(error.response.data.message));
+    .catch((error) => {
+        document.querySelector('.container').classList.remove('active');
+        return message.warning(error.response.data.message)});
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -58,6 +62,17 @@ const Login = () => {
     };
     return (
         <div style={styleBody}>
+            {/* <Spin className="login active" style={{position: 'fixed', width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgb(0 0 0 / 75%)', zIndex: 2}} tip="Loading..."></Spin> */}
+            <div class="container">
+                <h1><span>C<span>amel</span></span></h1>
+                <div class="loading">
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                </div>
+            </div>
             <div style={styleBackgroup}></div>
             <div style={styleContents}>
                 <Card style={{opacity:'0.9', boxShadow: '0 0 5px #000'}}>
