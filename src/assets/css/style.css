@@ -205,7 +205,9 @@ header {
     font-size: 15px;
     font-weight: 500;
     color: var(--color-text);
-    padding: 5px 0;
+    padding: 11px 7px;
+    background: #fff;
+    border-radius: 5px;
 }
 .home-page .bg-home {
     background-image: url("https://c.wallhere.com/photos/4e/06/low_poly_orange_digital_art_shapes_lines_abstract-1366661.jpg!d");

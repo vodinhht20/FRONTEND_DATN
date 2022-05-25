@@ -66,6 +66,16 @@ const navAccount = (
           </>
         ),
       },
+      {
+        label: (
+          <>
+            <QuestionCircleOutlined className="icon-dropdown" />
+            <Link rel="noopener noreferrer" to={"/loginfake"}>
+              Test
+            </Link>
+          </>
+        ),
+      },
     ]}
   />
 );

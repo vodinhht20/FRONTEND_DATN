@@ -1,16 +1,21 @@
 import { Button, Card, Checkbox, Form, Input, message, Table } from "antd";
 import { useState } from "react";
-import { GetDataFake, Login, Logout } from "~/api/BaseAPI";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { GetDataFake, LoginApi, Logout } from "~/api/BaseAPI";
+import { initAccess_token } from "~/recoil/access_token";
 
 const LoginFake = () => {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const [access_token, setAccess_token] = useRecoilState(initAccess_token);
+  let navigate = useNavigate();
   const onFinish = (values) => {
-    // console.log("Success:", values);
-    Login(values)
+    LoginApi(values)
     .then(({ data }) => {
-      localStorage.setItem("user", JSON.stringify(data));
+      setAccess_token(data);
     })
     .then(() => message.success('Đăng nhập thành công'))
+    .then(() => navigate('/'))
     .catch((error) => message.warning(error.response.data.message));
   };
 
@@ -19,11 +24,7 @@ const LoginFake = () => {
   };
 
   const GetDataFakeFunc = () => {
-    let accessToken;
-    if (JSON.parse(localStorage.getItem("user"))) {
-        accessToken = 'Bearer '+ JSON.parse(localStorage.getItem("user")).access_token;
-    }
-    GetDataFake({ headers: { Authorization: accessToken } })
+    GetDataFake(access_token)
     .then(({ data }) => {
         console.log(data);
         setData(data.payload.data);
@@ -33,17 +34,15 @@ const LoginFake = () => {
   }
 
   const LogoutFunc = () => {
-    let accessToken;
-    if (JSON.parse(localStorage.getItem("user"))) {
-        accessToken = 'Bearer '+ JSON.parse(localStorage.getItem("user")).access_token;
-    }
-    Logout({ headers: { Authorization: accessToken } })
+    Logout(access_token)
     .then(({ data }) => {
         console.log(data);
         localStorage.removeItem("user");
+        setAccess_token('');
     })
     .then(() => {
         message.success('Đã đăng xuất');
+        // navigate('/login');
     })
     .catch((error) => message.warning(error.response.data.message))
   }
@@ -64,7 +63,7 @@ const LoginFake = () => {
   return (
     <div className="wr-container home-page">
       <Card className="section-content">
-        <Form
+        {/* <Form
           name="basic"
           labelCol={{
             span: 8,
@@ -126,7 +125,7 @@ const LoginFake = () => {
               Submit
             </Button>
           </Form.Item>
-        </Form>
+        </Form> */}
         <Button type="primary" onClick={GetDataFakeFunc}>Lấy dữ liệu</Button>
         <Button type="primary" onClick={LogoutFunc}>Thoát</Button>
         {data && <Table dataSource={data} columns={columns} />}
