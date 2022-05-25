@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
+import Login from "~/pages/Login"
 import Checkin from "~/pages/Checkin";
 import Timesheet from "~/pages/Timesheet";
 import Home from "~/pages/Home";
@@ -59,6 +60,7 @@ const Router = () => {
 
   return (
     <Routes>
+      <Route path="login" element={<Login />}/>
       <Route path="/" element={<LayoutWebsite />}>
         <Route index element={<Home />} />
         <Route path="bang-cong" element={<Timesheet />} />
