@@ -17,6 +17,8 @@ import { getData } from "~/api/BaseAPI";
 import { notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
+import CheckLogin from "./components/CheckLogin";
+import PrivateApp from "./components/PrivateApp";
 
 const Router = () => {
   const setProfile = useSetRecoilState(initProfile);
@@ -60,14 +62,14 @@ const Router = () => {
 
   return (
     <Routes>
-      <Route path="login" element={<Login />}/>
-      <Route path="/" element={<LayoutWebsite />}>
+        <Route path="login" element={<CheckLogin><Login /></CheckLogin>}/>
+      <Route path="/" element={<PrivateApp><LayoutWebsite /></PrivateApp>}>
         <Route index element={<Home />} />
         <Route path="bang-cong" element={<Timesheet />} />
         <Route path="cham-cong" element={<Checkin />} />
         <Route path="thong-ke" element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="login" element={<LoginFake />} />
+        <Route path="loginfake" element={<LoginFake />} />
 
         {/* More router */}
         <Route path="more">

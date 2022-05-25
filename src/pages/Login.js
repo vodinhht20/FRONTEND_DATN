@@ -1,7 +1,10 @@
-import { Button, Col, Row, Form, Input, Checkbox, Card } from "antd";
+import { Button, Col, Row, Form, Input, Checkbox, Card, message } from "antd";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import { imageLogin } from "~/components/images";
-const onFinish = () => { }
-const onFinishFailed = () => { }
+import { initAccess_token } from "~/recoil/access_token";
+import { LoginApi } from "~/api/BaseAPI";
+
 const styleForm = {
     marginLeft: '15px',
     marginRight: '15px',
@@ -17,7 +20,11 @@ const styleBackgroup = {
     overflowY: 'scroll',
     display: 'flex',
     justifyContent: 'center',
-    opacity: '0.8'
+    opacity: '0.8',
+    backgroundImage: `url(${imageLogin})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    backgroundSize: 'cover'
 
 }
 const styleContents = {
@@ -26,19 +33,34 @@ const styleContents = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
-    width: '100vh',
+    width: '100%',
 }
 const styleBody = {
     height: '100vh',
-    width: "100vh",
+    width: "100%",
     margin: 'auto',
 }
 const Login = () => {
+    const setAccess_token = useSetRecoilState(initAccess_token);
+    let navigate = useNavigate();
+    const onFinish = (values) => {
+    LoginApi(values)
+    .then(({ data }) => {
+        setAccess_token(data);
+    })
+    .then(() => message.success('Đăng nhập thành công'))
+    .then(() => navigate('/'))
+    .catch((error) => message.warning(error.response.data.message));
+    };
+
+    const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+    };
     return (
         <div style={styleBody}>
-            <div style={styleBackgroup}> <img src={imageLogin}></img></div>
+            <div style={styleBackgroup}></div>
             <div style={styleContents}>
-                <Card style={{opacity:'0.8'}}>
+                <Card style={{opacity:'0.9', boxShadow: '0 0 5px #000'}}>
                     <Form
                         name="basic"
                         layout="vertical"
@@ -49,9 +71,9 @@ const Login = () => {
                         style={styleForm}
                     >
                         <Form.Item
-                            label="Username"
-                            name="username"
-                            rules={[{ required: true, message: 'Please input your username!' }]}
+                            label="Email"
+                            name="email"
+                            rules={[{ required: true, message: 'Please input your email!' }]}
                         >
                             <Input />
                         </Form.Item>
@@ -75,30 +97,7 @@ const Login = () => {
                         </Form.Item>
                     </Form>
                 </Card>
-
             </div>
-            {
-                <Row style={{ width: '100%' }}>
-                    <Col xs={24} md={18} lg={15} className="">
-                        <div className="">
-                            {
-
-
-                            }
-                        </div>
-
-                    </Col>
-                    <Col xs={24} md={6} lg={8}  >
-                        <div className="" >
-                            {
-
-
-                            }
-                        </div>
-
-                    </Col>
-                </Row>
-            }
         </ div>
     );
 };
