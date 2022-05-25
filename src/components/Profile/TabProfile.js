@@ -1,3 +1,5 @@
+import 'moment/locale/vi';
+import locale from 'antd/es/date-picker/locale/vi_VN';
 const { EditOutlined, CheckOutlined, CloudUploadOutlined } = require("@ant-design/icons")
 const { Col, Row, Image, Button, Form, DatePicker, Select, Input, Typography, Spin, notification } = require("antd")
 const { Title, Paragraph, Text } = Typography;
@@ -127,7 +129,7 @@ const TabProfile = ({profileProps}) => {
                                             message: 'Vui lòng nhập ngày sinh'
                                         }]}
                                     >
-                                        <DatePicker style={{ width: "100%"}} format={"YYYY-MM-DD"} disabled={ disabledInput }/>
+                                        <DatePicker style={{ width: "100%"}} format={"DD-MM-YYYY"} disabled={ disabledInput } locale={locale}/>
                                     </Form.Item>
                                 </Col>
                                 <Col xs={24} md={24} lg={12}>

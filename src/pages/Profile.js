@@ -1,7 +1,7 @@
 import { CheckOutlined, CloudUploadOutlined, EditOutlined, IdcardOutlined, KeyOutlined } from '@ant-design/icons';
 import { Button, Card, Col, DatePicker, Form, Image, Input, Radio, Row, Select, Spin, Tabs, Typography, notification, Upload } from 'antd';
 import React, { useEffect, useState, useRef } from 'react';
-import { initProfile } from "~/recoil/profileAtom";
+import { initProfile } from "~/recoil/profile";
 import { useRecoilState } from "recoil";
 import TabChangePassWord from '~/components/Profile/TabChangePassWord';
 import TabProfile from '~/components/Profile/TabProfile';

@@ -6,12 +6,12 @@ import DashboardRadar from "~/components/Chart/DashboardRadar";
 import DashboardPie from "~/components/Chart/DashboardPie";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { initDataChart } from "~/recoil/dataChart";
-import { initLoad } from "~/recoil/loadAtom";
+import { initLoad } from "~/recoil/load";
 
 const Dashboard = () => {
   const [visible, setVisible] = useState(false);
   const loading = useRecoilValue(initLoad);
-  
+
   // const [dataPie, setDataPie] = useRecoilState(initDataChart);
   // const [dataRadar, setDataRadar] = useRecoilState(initDataChart);
 

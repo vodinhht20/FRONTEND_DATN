@@ -18,7 +18,7 @@ import { useState, useEffect } from "react";
 import { List, Skeleton, Divider } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import InputSearch from "~/components/Search";
-import { initProfile } from "~/recoil/profileAtom";
+import { initProfile } from "~/recoil/profile";
 import { useRecoilValue } from "recoil";
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
@@ -62,6 +62,16 @@ const navAccount = (
             <LogoutOutlined className="icon-dropdown" />
             <Link target="_blank" rel="noopener noreferrer" to={"/"}>
               Logout
+            </Link>
+          </>
+        ),
+      },
+      {
+        label: (
+          <>
+            <QuestionCircleOutlined className="icon-dropdown" />
+            <Link rel="noopener noreferrer" to={"/loginfake"}>
+              Test
             </Link>
           </>
         ),
