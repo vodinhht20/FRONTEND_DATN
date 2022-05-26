@@ -24,8 +24,8 @@ const CreateOrder = () => {
         <Col xs={24} md={24} lg={24}>
           <Card title="Vui lòng chọn loại đơn" bordered={false} loading={loading}>
             {listOrder && listOrder.map(item =>
-              <Badge.Ribbon text="Đang mở">
-                <Link onClick={() => setOrder(item.name)} key={item.id} to={item.link} className="one-order">
+              <Badge.Ribbon text="Đang mở" key={item.id}>
+                <Link onClick={() => setOrder(item.name)} to={item.link} className="one-order">
                   <div className="title-order">{item.name}</div>
                   <CaretRightFilled className="icon-order" />
                 </Link>

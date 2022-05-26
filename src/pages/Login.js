@@ -7,16 +7,17 @@ import "~/assets/css/loading.css";
 import "~/assets/css/firefly.css";
 import {
   CodeSandboxCircleFilled,
-  FacebookFilled,
   GithubFilled,
   GoogleCircleFilled,
 } from "@ant-design/icons";
+import { useState } from "react";
 
 const Login = () => {
+  const [loading, setLoading] = useState("");
   const setAccess_token = useSetRecoilState(initAccess_token);
   let navigate = useNavigate();
   const onFinish = (values) => {
-    document.querySelector(".mask").classList.add("active");
+    setLoading("active");
     LoginApi(values)
       .then(({ data }) => {
         setAccess_token(data);
@@ -25,9 +26,9 @@ const Login = () => {
       .then(() => navigate("/"))
       .catch((error) => {
         setTimeout(() => {
-            document.querySelector(".mask").classList.remove("active");
-            return message.warning(error.response.data.message);
-        },5000);
+          setLoading("");
+          return message.warning(error.response.data.message);
+        }, 5000);
       });
   };
 
@@ -54,8 +55,8 @@ const Login = () => {
         <div className="firefly"></div>
       </div>
 
-      <div class="mask">
-        <div class="loader"></div>
+      <div className={`mask ${loading}`}>
+        <div className="loader"></div>
       </div>
 
       <Card className="form-login">
