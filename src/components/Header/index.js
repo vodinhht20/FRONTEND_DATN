@@ -76,6 +76,16 @@ const navAccount = (
           </>
         ),
       },
+      {
+        label: (
+          <>
+            <QuestionCircleOutlined className="icon-dropdown" />
+            <Link rel="noopener noreferrer" to={"/xxsdsdsa"}>
+              404
+            </Link>
+          </>
+        ),
+      },
     ]}
   />
 );
@@ -136,8 +146,8 @@ const Head = () => {
       </InfiniteScroll>
 
       <div className="scrollable-notify-footer">
-          <span className="mark-all">Đánh dấu tất cả là đã đọc</span>
-          <span className="see-all">Xem tất cả thông báo</span>
+        <span className="mark-all">Đánh dấu tất cả là đã đọc</span>
+        <span className="see-all">Xem tất cả thông báo</span>
       </div>
     </div>
   );

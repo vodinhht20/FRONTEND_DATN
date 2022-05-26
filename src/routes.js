@@ -19,6 +19,7 @@ import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
 import CheckLogin from "./components/CheckLogin";
 import PrivateApp from "./components/PrivateApp";
+import NotFound from "./pages/NotFound";
 
 const Router = () => {
   const setProfile = useSetRecoilState(initProfile);
@@ -79,6 +80,7 @@ const Router = () => {
             <Route path="tao-don" element={<OrderPage />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Route>
       <Route path="about" element={<h6>About</h6>} />
     </Routes>
