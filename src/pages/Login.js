@@ -1,119 +1,127 @@
-import { Button, Col, Row, Form, Input, Checkbox, Card, message, Spin } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Button, Form, Input, Card, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { imageLogin } from "~/components/images";
 import { initAccess_token } from "~/recoil/access_token";
 import { LoginApi } from "~/api/BaseAPI";
 import "~/assets/css/loading.css";
+import "~/assets/css/firefly.css";
+import {
+  CodeSandboxCircleFilled,
+  FacebookFilled,
+  GithubFilled,
+  GoogleCircleFilled,
+} from "@ant-design/icons";
 
-const styleForm = {
-    marginLeft: '15px',
-    marginRight: '15px',
-
-}
-const styleBackgroup = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '100%',
-    width: '100%',
-    overflowY: 'scroll',
-    display: 'flex',
-    justifyContent: 'center',
-    opacity: '0.8',
-    backgroundImage: `url(${imageLogin})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
-    backgroundSize: 'cover'
-
-}
-const styleContents = {
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    width: '100%',
-}
-const styleBody = {
-    height: '100vh',
-    width: "100%",
-    margin: 'auto',
-}
 const Login = () => {
-    const setAccess_token = useSetRecoilState(initAccess_token);
-    let navigate = useNavigate();
-    const onFinish = (values) => {
-        document.querySelector('.container').classList.add('active');
+  const setAccess_token = useSetRecoilState(initAccess_token);
+  let navigate = useNavigate();
+  const onFinish = (values) => {
+    document.querySelector(".mask").classList.add("active");
     LoginApi(values)
-    .then(({ data }) => {
+      .then(({ data }) => {
         setAccess_token(data);
-    })
-    .then(() => message.success('Đăng nhập thành công'))
-    .then(() => navigate('/'))
-    .catch((error) => {
-        document.querySelector('.container').classList.remove('active');
-        return message.warning(error.response.data.message)});
-    };
+      })
+      .then(() => message.success("Đăng nhập thành công"))
+      .then(() => navigate("/"))
+      .catch((error) => {
+        setTimeout(() => {
+            document.querySelector(".mask").classList.remove("active");
+            return message.warning(error.response.data.message);
+        },5000);
+      });
+  };
 
-    const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-    };
-    return (
-        <div style={styleBody}>
-            {/* <Spin className="login active" style={{position: 'fixed', width: '100%', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgb(0 0 0 / 75%)', zIndex: 2}} tip="Loading..."></Spin> */}
-            <div class="container">
-                <h1><span>C<span>amel</span></span></h1>
-                <div class="loading">
-                    <div class="ball"></div>
-                    <div class="ball"></div>
-                    <div class="ball"></div>
-                    <div class="ball"></div>
-                    <div class="ball"></div>
-                </div>
+  };
+  return (
+    <div className="login">
+      <div className="bg">
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+        <div className="firefly"></div>
+      </div>
+
+      <div class="mask">
+        <div class="loader"></div>
+      </div>
+
+      <Card className="form-login">
+        <h3 className="title">Đăng nhập</h3>
+        <Form
+          className="form-small"
+          name="basic"
+          layout="vertical"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng điền email!",
+              },
+            ]}
+          >
+            <Input className="input-login" placeholder="Nhập email của bạn" />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: "Vui lòng điền mật khẩu!" }]}
+          >
+            <Input.Password
+              className="input-login"
+              placeholder="Nhập mật khẩu của bạn"
+            />
+          </Form.Item>
+
+          <Form.Item name="remember" valuePropName="checked">
+            <Link to={"/"} style={{ float: "right" }}>
+              Quên mật khẩu?
+            </Link>
+          </Form.Item>
+
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Button className="btn btn-login" type="primary" htmlType="submit">
+              Đăng nhập
+            </Button>
+          </Form.Item>
+
+          <Form.Item className="or-login" wrapperCol={{ offset: 8, span: 16 }}>
+            <span>Hoặc đăng nhập với</span>
+            <div className="social">
+              <a href={"#"}>
+                <GoogleCircleFilled className="icon" />
+              </a>
+              <a href={"#"}>
+                <GithubFilled className="icon" />
+              </a>
+              <a href={"#"}>
+                <CodeSandboxCircleFilled className="icon" />
+              </a>
             </div>
-            <div style={styleBackgroup}></div>
-            <div style={styleContents}>
-                <Card style={{opacity:'0.9', boxShadow: '0 0 5px #000'}}>
-                    <Form
-                        name="basic"
-                        layout="vertical"
-                        initialValues={{ remember: true }}
-                        onFinish={onFinish}
-                        onFinishFailed={onFinishFailed}
-                        autoComplete="off"
-                        style={styleForm}
-                    >
-                        <Form.Item
-                            label="Email"
-                            name="email"
-                            rules={[{ required: true, message: 'Please input your email!' }]}
-                        >
-                            <Input />
-                        </Form.Item>
-
-                        <Form.Item
-                            label="Password"
-                            name="password"
-                            rules={[{ required: true, message: 'Please input your password!' }]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
-
-                        <Form.Item name="remember" valuePropName="checked" >
-                            <Checkbox>Remember me</Checkbox>
-                        </Form.Item>
-
-                        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                            <Button type="primary" htmlType="submit">
-                                Đăng nhập
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </Card>
-            </div>
-        </ div>
-    );
+          </Form.Item>
+        </Form>
+      </Card>
+    </div>
+  );
 };
 export default Login;

@@ -1,121 +1,92 @@
-/* HBO is copyrighted by WarnerMedia Direct, LLC. For testing purposes only. */
-/* Background stuff */
-.container {
-  background: #9a35ef;
-  background: linear-gradient(
-    90deg,
-    #fe8e47 0%,
-    rgba(131, 6, 128, 0.9598494398) 100%
-  );
+.mask {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  position: fixed;
   height: 100vh;
   padding-top: 35vh;
-  z-index: 2;
   position: fixed;
+  top: 0;
+  transition: all .3s linear;
   width: 100%;
-  top: -100%;
-  transition: .5s linear all;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
 }
-
-.container.active{
-    top: 0;
+.mask.active{
+  opacity: 1;
+  pointer-events: all;
 }
-
-/* Title */
-h1 {
-  font-family: "Roboto", sans-serif;
-  text-align: center;
-  color: #fe8e47 !important;
-  text-shadow: 2px 2px 3px #fff;
-  font-size: 1.6rem;
-  font-weight: 400;
-}
-h1 span {
-  letter-spacing: -5px;
-  font-size: 2em;
-  font-weight: 700;
-}
-h1 span span {
-  font-size: 1.2em;
-  font-weight: 400;
-  color: #0550a3;
-}
-
-/* Loading Area */
-.loading {
-  margin: 0 auto;
-  width: 100px;
-  height: 100px;
+.loader {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Delay subsequent balls. Must adjust if you change animation-duration above */
+  width: 2.5em;
+  height: 2.5em;
+  transform: rotate(165deg);
 }
-.loading .ball {
-  /* Set ball size */
-  opacity: 0;
-  height: 25px;
-  width: 25px;
-  border-radius: 50%;
-  background-color: white;
-  /* Shadow gives the look of a sphere */
-  box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.3);
+.loader:before,
+.loader:after {
+  content: "";
   position: absolute;
-  animation-name: load;
-  animation-duration: 2.5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.25em;
+  transform: translate(-50%, -50%);
 }
-.loading .ball:nth-child(2) {
-  animation-delay: 0.5s;
-  opacity: 0;
+.loader:before {
+  animation: before 2s infinite;
 }
-.loading .ball:nth-child(3) {
-  animation-delay: 1s;
-  opacity: 0;
-}
-.loading .ball:nth-child(4) {
-  animation-delay: 1.5s;
-  opacity: 0;
-}
-.loading .ball:nth-child(5) {
-  animation-delay: 2s;
-  opacity: 0;
+.loader:after {
+  animation: after 2s infinite;
 }
 
-/* 
-  Animation Key frames - Balls are loaded with 0 opacity and actually don't start until animation-delay is up.
-  Revolve around the Y axis with a radius of 35px.
-  rotateX gives a feel of slightly above it.
-  Increasing to 45px on the front size give an interesting whip effect
-  Then negative rotate to keep it facing forward. It is after all just a 2d circle.
-  Slightly scale to enhance 3D effect.
-  Reduce opacity when in the back.
-  */
-@keyframes load {
+@keyframes before {
   0% {
-    opacity: 0;
-    transform: rotateY(-90deg) rotateX(-10deg) translateZ(35px) rotateY(90deg)
-      scale3d(1, 1, 1);
+    width: 0.5em;
+    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75),
+      -1em 0.5em rgba(111, 202, 220, 0.75);
   }
-  25% {
-    opacity: 1;
-    transform: rotateY(0deg) rotateX(-15deg) translateZ(45px) rotateY(0deg)
-      scale3d(1.1, 1.1, 1.1);
+  35% {
+    width: 2.5em;
+    box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75),
+      0 0.5em rgba(111, 202, 220, 0.75);
   }
-  50% {
-    opacity: 0.2;
-    transform: rotateY(90deg) rotateX(-10deg) translateZ(45px) rotateY(-90deg)
-      scale3d(1, 1, 1);
-  }
-  75% {
-    opacity: 0;
-    transform: rotateY(180deg) rotateX(0deg) translateZ(45px) rotateY(-180deg)
-      scale3d(0.9, 0.9, 0.9);
+  70% {
+    width: 0.5em;
+    box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75),
+      1em 0.5em rgba(111, 202, 220, 0.75);
   }
   100% {
-    opacity: 0;
-    transform: rotateY(270deg) rotateX(0deg) translateZ(35px) rotateY(-270deg)
-      scale3d(1, 1, 1);
+    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75),
+      -1em 0.5em rgba(111, 202, 220, 0.75);
   }
+}
+@keyframes after {
+  0% {
+    height: 0.5em;
+    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75),
+      -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+  35% {
+    height: 2.5em;
+    box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75),
+      -0.5em 0 rgba(233, 169, 32, 0.75);
+  }
+  70% {
+    height: 0.5em;
+    box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75),
+      -0.5em 1em rgba(233, 169, 32, 0.75);
+  }
+  100% {
+    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75),
+      -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+}
+
+.loader {
+  position: absolute;
+  top: calc(50% - 1.25em);
+  left: calc(50% - 1.25em);
 }
