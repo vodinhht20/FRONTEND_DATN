@@ -9,11 +9,14 @@ import {
   GithubFilled,
   GoogleCircleFilled,
 } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "~/components/Global/Loading";
+import moment from "moment";
 
 const Login = () => {
   const [loading, setLoading] = useState("");
+  const [checkTimeBG, setCheckTimeBG] = useState("light");
+
   const setAccess_token = useSetRecoilState(initAccess_token);
   let navigate = useNavigate();
   const onFinish = (values) => {
@@ -35,9 +38,25 @@ const Login = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  useEffect(() => {
+    const format = "hh:mm:ss";
+    const time = moment(new Date().toLocaleString(), format),
+      beforeTime = moment("18:00:00", format),
+      afterTime = moment("24:00:00", format),
+      beforeTimeDAWN = moment("00:00:00", format),
+      afterTimeDAWN = moment("06:00:00", format);
+      console.log(time);
+    if (time.isBetween(beforeTime, afterTime) || time.isBetween(beforeTimeDAWN, afterTimeDAWN)) {
+      setCheckTimeBG("night");
+    } else {
+      setCheckTimeBG("light");
+    }
+  }, []);
+
   return (
     <div className="login">
-      <div className="bg">
+      <div className={`bg ${checkTimeBG}`}>
         <div className="firefly"></div>
         <div className="firefly"></div>
         <div className="firefly"></div>

@@ -22,6 +22,9 @@
     opacity: 0.4;
     animation: drift ease alternate infinite;
   }
+  .bg.light .firefly::before {
+    background: #fff !important;
+  }
   .firefly::after {
     background: white;
     opacity: 0;

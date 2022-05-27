@@ -904,7 +904,7 @@ header {
   justify-content: center;
 }
 .login .bg {
-  background-image: url(../images/background.webp);
+  background-image: url(../images/bg-night.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
@@ -914,13 +914,23 @@ header {
   width: 100%;
   position: absolute;
 }
-.login .bg::after {
+.login .bg.night{
+  background-image: url(../images/background.webp);
+}
+.login .bg.night::after{
   content: "";
   position: absolute;
   width: 100%;
   height: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), #080808);
 }
+/* .login .bg::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), #080808);
+} */
 @keyframes zoomin {
   0% {
     -webkit-transform: scale(1.2);
