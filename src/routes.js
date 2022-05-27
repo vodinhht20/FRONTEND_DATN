@@ -17,8 +17,8 @@ import { getData } from "~/api/BaseAPI";
 import { notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
-import CheckLogin from "./components/CheckLogin";
-import PrivateApp from "./components/PrivateApp";
+import CheckLogin from "./components/Global/CheckLogin";
+import PrivateApp from "./components/Global/PrivateApp";
 import NotFound from "./pages/NotFound";
 
 const Router = () => {

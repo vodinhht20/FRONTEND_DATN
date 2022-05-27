@@ -7,12 +7,14 @@ import { initOrder } from "~/recoil/order";
 import moment from 'moment';
 import 'moment/locale/vi';
 import locale from 'antd/es/date-picker/locale/vi_VN';
+import Loading from "~/components/Global/Loading";
 const { RangePicker } = DatePicker;
 
 const OrderPage = () => {
   const loading = useRecoilValue(initLoad);
   const setLoading = useSetRecoilState(initLoad);
   const [totalVacations, setTotalVacations] = useState(0);
+  const [active, setActive] = useState('');
 
   const order = useRecoilValue(initOrder);
 
@@ -42,14 +44,17 @@ const OrderPage = () => {
 
   const onFinish = (values) => {
     setLoading(true);
+    setActive('active');
 
     setTimeout(() => {
       setLoading(false);
+      setActive('');
       if (order) {
         message.success('gửi đơn thành công');
         console.log("Success:", [values, {"loaidon": order}]);
+      }else{
+        message.warning('gửi đơn lỗi vui lòng chọn loại đơn');
       }
-      message.warning('gửi đơn lỗi vui lòng chọn loại đơn');
     },2000)
   };
 
@@ -76,6 +81,7 @@ const OrderPage = () => {
 
   return (
     <Row className="OrderPage-container" gutter={[12, 12]}>
+      <Loading loading={active} />
       <Col xs={24} md={24} lg={24}>
         <Card bordered={false} loading={loading}>
           <p className="text-info">Mẫu đơn {order && order}</p>

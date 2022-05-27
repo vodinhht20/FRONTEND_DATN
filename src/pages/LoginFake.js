@@ -3,11 +3,13 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { GetDataFake, LoginApi, Logout } from "~/api/BaseAPI";
+import Loading from "~/components/Global/Loading";
 import { initAccess_token } from "~/recoil/access_token";
 
 const LoginFake = () => {
   const [data, setData] = useState([]);
   const [access_token, setAccess_token] = useRecoilState(initAccess_token);
+  const [active, setActive] = useState('');
   let navigate = useNavigate();
   const onFinish = (values) => {
     LoginApi(values)
@@ -24,13 +26,15 @@ const LoginFake = () => {
   };
 
   const GetDataFakeFunc = () => {
+    setActive('active');
     GetDataFake(access_token)
     .then(({ data }) => {
         console.log(data);
         setData(data.payload.data);
+        setActive('');
         message.success('Lấy data thành công');
     })
-    .catch((error) => message.warning(error.response.data.message));
+    .catch((error) => message.warning(error.response.data.message), setActive('active'));
   }
 
   const LogoutFunc = () => {
@@ -62,6 +66,7 @@ const LoginFake = () => {
 
   return (
     <div className="wr-container home-page">
+      <Loading loading={active}/>
       <Card className="section-content">
         {/* <Form
           name="basic"

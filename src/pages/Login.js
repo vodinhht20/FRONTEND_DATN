@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { initAccess_token } from "~/recoil/access_token";
 import { LoginApi } from "~/api/BaseAPI";
-import "~/assets/css/loading.css";
 import "~/assets/css/firefly.css";
 import {
   CodeSandboxCircleFilled,
@@ -11,6 +10,7 @@ import {
   GoogleCircleFilled,
 } from "@ant-design/icons";
 import { useState } from "react";
+import Loading from "~/components/Global/Loading";
 
 const Login = () => {
   const [loading, setLoading] = useState("");
@@ -55,9 +55,7 @@ const Login = () => {
         <div className="firefly"></div>
       </div>
 
-      <div className={`mask ${loading}`}>
-        <div className="loader"></div>
-      </div>
+      <Loading loading={loading} />
 
       <Card className="form-login">
         <h3 className="title">Đăng nhập</h3>
