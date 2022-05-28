@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const initAccess_token = atom({
+export const initAccessToken = atom({
     key: "access_token",
     default: ""
 });

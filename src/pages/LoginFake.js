@@ -1,52 +1,36 @@
-import { Button, Card, Checkbox, Form, Input, message, Table } from "antd";
+import { Button, Card, message, Table } from "antd";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { GetDataFake, LoginApi, Logout } from "~/api/BaseAPI";
-import Loading from "~/components/Global/Loading";
-import { initAccess_token } from "~/recoil/access_token";
-
+import { Link } from "react-router-dom";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { useSetRecoilState } from "recoil";
+import { GetDataFake, Logout } from "~/api/BaseAPI";
+import { initAccessToken } from "~/recoil/accessToken";
 const LoginFake = () => {
   const [data, setData] = useState([]);
-  const [access_token, setAccess_token] = useRecoilState(initAccess_token);
-  const [active, setActive] = useState('');
-  let navigate = useNavigate();
-  const onFinish = (values) => {
-    LoginApi(values)
-    .then(({ data }) => {
-      setAccess_token(data);
-    })
-    .then(() => message.success('Đăng nhập thành công'))
-    .then(() => navigate('/'))
-    .catch((error) => message.warning(error.response.data.message));
-  };
+  const setAccessToken = useSetRecoilState(initAccessToken);
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+  const clearData = () => {
+    setData([]);
   };
 
   const GetDataFakeFunc = () => {
-    setActive('active');
-    GetDataFake(access_token)
+    GetDataFake()
     .then(({ data }) => {
         console.log(data);
-        setData(data.payload.data);
-        setActive('');
+        setData(data.payload.data)
         message.success('Lấy data thành công');
     })
-    .catch((error) => message.warning(error.response.data.message), setActive('active'));
+    .catch((error) => console.log('error get data', error));
   }
 
   const LogoutFunc = () => {
-    Logout(access_token)
-    .then(({ data }) => {
-        console.log(data);
-        localStorage.removeItem("user");
-        setAccess_token('');
+    Logout()
+    .then(( ) => {
+      reactLocalStorage.clear();
+      setAccessToken('');
     })
     .then(() => {
-        message.success('Đã đăng xuất');
-        // navigate('/login');
+      message.success('Đã đăng xuất');
     })
     .catch((error) => message.warning(error.response.data.message))
   }
@@ -66,73 +50,11 @@ const LoginFake = () => {
 
   return (
     <div className="wr-container home-page">
-      <Loading loading={active}/>
       <Card className="section-content">
-        {/* <Form
-          name="basic"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form> */}
         <Button type="primary" onClick={GetDataFakeFunc}>Lấy dữ liệu</Button>
+        <Button type="primary" onClick={clearData}>Clear Data</Button>
         <Button type="primary" onClick={LogoutFunc}>Thoát</Button>
+        <Link to={"/"}><Button type="primary">Login</Button></Link>
         {data && <Table dataSource={data} columns={columns} />}
       </Card>
     </div>
