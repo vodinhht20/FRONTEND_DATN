@@ -12,7 +12,7 @@ import Profile from "~/pages/Profile";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useSetRecoilState } from "recoil";
-import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic } from "~/recoil/atom";
+import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken } from "~/recoil/atom";
 import { getData } from "~/api/BaseAPI";
 import { notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
@@ -20,8 +20,10 @@ import LoginFake from "./pages/LoginFake";
 import CheckLogin from "./components/Global/CheckLogin";
 import PrivateApp from "./components/Global/PrivateApp";
 import NotFound from "./pages/NotFound";
+import { reactLocalStorage } from "reactjs-localstorage";
 
 const Router = () => {
+  const setAccessToken = useSetRecoilState(initAccessToken);
   const setProfile = useSetRecoilState(initProfile);
   const setLoading = useSetRecoilState(initLoad);
   const setCheckin = useSetRecoilState(initCheckin);
@@ -30,6 +32,7 @@ const Router = () => {
   const setRankCheckin = useSetRecoilState(initRankCheckin);
   const setHomeStatistic = useSetRecoilState(initHomeStatistic);
   useEffect(() => {
+    setAccessToken(reactLocalStorage.get('access_token'));
     (async () => {
       try {
 
@@ -51,12 +54,21 @@ const Router = () => {
         // when all call api success then set loading is false
         setLoading(false);
       } catch (error) {
-        setLoading(true);
-        notification['error']({
-          message: 'Đã có lỗi xảy ra',
-          description: <>message: {error.message}<br/>code: {error.code}<br/></>
-        });
-        throw error;
+        console.log("Đã có lỗi xảy ra:", error);
+        if (error.code == 'access_token_expired') {
+          notification['info']({
+            message: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'
+          });
+          setAccessToken("");
+          reactLocalStorage.clear();
+        } else {
+          setLoading(true);
+          notification['error']({
+            message: 'Đã có lỗi xảy ra',
+            description: <>message: {error.message}<br/>code: {error.code}<br/></>
+          });
+          throw error;
+        }
       }
     })()
   }, []);

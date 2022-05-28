@@ -6,3 +6,4 @@ export { initOrder } from "~/recoil/order";
 export { initProfile } from "~/recoil/profile";
 export { initRankCheckin } from "~/recoil/rankCheckin";
 export { initHomeStatistic } from "~/recoil/homeStatistic";
+export { initAccessToken } from "~/recoil/accessToken";

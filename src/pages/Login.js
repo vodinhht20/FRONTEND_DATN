@@ -1,7 +1,7 @@
 import { Button, Form, Input, Card, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { initAccess_token } from "~/recoil/access_token";
+import { initAccessToken } from "~/recoil/accessToken";
 import { LoginApi } from "~/api/BaseAPI";
 import "~/assets/css/firefly.css";
 import {
@@ -12,18 +12,20 @@ import {
 import { useEffect, useState } from "react";
 import Loading from "~/components/Global/Loading";
 import moment from "moment";
+import { reactLocalStorage } from "reactjs-localstorage";
 
 const Login = () => {
   const [loading, setLoading] = useState("");
   const [checkTimeBG, setCheckTimeBG] = useState("light");
-
-  const setAccess_token = useSetRecoilState(initAccess_token);
+  const setAccessToken = useSetRecoilState(initAccessToken);
   let navigate = useNavigate();
   const onFinish = (values) => {
     setLoading("active");
     LoginApi(values)
       .then(({ data }) => {
-        setAccess_token(data);
+        const accessToken = data.access_token;
+        reactLocalStorage.set('access_token', accessToken);
+        setAccessToken(accessToken);
       })
       .then(() => message.success("Đăng nhập thành công"))
       .then(() => navigate("/"))

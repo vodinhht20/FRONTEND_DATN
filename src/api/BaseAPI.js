@@ -1,14 +1,6 @@
-import { reactLocalStorage } from "reactjs-localstorage";
+import requestHeader from "~/config/requestHeader";
 import instance from "./instance";
 import instance2 from "./instance2";
-
-// const config = {
-//   headers: {
-//     Authorization: reactLocalStorage.getObject('user')
-//       ? "Bearer " + reactLocalStorage.getObject('user').access_token
-//       : null,
-//   },
-// };
 
 export const getData = (data) => {
   const url = data;
@@ -20,12 +12,14 @@ export const LoginApi = (data) => {
   return instance2.post(url, data);
 };
 
-export const GetDataFake = (config) => {
+export const GetDataFake = () => {
+  const headers = requestHeader();
   const url = "users";
-  return instance2.get(url, {headers: {Authorization: "Bearer " + config.access_token}});
+  return instance2.get(url, { headers });
 };
 
-export const Logout = (config) => {
+export const Logout = () => {
+  const headers = requestHeader();
   const url = "logout";
-  return instance2.post(url, [], {headers: {Authorization: "Bearer " + config.access_token}});
+  return instance2.post(url, [], { headers });
 };
