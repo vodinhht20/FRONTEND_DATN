@@ -2,7 +2,7 @@ import { reactLocalStorage } from "reactjs-localstorage";
 
 const useRequestHeader = () => {
     let token = reactLocalStorage.get('access_token');
-    let headers = {'Authorization': 'Bearer '+ window.atob(token)}
+    let headers = {'Authorization': 'Bearer '+ token}
     return headers;
 }
 
