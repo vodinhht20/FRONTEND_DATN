@@ -26,7 +26,7 @@ const Login = () => {
     LoginApi(values)
       .then(({ data }) => {
         const accessToken = data.access_token;
-        reactLocalStorage.set('access_token', accessToken);
+        reactLocalStorage.set('access_token', window.btoa(accessToken));
         setAccessToken(accessToken);
         setRoutesLogin(true);
       })
