@@ -1,9 +1,9 @@
-import { Button, Card, message, Table } from "antd";
+import { Button, Card, message, notification, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { useSetRecoilState } from "recoil";
-import { GetDataFake, Logout } from "~/api/BaseAPI";
+import { GetDataFake } from "~/api/BaseAPI";
 import { initAccessToken } from "~/recoil/accessToken";
 import { GoogleLogin } from 'react-google-login';
 
@@ -22,19 +22,14 @@ const LoginFake = () => {
         setData(data.payload.data)
         message.success('Lấy data thành công');
     })
-    .catch((error) => console.log('error get data', error));
-  }
-
-  const LogoutFunc = () => {
-    Logout()
-    .then(( ) => {
+    .catch((error) => {
+      console.log('error get data', error);
+      notification['info']({
+        message: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'
+      });
+      setAccessToken("");
       reactLocalStorage.clear();
-      setAccessToken('');
-    })
-    .then(() => {
-      message.success('Đã đăng xuất');
-    })
-    .catch((error) => message.warning(error.response.data.message))
+    });
   }
 
   const responseGoogle = (response) => {

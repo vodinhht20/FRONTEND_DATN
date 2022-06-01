@@ -10,6 +10,7 @@ import Fab from '@mui/material/Fab';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import Clock from "react-live-clock";
+import { checkIn } from "~/api/BaseAPI";
 
 const { Title, Text } = Typography;
 
@@ -70,18 +71,38 @@ const Checkin = ( { handleProps } ) => {
             }, 2000)
           } else {
             // call api
+            checkIn()
+            .then(({ data }) => {
+              console.log(data);
+              // setdata
+              setStatusRes(false);
+              setTimeout(() => {
+                setCircleLoading(false);
+                setStatusRes(true);
+                setDataCheckin({
+                  ...dataCheckin,
+                  type: 1,
+                  checkin: timeCurrent
+                });
+                if (data.error_code == 80) {
+                  openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
+                }else{
+                  openNotification('warning', data.message + ' ip: ' + data.ip);
+                }
+              }, 2000);
+            })
             // setdata
-            setStatusRes(false);
-            setTimeout(() => {
-              setCircleLoading(false);
-              setStatusRes(true);
-              setDataCheckin({
-                ...dataCheckin,
-                type: 1,
-                checkin: timeCurrent
-              });
-              openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
-            }, 2000);
+            // setStatusRes(false);
+            // setTimeout(() => {
+            //   setCircleLoading(false);
+            //   setStatusRes(true);
+            //   setDataCheckin({
+            //     ...dataCheckin,
+            //     type: 1,
+            //     checkin: timeCurrent
+            //   });
+            //   openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
+            // }, 2000);
           }
         } else {
           message.warning('Hành động này chúng tôi đang xử lý');

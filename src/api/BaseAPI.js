@@ -7,6 +7,12 @@ export const getData = (data) => {
   return instance.get(url);
 };
 
+export const checkAuth = () => {
+  const headers = requestHeader();
+  const url = "auth";
+  return instance2.post(url, [], { headers });
+};
+
 export const LoginApi = (data) => {
   const url = "login";
   return instance2.post(url, data);
@@ -21,5 +27,11 @@ export const GetDataFake = () => {
 export const Logout = () => {
   const headers = requestHeader();
   const url = "logout";
+  return instance2.post(url, [], { headers });
+};
+
+export const checkIn = () => {
+  const headers = requestHeader();
+  const url = "checkin";
   return instance2.post(url, [], { headers });
 };
