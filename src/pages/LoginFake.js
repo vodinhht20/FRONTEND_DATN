@@ -1,9 +1,9 @@
-import { Button, Card, message, Table } from "antd";
+import { Button, Card, message, notification, Table } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { useSetRecoilState } from "recoil";
-import { GetDataFake, Logout } from "~/api/BaseAPI";
+import { GetDataFake } from "~/api/BaseAPI";
 import { initAccessToken } from "~/recoil/accessToken";
 const LoginFake = () => {
   const [data, setData] = useState([]);
@@ -20,19 +20,14 @@ const LoginFake = () => {
         setData(data.payload.data)
         message.success('Lấy data thành công');
     })
-    .catch((error) => console.log('error get data', error));
-  }
-
-  const LogoutFunc = () => {
-    Logout()
-    .then(( ) => {
+    .catch((error) => {
+      console.log('error get data', error);
+      notification['info']({
+        message: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'
+      });
+      setAccessToken("");
       reactLocalStorage.clear();
-      setAccessToken('');
-    })
-    .then(() => {
-      message.success('Đã đăng xuất');
-    })
-    .catch((error) => message.warning(error.response.data.message))
+    });
   }
 
   const columns = [
@@ -53,7 +48,6 @@ const LoginFake = () => {
       <Card className="section-content">
         <Button type="primary" onClick={GetDataFakeFunc}>Lấy dữ liệu</Button>
         <Button type="primary" onClick={clearData}>Clear Data</Button>
-        <Button type="primary" onClick={LogoutFunc}>Thoát</Button>
         <Link to={"/"}><Button type="primary">Login</Button></Link>
         {data && <Table dataSource={data} columns={columns} />}
       </Card>

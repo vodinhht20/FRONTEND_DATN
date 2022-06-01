@@ -5,7 +5,7 @@ import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MaterialAvatar from "@mui/material/Avatar";
-import { Menu, Dropdown, PageHeader } from "antd";
+import { Menu, Dropdown, PageHeader, message } from "antd";
 import { Row, Col, Typography } from "antd";
 import {
   LogoutOutlined,
@@ -19,80 +19,36 @@ import { List, Skeleton, Divider } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import InputSearch from "~/components/Search";
 import { initProfile } from "~/recoil/profile";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Tabs } from "antd";
+import { Logout } from "~/api/BaseAPI";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { initAccessToken } from "~/recoil/accessToken";
 const { TabPane } = Tabs;
 
 const { Paragraph } = Typography;
-const navAccount = (
-  <Menu
-    className="dropdown-account"
-    items={[
-      {
-        label: (
-          <>
-            <UserOutlined className="icon-dropdown" />
-            <Link to={"/profile"}>Profile</Link>
-          </>
-        ),
-      },
-      {
-        label: (
-          <>
-            <SettingOutlined className="icon-dropdown" />
-            <Link target="_blank" rel="noopener noreferrer" to={"/"}>
-              Setting
-            </Link>
-          </>
-        ),
-      },
-      {
-        label: (
-          <>
-            <QuestionCircleOutlined className="icon-dropdown" />
-            <Link target="_blank" rel="noopener noreferrer" to={"/"}>
-              Trợ giúp
-            </Link>
-          </>
-        ),
-      },
-      {
-        label: (
-          <>
-            <LogoutOutlined className="icon-dropdown" />
-            <Link target="_blank" rel="noopener noreferrer" to={"/"}>
-              Logout
-            </Link>
-          </>
-        ),
-      },
-      {
-        label: (
-          <>
-            <QuestionCircleOutlined className="icon-dropdown" />
-            <Link rel="noopener noreferrer" to={"/loginfake"}>
-              Test
-            </Link>
-          </>
-        ),
-      },
-      {
-        label: (
-          <>
-            <QuestionCircleOutlined className="icon-dropdown" />
-            <Link rel="noopener noreferrer" to={"/xxsdsdsa"}>
-              404
-            </Link>
-          </>
-        ),
-      },
-    ]}
-  />
-);
 
 const Head = () => {
   const [data, setData] = useState([]);
   const profile = useRecoilValue(initProfile);
+  const setAccessToken = useSetRecoilState(initAccessToken);
+
+  const LogoutFunc = () => {
+    Logout()
+    .then(( ) => {
+      reactLocalStorage.clear();
+      setAccessToken('');
+    })
+    .then(() => {
+      message.success('Đã đăng xuất');
+    })
+    .catch((error) => {
+      reactLocalStorage.clear();
+      setAccessToken('');
+      message.success('Đã đăng xuất');
+    })
+  }
+
   const loadMoreData = () => {
     // call api notify
     fetch(
@@ -154,6 +110,70 @@ const Head = () => {
   useEffect(() => {
     loadMoreData();
   }, []);
+
+  const navAccount = (
+    <Menu
+      className="dropdown-account"
+      items={[
+        {
+          label: (
+            <>
+              <UserOutlined className="icon-dropdown" />
+              <Link to={"/profile"}>Profile</Link>
+            </>
+          ),
+        },
+        {
+          label: (
+            <>
+              <SettingOutlined className="icon-dropdown" />
+              <Link target="_blank" rel="noopener noreferrer" to={"/"}>
+                Setting
+              </Link>
+            </>
+          ),
+        },
+        {
+          label: (
+            <>
+              <QuestionCircleOutlined className="icon-dropdown" />
+              <Link target="_blank" rel="noopener noreferrer" to={"/"}>
+                Trợ giúp
+              </Link>
+            </>
+          ),
+        },
+        {
+          label: (
+            <div className="logout" onClick={LogoutFunc}>
+              <LogoutOutlined className="icon-dropdown" />
+                Logout
+            </div>
+          ),
+        },
+        {
+          label: (
+            <>
+              <QuestionCircleOutlined className="icon-dropdown" />
+              <Link rel="noopener noreferrer" to={"/loginfake"}>
+                Test
+              </Link>
+            </>
+          ),
+        },
+        {
+          label: (
+            <>
+              <QuestionCircleOutlined className="icon-dropdown" />
+              <Link rel="noopener noreferrer" to={"/xxsdsdsa"}>
+                404
+              </Link>
+            </>
+          ),
+        },
+      ]}
+    />
+  );
 
   return (
     <div className="head wr-container">

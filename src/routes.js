@@ -11,9 +11,9 @@ import CreateOrder from "~/pages/CreateOrder";
 import Profile from "~/pages/Profile";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken } from "~/recoil/atom";
-import { getData } from "~/api/BaseAPI";
+import { checkAuth, getData } from "~/api/BaseAPI";
 import { notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
@@ -21,6 +21,7 @@ import CheckLogin from "./components/Global/CheckLogin";
 import PrivateApp from "./components/Global/PrivateApp";
 import NotFound from "./pages/NotFound";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { initRoutesLogin } from "./recoil/routesLogin";
 
 const Router = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -31,47 +32,53 @@ const Router = () => {
   const setlistOrder = useSetRecoilState(initListOrder);
   const setRankCheckin = useSetRecoilState(initRankCheckin);
   const setHomeStatistic = useSetRecoilState(initHomeStatistic);
+
+  const routesLogin = useRecoilValue(initRoutesLogin);
   useEffect(() => {
     setAccessToken(reactLocalStorage.get('access_token'));
-    (async () => {
-      try {
-
-        let orderData = await getData("list-don");
-        setlistOrder(orderData.data);
-
-        let dashboardData = await getData("dashboard");
-        setDataChart(dashboardData.data);
-
-        let profileData = await getData("Profile");
-        setProfile(...profileData.data);
-
-        setCheckin(checkinData);
-
-        setRankCheckin(rankListData);
-
-        setHomeStatistic(homeStatisticData);
-
-        // when all call api success then set loading is false
-        setLoading(false);
-      } catch (error) {
-        console.log("Đã có lỗi xảy ra:", error);
-        if (error.code == 'access_token_expired') {
-          notification['info']({
-            message: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'
-          });
-          setAccessToken("");
-          reactLocalStorage.clear();
-        } else {
-          setLoading(true);
-          notification['error']({
-            message: 'Đã có lỗi xảy ra',
-            description: <>message: {error.message}<br/>code: {error.code}<br/></>
-          });
-          throw error;
-        }
-      }
-    })()
-  }, []);
+    checkAuth().then(() => {
+      (async () => {
+          let orderData = await getData("list-don");
+          setlistOrder(orderData.data);
+  
+          let dashboardData = await getData("dashboard");
+          setDataChart(dashboardData.data);
+  
+          let profileData = await getData("Profile");
+          setProfile(...profileData.data);
+  
+          setCheckin(checkinData);
+  
+          setRankCheckin(rankListData);
+  
+          setHomeStatistic(homeStatisticData);
+  
+          // when all call api success then set loading is false
+          setLoading(false);
+      })()
+    })
+    .catch((error) => {
+      console.log("Đã có lỗi xảy ra:", error.response.data.message);
+          if (error.response.data.error_code == 71) {
+            notification['info']({
+              message: 'Phiên đăng nhập đã hết hạn vui lòng đăng nhập lại'
+            });
+            setAccessToken("");
+            reactLocalStorage.clear();
+          }else if(error.response.data.error_code == 70){
+            setAccessToken("");
+            reactLocalStorage.clear();
+          }
+          else {
+            setLoading(true);
+            notification['error']({
+              message: 'Đã có lỗi xảy ra',
+              description: <>message: {error.message}<br/>code: {error.code}<br/></>
+            });
+            throw error;
+          }
+    })
+  }, [routesLogin]);
 
   return (
     <Routes>

@@ -13,11 +13,13 @@ import { useEffect, useState } from "react";
 import Loading from "~/components/Global/Loading";
 import moment from "moment";
 import { reactLocalStorage } from "reactjs-localstorage";
+import { initRoutesLogin } from "~/recoil/routesLogin";
 
 const Login = () => {
   const [loading, setLoading] = useState("");
   const [checkTimeBG, setCheckTimeBG] = useState("light");
   const setAccessToken = useSetRecoilState(initAccessToken);
+  const setRoutesLogin = useSetRecoilState(initRoutesLogin);
   let navigate = useNavigate();
   const onFinish = (values) => {
     setLoading("active");
@@ -26,6 +28,7 @@ const Login = () => {
         const accessToken = data.access_token;
         reactLocalStorage.set('access_token', accessToken);
         setAccessToken(accessToken);
+        setRoutesLogin(true);
       })
       .then(() => message.success("Đăng nhập thành công"))
       .then(() => navigate("/"))
