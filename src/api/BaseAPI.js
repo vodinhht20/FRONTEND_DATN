@@ -29,3 +29,9 @@ export const Logout = () => {
   const url = "logout";
   return instance2.post(url, [], { headers });
 };
+
+export const checkIn = () => {
+  const headers = requestHeader();
+  const url = "checkin";
+  return instance2.post(url, [], { headers });
+};

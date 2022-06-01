@@ -10,6 +10,7 @@ import Fab from '@mui/material/Fab';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import Clock from "react-live-clock";
+import { checkIn } from "~/api/BaseAPI";
 
 const { Title, Text } = Typography;
 
@@ -70,6 +71,7 @@ const Checkin = ( { handleProps } ) => {
             }, 2000)
           } else {
             // call api
+            checkIn(({ data }) => console.log(data))
             // setdata
             setStatusRes(false);
             setTimeout(() => {
