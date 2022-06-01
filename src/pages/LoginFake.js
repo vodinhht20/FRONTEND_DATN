@@ -5,6 +5,8 @@ import { reactLocalStorage } from "reactjs-localstorage";
 import { useSetRecoilState } from "recoil";
 import { GetDataFake, Logout } from "~/api/BaseAPI";
 import { initAccessToken } from "~/recoil/accessToken";
+import { GoogleLogin } from 'react-google-login';
+
 const LoginFake = () => {
   const [data, setData] = useState([]);
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -35,6 +37,10 @@ const LoginFake = () => {
     .catch((error) => message.warning(error.response.data.message))
   }
 
+  const responseGoogle = (response) => {
+    console.log(response);
+  }
+
   const columns = [
     {
       title: 'Name',
@@ -54,6 +60,13 @@ const LoginFake = () => {
         <Button type="primary" onClick={GetDataFakeFunc}>Lấy dữ liệu</Button>
         <Button type="primary" onClick={clearData}>Clear Data</Button>
         <Button type="primary" onClick={LogoutFunc}>Thoát</Button>
+        <GoogleLogin
+          clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          cookiePolicy={'single_host_origin'}
+        />
         <Link to={"/"}><Button type="primary">Login</Button></Link>
         {data && <Table dataSource={data} columns={columns} />}
       </Card>
