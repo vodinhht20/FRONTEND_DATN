@@ -20,7 +20,7 @@ export const LoginApi = (data) => {
 
 export const LoginGG = (tokenId) => {
   const url = `login-google/?token_id=${tokenId}`;
-  return instance2.get(url);
+  return instance2.post(url);
 };
 
 export const GetDataFake = () => {
