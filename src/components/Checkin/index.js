@@ -87,7 +87,7 @@ const Checkin = ( { handleProps } ) => {
                 if (data.error_code == 80) {
                   openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
                 }else{
-                  openNotification('warning', data.message + ' ip: ' + data.ip);
+                  openNotification('warning', data.message + ' ip: ' + data.ip + ' mac: ' + data.mac);
                 }
               }, 2000);
             })

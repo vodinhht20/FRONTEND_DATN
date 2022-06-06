@@ -18,9 +18,19 @@ export const LoginApi = (data) => {
   return instance2.post(url, data);
 };
 
+export const LoginGG = (tokenId) => {
+  const url = `login-google/?token_id=${tokenId}`;
+  return instance2.post(url);
+};
+
 export const GetDataFake = () => {
   const headers = requestHeader();
   const url = "users";
+  return instance2.get(url, { headers });
+};
+export const GetDataLogin = () => {
+  const headers = requestHeader();
+  const url = "login-google";
   return instance2.get(url, { headers });
 };
 

@@ -2,25 +2,55 @@ import { Button, Form, Input, Card, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { initAccessToken } from "~/recoil/accessToken";
-import { LoginApi } from "~/api/BaseAPI";
+import { LoginApi,LoginGG } from "~/api/BaseAPI";
 import "~/assets/css/firefly.css";
-import {
-  CodeSandboxCircleFilled,
-  GithubFilled,
-  GoogleCircleFilled,
-} from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import Loading from "~/components/Global/Loading";
 import moment from "moment";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { initRoutesLogin } from "~/recoil/routesLogin";
+import GoogleLogin from "react-google-login";
+import axios from "axios";
 
 const Login = () => {
+  // const handelLogout =()=>{
+  //   localStorage.removeItem('loginData');
+  //   setLoginData(null)
+  // }
+  // const [loginData, setLoginData]= useState(
+  //   localStorage.getItem('loginData')?JSON.parse(localStorage.getItem('loginData')):null
+  // )
+
   const [loading, setLoading] = useState("");
   const [checkTimeBG, setCheckTimeBG] = useState("light");
   const setAccessToken = useSetRecoilState(initAccessToken);
   const setRoutesLogin = useSetRecoilState(initRoutesLogin);
   let navigate = useNavigate();
+
+  // login google
+  const handleFailure = (result) =>{
+    console.log('loi:',result )
+  }
+  const handleLogin = (googleData)=>{
+    let tokenId = googleData.tokenId
+    LoginGG(tokenId)
+      .then((res)=>{
+        const accessToken = res.data.access_token;
+        reactLocalStorage.set('access_token', accessToken);
+        setAccessToken(accessToken);
+        setRoutesLogin(true);
+      })
+      .then(() => message.success("Đăng nhập thành công"))
+      .then(() => navigate("/"))
+      .catch((error) => {
+        setTimeout(() => {
+          setLoading("");
+          return message.warning(error.response.data.message);
+        }, 5000);
+      });
+  }
+  // login google
+  
   const onFinish = (values) => {
     setLoading("active");
     LoginApi(values)
@@ -128,18 +158,19 @@ const Login = () => {
             </Button>
           </Form.Item>
 
-          <Form.Item className="or-login" wrapperCol={{ offset: 8, span: 16 }}>
-            <span>Hoặc đăng nhập với</span>
+          <Form.Item className="or-login" style={{ margin: "0" }}wrapperCol={{ offset: 8, span: 16 }}>
+            {/* <span>Hoặc đăng nhập với</span> */}
+
             <div className="social">
-              <a href={"#"}>
-                <GoogleCircleFilled className="icon" />
-              </a>
-              <a href={"#"}>
-                <GithubFilled className="icon" />
-              </a>
-              <a href={"#"}>
-                <CodeSandboxCircleFilled className="icon" />
-              </a>
+            <GoogleLogin
+                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                buttonText="Đăng nhập với Google"
+                onSuccess={handleLogin}
+                onFailure={handleFailure}
+                cookiePolicy={'single_host_origin'}
+                className="btn btn-login google"
+                icon={false}
+              ></GoogleLogin>
             </div>
           </Form.Item>
         </Form>
