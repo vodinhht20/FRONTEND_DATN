@@ -158,9 +158,8 @@ const Login = () => {
             </Button>
           </Form.Item>
 
-          <Form.Item className="or-login" wrapperCol={{ offset: 8, span: 16 }}>
-            <span>Hoặc đăng nhập với</span>
-
+          <Form.Item className="or-login" style={{ margin: "0" }}wrapperCol={{ offset: 8, span: 16 }}>
+            {/* <span>Hoặc đăng nhập với</span> */}
 
             <div className="social">
             <GoogleLogin
@@ -169,6 +168,8 @@ const Login = () => {
                 onSuccess={handleLogin}
                 onFailure={handleFailure}
                 cookiePolicy={'single_host_origin'}
+                className="btn btn-login google"
+                icon={false}
               ></GoogleLogin>
             </div>
           </Form.Item>

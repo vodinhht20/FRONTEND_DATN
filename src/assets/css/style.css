@@ -994,12 +994,19 @@ header {
 .login .btn-login {
   width: 100%;
   height: 42px;
-  border-radius: 10px;
+  border-radius: 10px !important;
   margin: 0;
   background-color: var(--color-orange);
   border-color: var(--color-orange);
   font-size: 16px;
   text-transform: uppercase;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.login .btn-login.google{
+  background-color: #4F86EC !important;
+  color: #fff !important;
 }
 .login .btn-login:hover {
   background-color: #ff9e36cb;
