@@ -13,7 +13,21 @@ import GoogleLogin from "react-google-login";
 import axios from "axios";
 
 const Login = () => {
+  // const handelLogout =()=>{
+  //   localStorage.removeItem('loginData');
+  //   setLoginData(null)
+  // }
+  // const [loginData, setLoginData]= useState(
+  //   localStorage.getItem('loginData')?JSON.parse(localStorage.getItem('loginData')):null
+  // )
 
+  const [loading, setLoading] = useState("");
+  const [checkTimeBG, setCheckTimeBG] = useState("light");
+  const setAccessToken = useSetRecoilState(initAccessToken);
+  const setRoutesLogin = useSetRecoilState(initRoutesLogin);
+  let navigate = useNavigate();
+
+  // login google
   const handleFailure = (result) =>{
     console.log('loi:',result )
   }
@@ -34,21 +48,9 @@ const Login = () => {
           return message.warning(error.response.data.message);
         }, 5000);
       });
-    
   }
-  const handelLogout =()=>{
-    localStorage.removeItem('loginData');
-    setLoginData(null)
-  }
-  const [loginData, setLoginData]= useState(
-    localStorage.getItem('loginData')?JSON.parse(localStorage.getItem('loginData')):null
-  )
-
-  const [loading, setLoading] = useState("");
-  const [checkTimeBG, setCheckTimeBG] = useState("light");
-  const setAccessToken = useSetRecoilState(initAccessToken);
-  const setRoutesLogin = useSetRecoilState(initRoutesLogin);
-  let navigate = useNavigate();
+  // login google
+  
   const onFinish = (values) => {
     setLoading("active");
     LoginApi(values)
