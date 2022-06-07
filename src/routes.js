@@ -13,7 +13,7 @@ import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken } from "~/recoil/atom";
-import { checkAuth, getData } from "~/api/BaseAPI";
+import { checkAuth, getData, getData2 } from "~/api/BaseAPI";
 import { notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
@@ -44,8 +44,8 @@ const Router = () => {
           let dashboardData = await getData("dashboard");
           setDataChart(dashboardData.data);
   
-          let profileData = await getData("Profile");
-          setProfile(...profileData.data);
+          let profileData = await getData2("profile");
+          setProfile(profileData.data);
   
           setCheckin(checkinData);
   

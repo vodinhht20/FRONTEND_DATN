@@ -7,6 +7,12 @@ export const getData = (data) => {
   return instance.get(url);
 };
 
+export const getData2 = (data) => {
+  const url = data;
+  const headers = requestHeader();
+  return instance2.get(url, { headers });
+};
+
 export const checkAuth = () => {
   const headers = requestHeader();
   const url = "auth";

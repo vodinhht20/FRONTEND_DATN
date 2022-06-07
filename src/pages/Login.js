@@ -1,6 +1,6 @@
 import { Button, Form, Input, Card, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { initAccessToken } from "~/recoil/accessToken";
 import { LoginApi,LoginGG } from "~/api/BaseAPI";
 import "~/assets/css/firefly.css";
@@ -24,7 +24,7 @@ const Login = () => {
   const [loading, setLoading] = useState("");
   const [checkTimeBG, setCheckTimeBG] = useState("light");
   const setAccessToken = useSetRecoilState(initAccessToken);
-  const setRoutesLogin = useSetRecoilState(initRoutesLogin);
+  const [routesLogin, setRoutesLogin] = useRecoilState(initRoutesLogin);
   let navigate = useNavigate();
 
   // login google
@@ -38,7 +38,7 @@ const Login = () => {
         const accessToken = res.data.access_token;
         reactLocalStorage.set('access_token', accessToken);
         setAccessToken(accessToken);
-        setRoutesLogin(true);
+        routesLogin == true ? setRoutesLogin(false) : setRoutesLogin(true);
       })
       .then(() => message.success("Đăng nhập thành công"))
       .then(() => navigate("/"))
@@ -58,7 +58,7 @@ const Login = () => {
         const accessToken = data.access_token;
         reactLocalStorage.set('access_token', accessToken);
         setAccessToken(accessToken);
-        setRoutesLogin(true);
+        routesLogin == true ? setRoutesLogin(false) : setRoutesLogin(true);
       })
       .then(() => message.success("Đăng nhập thành công"))
       .then(() => navigate("/"))
