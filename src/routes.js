@@ -22,6 +22,7 @@ import PrivateApp from "./components/Global/PrivateApp";
 import NotFound from "./pages/NotFound";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { initRoutesLogin } from "./recoil/routesLogin";
+import moment from "moment";
 
 const Router = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -45,8 +46,8 @@ const Router = () => {
           setDataChart(dashboardData.data);
   
           let profileData = await getData2("profile");
-          setProfile(profileData.data);
-  
+          setProfile({...profileData.data, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});
+          
           setCheckin(checkinData);
   
           setRankCheckin(rankListData);
