@@ -71,26 +71,26 @@ const Checkin = ( { handleProps } ) => {
             }, 2000)
           } else {
             // call api
+            setStatusRes(false);
             checkIn()
             .then(({ data }) => {
-              console.log(data);
               // setdata
-              setStatusRes(false);
-              setTimeout(() => {
-                setCircleLoading(false);
+              setCircleLoading(false);
+              
+              if (data.error_code == 80) {
                 setStatusRes(true);
                 setDataCheckin({
                   ...dataCheckin,
                   type: 1,
                   checkin: timeCurrent
                 });
-                if (data.error_code == 80) {
-                  openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
-                }else{
-                  openNotification('warning', data.message + ' ip: ' + data.ip + ' mac: ' + data.mac);
-                }
-              }, 2000);
+                openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
+              }else{
+                setStatusRes(true);
+                openNotification('warning', data.message + ' ip: ' + data.ip + ' mac: ' + data.mac);
+              }
             })
+
             // setdata
             // setStatusRes(false);
             // setTimeout(() => {
@@ -103,6 +103,7 @@ const Checkin = ( { handleProps } ) => {
             //   });
             //   openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
             // }, 2000);
+
           }
         } else {
           message.warning('Hành động này chúng tôi đang xử lý');
