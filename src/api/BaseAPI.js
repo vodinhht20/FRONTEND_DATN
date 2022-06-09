@@ -49,5 +49,5 @@ export const Logout = () => {
 export const checkIn = () => {
   const headers = requestHeader();
   const url = "checkin";
-  return instance2.post(url, [], { headers });
+  return instance2.post(url, {'latitude': 1, 'longitude': 103}, { headers });
 };

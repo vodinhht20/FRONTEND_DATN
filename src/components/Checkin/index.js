@@ -90,6 +90,7 @@ const Checkin = ( { handleProps } ) => {
                 openNotification('warning', data.message + ' ip: ' + data.ip + ' mac: ' + data.mac);
               }
             })
+            .catch((error) => openNotification('warning', error.response.data.message))
 
             // setdata
             // setStatusRes(false);
