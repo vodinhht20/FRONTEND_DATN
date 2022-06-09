@@ -19,11 +19,17 @@ import { List, Skeleton, Divider } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 import InputSearch from "~/components/Search";
 import { initProfile } from "~/recoil/profile";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import { Tabs } from "antd";
 import { Logout } from "~/api/BaseAPI";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { initAccessToken } from "~/recoil/accessToken";
+import { initLoad } from "~/recoil/load";
+import { initCheckin } from "~/recoil/checkin";
+import { initDataChart } from "~/recoil/dataChart";
+import { initListOrder } from "~/recoil/listOrder";
+import { initRankCheckin } from "~/recoil/rankCheckin";
+import { initHomeStatistic } from "~/recoil/homeStatistic";
 const { TabPane } = Tabs;
 
 const { Paragraph } = Typography;
@@ -31,20 +37,37 @@ const { Paragraph } = Typography;
 const Head = () => {
   const [data, setData] = useState([]);
   const profile = useRecoilValue(initProfile);
-  const setAccessToken = useSetRecoilState(initAccessToken);
+  const resetAccessToken = useResetRecoilState(initAccessToken);
+  
+  //reset Recoil logout
+  const resetProfile = useResetRecoilState(initProfile);
+  const resetLoading = useResetRecoilState(initLoad);
+  const resetCheckin = useResetRecoilState(initCheckin);
+  const resetDataChart = useResetRecoilState(initDataChart);
+  const resetlistOrder = useResetRecoilState(initListOrder);
+  const resetRankCheckin = useResetRecoilState(initRankCheckin);
+  const resetHomeStatistic = useResetRecoilState(initHomeStatistic);
+  //reset Recoil logout
 
   const LogoutFunc = () => {
     Logout()
     .then(( ) => {
       reactLocalStorage.clear();
-      setAccessToken('');
+      resetAccessToken('');
+      resetProfile();
+      resetLoading();
+      resetCheckin();
+      resetDataChart();
+      resetlistOrder();
+      resetRankCheckin();
+      resetHomeStatistic();
     })
     .then(() => {
       message.success('Đã đăng xuất');
     })
     .catch((error) => {
       reactLocalStorage.clear();
-      setAccessToken('');
+      resetAccessToken('');
       message.success('Đã đăng xuất');
     })
   }

@@ -17,7 +17,7 @@ const TabProfile = ({profileProps}) => {
     ] = profileProps;
     const [formChangeProfile] = Form.useForm();
     let inputAvatar= '';
-
+    console.log(profileData);
     // change profile
     const handleSubmitProfile = (values) => {
 

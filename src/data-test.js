@@ -119,7 +119,7 @@ export const checkinData = (
     {
         "type": 0, // trạng thái checkin 0 chưa checkin, 1 đã checkin
         "fullname": "Võ Văn Định",
-        "checkin": "08:30", // thời gian checkin vd: 08:30 default null
+        "checkin": null, // thời gian checkin vd: 08:30 default null
         "checkout": null, // thời gian checkout vd: 08:30 default null
         "working_time": null, // tổng thời gian làm
         "date": "30/04/2022",

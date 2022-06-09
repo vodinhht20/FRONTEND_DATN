@@ -13,7 +13,7 @@ import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken } from "~/recoil/atom";
-import { checkAuth, getData } from "~/api/BaseAPI";
+import { checkAuth, getData, getData2 } from "~/api/BaseAPI";
 import { notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
@@ -22,6 +22,7 @@ import PrivateApp from "./components/Global/PrivateApp";
 import NotFound from "./pages/NotFound";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { initRoutesLogin } from "./recoil/routesLogin";
+import moment from "moment";
 
 const Router = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -44,9 +45,9 @@ const Router = () => {
           let dashboardData = await getData("dashboard");
           setDataChart(dashboardData.data);
   
-          let profileData = await getData("Profile");
-          setProfile(...profileData.data);
-  
+          let profileData = await getData2("profile");
+          setProfile({...profileData.data, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});
+          
           setCheckin(checkinData);
   
           setRankCheckin(rankListData);

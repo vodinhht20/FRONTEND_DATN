@@ -7,6 +7,12 @@ export const getData = (data) => {
   return instance.get(url);
 };
 
+export const getData2 = (data) => {
+  const url = data;
+  const headers = requestHeader();
+  return instance2.get(url, { headers });
+};
+
 export const checkAuth = () => {
   const headers = requestHeader();
   const url = "auth";
@@ -43,5 +49,5 @@ export const Logout = () => {
 export const checkIn = () => {
   const headers = requestHeader();
   const url = "checkin";
-  return instance2.post(url, [], { headers });
+  return instance2.post(url, {'latitude': 1, 'longitude': 103}, { headers });
 };

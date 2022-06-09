@@ -13,8 +13,10 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import "~/assets/css/avatar-style.css";
 import { iconSetting, iconFile, iconShare, iconPlus} from "~/components/images";
+import { initLoad } from "~/recoil/load";
 const style = {
   textAlign: "center",
   marginBottom: "8vw",
@@ -24,7 +26,7 @@ const key = "updatable";
 
 const More = () => {
   let navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const loading = useRecoilValue(initLoad);
 
   const openMessage = () => {
     message.loading({ content: "Loading...", key });
@@ -56,12 +58,6 @@ const More = () => {
     message.success("Đã reset về mặc định");
     localStorage.removeItem("backgroundColor");
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
 
   return (
     <div className="wr-container more">
