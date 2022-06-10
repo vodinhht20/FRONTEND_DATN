@@ -46,8 +46,8 @@ export const Logout = () => {
   return instance2.post(url, [], { headers });
 };
 
-export const checkIn = () => {
+export const checkIn = (location) => {
   const headers = requestHeader();
   const url = "checkin";
-  return instance2.post(url, {'latitude': 1, 'longitude': 103}, { headers });
+  return instance2.post(url, location, { headers });
 };

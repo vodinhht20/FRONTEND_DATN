@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import Login from "~/pages/Login"
 import Checkin from "~/pages/Checkin";
@@ -14,7 +14,7 @@ import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken } from "~/recoil/atom";
 import { checkAuth, getData, getData2 } from "~/api/BaseAPI";
-import { notification } from "antd";
+import { message, notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
 import CheckLogin from "./components/Global/CheckLogin";
@@ -23,6 +23,8 @@ import NotFound from "./pages/NotFound";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { initRoutesLogin } from "./recoil/routesLogin";
 import moment from "moment";
+import { initLocation } from "./recoil/location";
+import { initLoadLocationPopup } from "./recoil/loadLocationPopup";
 
 const Router = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -33,6 +35,8 @@ const Router = () => {
   const setlistOrder = useSetRecoilState(initListOrder);
   const setRankCheckin = useSetRecoilState(initRankCheckin);
   const setHomeStatistic = useSetRecoilState(initHomeStatistic);
+  const setLocation = useSetRecoilState(initLocation);
+  const setLoadingLocation = useSetRecoilState(initLoadLocationPopup);
 
   const routesLogin = useRecoilValue(initRoutesLogin);
   useEffect(() => {
@@ -48,14 +52,24 @@ const Router = () => {
           let profileData = await getData2("profile");
           setProfile({...profileData.data, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});
           
+          
           setCheckin(checkinData);
-  
+          
           setRankCheckin(rankListData);
-  
+          
           setHomeStatistic(homeStatisticData);
-  
+          
           // when all call api success then set loading is false
-          setLoading(false);
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              setLocation({"latitude": position.coords.latitude, "longitude": position.coords.longitude})
+              setLoading(false);
+            },
+            (error) => {
+              message.warning(`Vui lòng cho phép trang web truy cập vị trí của bạn - ${error.code} - ${error.message}`)
+              setLoadingLocation('active');
+            },
+          )
       })()
     })
     .catch((error) => {

@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import Workspace from "~/components/Checkin/Workspace";
 import ActionCheckin from "~/components/Checkin";
 import { initCheckin } from "~/recoil/checkin";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { initLocation } from '~/recoil/location';
 const Checkin = () => {
 
   const [dataCheckin, setDataCheckin] = useRecoilState(initCheckin);
@@ -11,6 +12,7 @@ const Checkin = () => {
   const [disableSelect, setDisableSelect] = useState(true);
   const [circleLoading, setCircleLoading] = useState(false);
   const [loading, setLoading] = useState(false);
+  const location = useRecoilValue(initLocation);
 
   useEffect(() => {
     document.title = "Chấm công";
@@ -34,7 +36,8 @@ const Checkin = () => {
       setDataCheckin,
       setCircleLoading,
       loading,
-      circleLoading
+      circleLoading,
+      location
     ];
   }
 
