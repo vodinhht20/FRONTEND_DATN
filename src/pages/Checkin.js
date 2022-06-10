@@ -3,7 +3,12 @@ import { useEffect, useState } from 'react';
 import Workspace from "~/components/Checkin/Workspace";
 import ActionCheckin from "~/components/Checkin";
 import { initCheckin } from "~/recoil/checkin";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { initLocation } from '~/recoil/location';
+
+import PopupLocation from "~/components/Global/PopupLocation";
+import { initLoadLocationPopup } from "~/recoil/loadLocationPopup";
+
 const Checkin = () => {
 
   const [dataCheckin, setDataCheckin] = useRecoilState(initCheckin);
@@ -11,6 +16,8 @@ const Checkin = () => {
   const [disableSelect, setDisableSelect] = useState(true);
   const [circleLoading, setCircleLoading] = useState(false);
   const [loading, setLoading] = useState(false);
+  const location = useRecoilValue(initLocation);
+  const locationpopup = useRecoilValue(initLoadLocationPopup);
 
   useEffect(() => {
     document.title = "Chấm công";
@@ -34,7 +41,8 @@ const Checkin = () => {
       setDataCheckin,
       setCircleLoading,
       loading,
-      circleLoading
+      circleLoading,
+      location
     ];
   }
 
@@ -42,6 +50,7 @@ const Checkin = () => {
     <div className="wr-container time-keep" id="time-keep-location">
       <Workspace handleProps={exportPropWorkpaces()}/>
       <ActionCheckin handleProps={exportPropAction()}/>
+      <PopupLocation locationpopup={locationpopup} />
     </div>
   );
 }

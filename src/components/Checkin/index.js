@@ -11,16 +11,20 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import Clock from "react-live-clock";
 import { checkIn } from "~/api/BaseAPI";
+import { initLoad } from "~/recoil/load";
+import { useRecoilValue } from "recoil";
 
 const { Title, Text } = Typography;
 
 const Checkin = ( { handleProps } ) => {
+  const loadingCard = useRecoilValue(initLoad);
   const [
     dataCheckin,
     setDataCheckin,
     setCircleLoading,
     loading,
-    circleLoading
+    circleLoading,
+    location
   ] = handleProps;
   const [statusRes, setStatusRes] = useState(true);
 
@@ -72,7 +76,7 @@ const Checkin = ( { handleProps } ) => {
           } else {
             // call api
             setStatusRes(false);
-            checkIn()
+            checkIn(location)
             .then(({ data }) => {
               // setdata
               setCircleLoading(false);
@@ -126,7 +130,7 @@ const Checkin = ( { handleProps } ) => {
     };
 
     return (
-        <CardAntd className="time-keep-main">
+        <CardAntd className="time-keep-main" loading={loadingCard}>
             <Row justify="center">
                 <Col xs={24} md={20} lg={16} style={{ textAlign: 'center' }}>
                 <Title level={3} style={{ marginBlock: '5px' }}>Công Ty Cổ phần Quản Lý Nhân Sự Camel</Title>
