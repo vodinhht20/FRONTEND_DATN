@@ -54,7 +54,7 @@ const LoginFake = () => {
       <Card className="section-content">
         <Button type="primary" onClick={GetDataFakeFunc}>Lấy dữ liệu</Button>
         <Button type="primary" onClick={clearData}>Clear Data</Button>
-        <Button type="primary" onClick={LogoutFunc}>Thoát</Button>
+        <Button type="primary">Thoát</Button>
         <GoogleLogin
           clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
           buttonText="Login"
