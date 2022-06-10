@@ -5,14 +5,11 @@ import Head from "~/components/Header";
 import MenuBottom from "~/components/NavBottom";
 import { initLoad } from "~/recoil/load";
 import { useRecoilValue } from "recoil";
-import PopupLocation from "~/components/Global/PopupLocation";
-import { initLoadLocationPopup } from "~/recoil/loadLocationPopup";
 
 const { Header, Footer, Sider, Content } = Layout;
 
 const LayoutWebsite = () => {
   const loading = useRecoilValue(initLoad);
-  const locationpopup = useRecoilValue(initLoadLocationPopup);
   return (
     <>
       <Layout>
@@ -29,7 +26,6 @@ const LayoutWebsite = () => {
         </Content>
         <MenuBottom />
       </Layout>
-      <PopupLocation locationpopup={locationpopup} />
     </>
   );
 };

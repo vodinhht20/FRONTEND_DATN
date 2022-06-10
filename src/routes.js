@@ -63,13 +63,14 @@ const Router = () => {
           navigator.geolocation.getCurrentPosition(
             (position) => {
               setLocation({"latitude": position.coords.latitude, "longitude": position.coords.longitude})
-              setLoading(false);
             },
             (error) => {
               message.warning(`Vui lòng cho phép trang web truy cập vị trí của bạn - ${error.code} - ${error.message}`)
               setLoadingLocation('active');
             },
           )
+
+          setLoading(false);
       })()
     })
     .catch((error) => {
