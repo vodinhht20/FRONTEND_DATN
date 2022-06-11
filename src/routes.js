@@ -25,6 +25,7 @@ import { initRoutesLogin } from "./recoil/routesLogin";
 import moment from "moment";
 import { initLocation } from "./recoil/location";
 import { initLoadLocationPopup } from "./recoil/loadLocationPopup";
+import GoogleMap from "./pages/GoogleMap";
 
 const Router = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -110,6 +111,7 @@ const Router = () => {
         {/* More router */}
         <Route path="more">
           <Route index element={<More />} />
+          <Route path="map" element={<GoogleMap />} />
           <Route path="create-order" element={<CreateOrderLayout />} >
             <Route index element={<CreateOrder />} />
             <Route path="tao-don" element={<OrderPage />} />
