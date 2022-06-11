@@ -188,8 +188,8 @@ const Head = () => {
           label: (
             <>
               <QuestionCircleOutlined className="icon-dropdown" />
-              <Link rel="noopener noreferrer" to={"/xxsdsdsa"}>
-                404
+              <Link rel="noopener noreferrer" to={"/more/map"}>
+                map
               </Link>
             </>
           ),
