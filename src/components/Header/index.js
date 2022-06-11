@@ -38,7 +38,7 @@ const Head = () => {
   const [data, setData] = useState([]);
   const profile = useRecoilValue(initProfile);
   const resetAccessToken = useResetRecoilState(initAccessToken);
-  
+
   //reset Recoil logout
   const resetProfile = useResetRecoilState(initProfile);
   const resetLoading = useResetRecoilState(initLoad);
@@ -183,17 +183,7 @@ const Head = () => {
               </Link>
             </>
           ),
-        },
-        {
-          label: (
-            <>
-              <QuestionCircleOutlined className="icon-dropdown" />
-              <Link rel="noopener noreferrer" to={"/more/map"}>
-                map
-              </Link>
-            </>
-          ),
-        },
+        }
       ]}
     />
   );

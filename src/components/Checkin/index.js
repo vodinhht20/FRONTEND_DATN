@@ -3,20 +3,22 @@ import { Typography, notification } from 'antd';
 import { EnvironmentOutlined } from '@ant-design/icons';
 import { Card as CardAntd, Col, message, Row, Space} from 'antd';
 import { orange } from '@mui/material/colors';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import LogoutIcon from '@mui/icons-material/Logout';
 import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import Clock from "react-live-clock";
-import { checkIn } from "~/api/BaseAPI";
+import { checkIn, locationOCG } from "~/api/BaseAPI";
 import { initLoad } from "~/recoil/load";
 import { useRecoilValue } from "recoil";
+import { initLocation } from "~/recoil/location";
+import axios from "axios";
 
 const { Title, Text } = Typography;
-
 const Checkin = ( { handleProps } ) => {
+  const locationValue = useRecoilValue(initLocation);
   const loadingCard = useRecoilValue(initLoad);
   const [
     dataCheckin,
@@ -27,6 +29,17 @@ const Checkin = ( { handleProps } ) => {
     location
   ] = handleProps;
   const [statusRes, setStatusRes] = useState(true);
+  const [locationAdress, setLocationAdress] = useState('Không thể xác định được vị trí');
+
+  useEffect(() => {
+    if (locationValue) {
+      const query = `${locationValue.latitude}+${locationValue.longitude}`;
+      locationOCG(query).then(({ data }) => {
+        let address = data.results[0].formatted;
+        setLocationAdress(address);
+      });
+    }
+  }, []);
 
     const circleLoadingStype = {
         ...(dataCheckin.type && {
@@ -50,66 +63,31 @@ const Checkin = ( { handleProps } ) => {
     const handleButtonCheckin = () => {
         if(statusRes) {
           setCircleLoading(true);
-          let timeCurrent = `${formatDate(null, 'HH:mm')}`;
-          if (dataCheckin.type) {
-            let startTime = getDate(dataCheckin.checkin, 'HH:mm');
-            let endTime = getDate(timeCurrent, 'HH:mm');
-            let workingTime = endTime.diff(startTime, 'hours', true);
-            if(workingTime) {
-              workingTime = workingTime.toFixed(1);
-            } else {
-              workingTime = null;
-            }
-
-            // call api
-            setStatusRes(false);
-            setTimeout(() => {
-              setCircleLoading(false);
-              setStatusRes(true);
-              setDataCheckin({
-                ...dataCheckin,
-                checkout: timeCurrent,
-                working_time: workingTime
-              });
-              openNotification('success', 'Checkout thành công !', `Bạn đã checkout vào lúc ${timeCurrent}`);
-            }, 2000)
-          } else {
-            // call api
-            setStatusRes(false);
-            checkIn(location)
+          setStatusRes(false);
+          checkIn(location)
             .then(({ data }) => {
-              // setdata
-              setCircleLoading(false);
-              
-              if (data.error_code == 80) {
-                setStatusRes(true);
+              if (data.status == 'success') {
+                let resDataCheckin = data.data;
                 setDataCheckin({
                   ...dataCheckin,
-                  type: 1,
-                  checkin: timeCurrent
+                  type: resDataCheckin.type,
+                  checkin: resDataCheckin.checkin,
+                  checkout: resDataCheckin.checkout,
+                  working_time: resDataCheckin.working_time
+
                 });
-                openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
-              }else{
-                setStatusRes(true);
-                openNotification('warning', data.message + ' ip: ' + data.ip + ' mac: ' + data.mac);
+                openNotification('success', 'Checkin thành công !', `Bạn đã ${ resDataCheckin.type ? 'checkin' : 'checkout' } thành công`);
+              } else{
+                openNotification('warning', data.message + ' ip: ' + data.ip);
               }
+              setStatusRes(true);
+              setCircleLoading(false);
             })
-            .catch((error) => openNotification('warning', error.response.data.message))
-
-            // setdata
-            // setStatusRes(false);
-            // setTimeout(() => {
-            //   setCircleLoading(false);
-            //   setStatusRes(true);
-            //   setDataCheckin({
-            //     ...dataCheckin,
-            //     type: 1,
-            //     checkin: timeCurrent
-            //   });
-            //   openNotification('success', 'Checkin thành công !', `Bạn đã checkin vào lúc ${timeCurrent}`);
-            // }, 2000);
-
-          }
+            .catch((error) => {
+              openNotification('warning', error.response.data.message);
+              setStatusRes(true);
+              setCircleLoading(false);
+            })
         } else {
           message.warning('Hành động này chúng tôi đang xử lý');
         }
@@ -171,7 +149,7 @@ const Checkin = ( { handleProps } ) => {
                 </Box>
                 <div className="location-address">
                     <Title level={5}>Địa điểm làm việc</Title>
-                    <Text><EnvironmentOutlined /> {dataCheckin.location}</Text>
+                    <Text><EnvironmentOutlined style={{ paddingRight: '10px' }}/>{ locationAdress }</Text>
                 </div>
                 <Row gutter={[12,12]} className="wrap-time-statistic">
                     <Col span={8}>

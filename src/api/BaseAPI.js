@@ -1,6 +1,7 @@
 import requestHeader from "~/config/requestHeader";
 import instance from "./instance";
 import instance2 from "./instance2";
+import axios from "axios";
 
 export const getData = (data) => {
   const url = data;
@@ -51,3 +52,9 @@ export const checkIn = (location) => {
   const url = "checkin";
   return instance2.post(url, location, { headers });
 };
+
+export const locationOCG = (query) => {
+  const url = process.env.REACT_APP_OPENCAGE_URL;
+  const key = process.env.REACT_APP_OPENCAGE_KEY;
+  return axios.get(url, { params:{ q: query, key, language: 'vn' }});
+}
