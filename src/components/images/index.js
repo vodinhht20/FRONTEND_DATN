@@ -3,6 +3,7 @@ export { default as iconSetting } from "~/assets/images/icons-svg/setting.svg";
 export { default as iconFile } from "~/assets/images/icons-svg/file.svg";
 export { default as iconShare } from "~/assets/images/icons-svg/share.svg";
 export { default as iconPlus } from "~/assets/images/icons-svg/plus.svg";
+export { default as iconLocation2 } from "~/assets/images/icons-svg/location.png";
 
 // banner
 export { default as banner01 } from "~/assets/images/banner/banner_01.png";

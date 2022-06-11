@@ -5,27 +5,20 @@ import {
   Card,
   Col,
   Drawer,
-  Dropdown,
   message,
-  PageHeader,
   Popconfirm,
   Row,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import "~/assets/css/avatar-style.css";
-import { iconSetting, iconFile, iconShare, iconPlus} from "~/components/images";
+import { iconSetting, iconFile, iconShare, iconPlus, iconLocation2} from "~/components/images";
 import { initLoad } from "~/recoil/load";
-const style = {
-  textAlign: "center",
-  marginBottom: "8vw",
-};
 
 const key = "updatable";
 
 const More = () => {
-  let navigate = useNavigate();
   const loading = useRecoilValue(initLoad);
 
   const openMessage = () => {
@@ -80,16 +73,18 @@ const More = () => {
                 </Link>
               </Col>
               <Col xs={6} md={6} lg={4}>
-                <Badge count={""}>
+                <Badge count={""} onClick={openMessage}>
                   <Avatar className="icon-app-style" src={iconShare} />
                   <p>Chia sẻ</p>
                 </Badge>
               </Col>
               <Col xs={6} md={6} lg={4}>
+              <Link to={"map"}>
                 <Badge count={""}>
-                  <Avatar className="icon-app-style" src={iconPlus} />
-                  <p>Example</p>
+                  <Avatar className="icon-app-style" src={iconLocation2} />
+                  <p>Vị trí hiện tại</p>
                 </Badge>
+              </Link>
               </Col>
               <Col xs={6} md={6} lg={4}>
                 <Badge count={""}>
