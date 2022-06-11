@@ -52,6 +52,9 @@ header {
   align-items: center;
   justify-content: center;
 }
+.ant-layout-header {
+  z-index: 3;
+}
 .head .ant-layout-header {
   line-height: unset !important;
 }

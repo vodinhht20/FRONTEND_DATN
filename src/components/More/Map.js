@@ -1,7 +1,6 @@
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps"
-
+import { iconLocation } from "~/components/images";
 const Map = ({ location }) => {
-    console.log(location);
   return (
     <div>
       <GoogleMap
@@ -10,8 +9,8 @@ const Map = ({ location }) => {
         >
             <Marker
               icon={{
-                url: 'https://diamondflowerlevanluong.com/wp-content/uploads/2021/04/delivery.png',
-                scaledSize: new window.google.maps.Size(60, 60),
+                url: iconLocation,
+                scaledSize: new window.google.maps.Size(50, 50),
               }}
               position={{ lat: location.latitude, lng: location.longitude }}
           />
