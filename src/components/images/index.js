@@ -12,3 +12,6 @@ export { default as banner04 } from "~/assets/images/banner/banner_04.png";
 
 //login
 export { default as imageLogin } from "~/assets/images/login-v2.svg";
+
+//icon map
+export { default as iconLocation } from "~/assets/images/location.png";
