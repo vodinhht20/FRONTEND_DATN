@@ -46,20 +46,20 @@ const Router = () => {
       (async () => {
           let orderData = await getData("list-don");
           setlistOrder(orderData.data);
-  
+
           let dashboardData = await getData("dashboard");
           setDataChart(dashboardData.data);
-  
+
           let profileData = await getData2("profile");
           setProfile({...profileData.data, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});
-          
-          
-          setCheckin(checkinData);
-          
+
+          let checkinData = await getData2('checkin/data-checkin');
+          setCheckin(checkinData.data.data);
+
           setRankCheckin(rankListData);
-          
+
           setHomeStatistic(homeStatisticData);
-          
+
           // when all call api success then set loading is false
           navigator.geolocation.getCurrentPosition(
             (position) => {
