@@ -39,7 +39,7 @@ const Checkin = ( { handleProps } ) => {
         setLocationAdress(address);
       });
     }
-  }, []);
+  }, [locationValue]);
 
     const circleLoadingStype = {
         ...(dataCheckin.type && {
@@ -52,7 +52,7 @@ const Checkin = ( { handleProps } ) => {
     }
 
     const buttonSx = {
-        ...(dataCheckin.type && {
+        ...(dataCheckin.checkin != null && {
           bgcolor: orange[500],
           '&:hover': {
             bgcolor: orange[700],
@@ -106,7 +106,7 @@ const Checkin = ( { handleProps } ) => {
         notification.error(data);
         }
     };
-
+    console.log(dataCheckin.checkin);
     return (
         <CardAntd className="time-keep-main" loading={loadingCard}>
             <Row justify="center">
@@ -133,7 +133,7 @@ const Checkin = ( { handleProps } ) => {
                         loading={loading}
                     >
                         {
-                        dataCheckin.type ?
+                        dataCheckin.checkin != null ?
                         <Space className="button-content">
                             <LogoutIcon  className="button-icon"/>
                             <Text className="lable-button">Check out</Text>
