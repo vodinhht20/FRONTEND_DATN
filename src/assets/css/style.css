@@ -78,7 +78,7 @@ header {
 }
 @media (max-width: 375px) {
   .head .account-dropdown {
-    display: none;
+    /* display: none; */
   }
 }
 .loading-bottom-head {
