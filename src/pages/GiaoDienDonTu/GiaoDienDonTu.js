@@ -1,5 +1,4 @@
 import {
-  Button,
   Form,
   Input,
   Select,
@@ -12,7 +11,7 @@ import {
   Avatar 
 } from "antd";
 import { SearchOutlined,UserOutlined  } from "@ant-design/icons";
-import { useState } from "react";
+// import { useState } from "react";
 import './GiaoDienDonTu.css'
 
 const Checkin = () => {
@@ -92,7 +91,7 @@ const Checkin = () => {
       title: "Action",
       key: "operation",
       width: 60,
-      render: () => <a>action</a>,
+      render: () => ( <p>action</p>),
     },
   ];
   const data = [
