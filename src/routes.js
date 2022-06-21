@@ -51,7 +51,7 @@ const Router = () => {
           setDataChart(dashboardData.data);
 
           let profileData = await getData2("profile");
-          setProfile({...profileData.data, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});
+          setProfile({...profileData.data, avatar: profileData.data.avatar ? process.env.REACT_APP_LINK_SERVER+profileData.data.avatar : null, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});
 
           let checkinData = await getData2('checkin/data-checkin');
           setCheckin(checkinData.data.data);

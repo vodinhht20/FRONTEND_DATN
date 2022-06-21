@@ -64,3 +64,9 @@ export const changePassword = (password) => {
   const url = "change-password";
   return instance2.post(url, password, { headers });
 };
+
+export const updateAvatar = (avatar) => {
+  const headers = requestHeader();
+  const url = "update-avatar";
+  return instance2.post(url, avatar, { headers });
+};

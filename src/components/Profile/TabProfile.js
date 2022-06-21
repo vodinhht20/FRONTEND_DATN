@@ -1,5 +1,6 @@
 import 'moment/locale/vi';
 import locale from 'antd/es/date-picker/locale/vi_VN';
+import { updateAvatar } from '~/api/BaseAPI';
 const { EditOutlined, CheckOutlined, CloudUploadOutlined } = require("@ant-design/icons")
 const { Col, Row, Image, Button, Form, DatePicker, Select, Input, Typography, Spin, notification } = require("antd")
 const { Title, Paragraph, Text } = Typography;
@@ -38,23 +39,33 @@ const TabProfile = ({profileProps}) => {
 
     // change avatar
     const uploadAvatar = (event) => {
-
         setLoadUpImage(true);
         //call api change image
-        setTimeout(() => {
-            var reader = new FileReader();
-            reader.onload = function(){
-                setProfileData({...profileData, avatar: reader.result});
-            };
-            reader.readAsDataURL(event.target.files[0]);
-            setLoadUpImage(false);
-            //success
-            notification.success({
-                message: "Cập nhật thành công !",
-                description: "Ảnh đại diện đã được thay đổi",
-                placement: 'topRight'
-            });
-        }, 2000);
+        let img = event.target.files[0];
+        let fd = new FormData()
+        fd.append("avatar", img);
+
+        // var reader = new FileReader();
+        updateAvatar(fd)
+            .then(({ data }) => {
+                    setProfileData({...profileData, avatar: process.env.REACT_APP_LINK_SERVER+data.image_links});
+            })
+            .then(() => {
+                notification.success({
+                    message: "Cập nhật thành công !",
+                    description: "Ảnh đại diện đã được thay đổi",
+                    placement: 'topRight'
+                });
+                setLoadUpImage(false);
+            })
+            .catch((error) => {
+                notification.warning({
+                    message: "Cập nhật thất bại !",
+                    description: error.response.data.message,
+                    placement: 'topRight'
+                });
+                setLoadUpImage(false);
+            })
     };
 
     return (
@@ -64,7 +75,7 @@ const TabProfile = ({profileProps}) => {
                 <Col xs={24} md={8} lg={6} className="box-profile-avatar">
                     <Image rootClassName="avatar-profile-around"
                         src={profileData.avatar}/>
-                        <input type="file" id='input-file-avatar' ref={input => {inputAvatar=input} } onChange={uploadAvatar} style={{ display: "none" }}/>
+                        <input type="file" accept="image/png, image/gif, image/jpeg" id='input-file-avatar' ref={input => {inputAvatar=input} } onChange={uploadAvatar} style={{ display: "none" }}/>
                         <Button
                             className="btn-change-avatar"
                             type="primary"
