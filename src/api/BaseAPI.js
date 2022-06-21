@@ -58,3 +58,9 @@ export const locationOCG = (query) => {
   const key = process.env.REACT_APP_OPENCAGE_KEY;
   return axios.get(url, { params:{ q: query, key, language: 'vn' }});
 }
+
+export const changePassword = (password) => {
+  const headers = requestHeader();
+  const url = "change-password";
+  return instance2.post(url, password, { headers });
+};

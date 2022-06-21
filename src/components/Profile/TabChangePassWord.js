@@ -1,3 +1,5 @@
+import { changePassword } from "~/api/BaseAPI";
+
 const { CheckOutlined } = require("@ant-design/icons");
 const { Spin, Row, Col, Form, Input, Button, Typography, notification } = require("antd");
 const { Title, Paragraph, Text } = Typography;
@@ -13,20 +15,29 @@ const TabChangePassWord = ({passwordProps}) => {
 
     // change password
     const handleSubmitChangePassWord = (values) => {
-
         // call api change password
         setLoadChangePass(true);
-        setTimeout(() => {
-            console.log("handle_password: ", values);
+        changePassword(values)
+        .then(({ data }) => {
             setLoadChangePass(false);
             //success
             formChangePass.resetFields();
-            notification.success({
-                message: "Cập nhật thành công !",
-                description: "Mật khẩu đã được thay đổi",
+            if (data.error_code === "success") {
+                notification.success({
+                    message: "Cập nhật thành công !",
+                    description: data.message,
+                    placement: 'topRight'
+                });
+            }
+        })
+        .catch((error) => {
+            setLoadChangePass(false);
+            notification.warning({
+                message: 'Cập nhật mật khẩu thất bại !',
+                description: error.response.data.message,
                 placement: 'topRight'
             });
-        }, 2000)
+        })
     }
 
     return (
