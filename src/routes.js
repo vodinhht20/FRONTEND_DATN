@@ -17,7 +17,8 @@ import { checkAuth, getData, getData2 } from "~/api/BaseAPI";
 import { message, notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
-import GiaoDienDonTu from "./pages/GiaoDienDonTu/GiaoDienDonTu"
+import GiaoDienDonTu from "./pages/GiaoDienDonTu/GiaoDienDonTu";
+import HoSoNhanSu from "./pages/HoSoNhanSu/HoSoNhanSu";
 import CheckLogin from "./components/Global/CheckLogin";
 import PrivateApp from "./components/Global/PrivateApp";
 import NotFound from "./pages/NotFound";
@@ -111,6 +112,7 @@ const Router = () => {
         <Route path="loginfake" element={<LoginFake />} />
         <Route path="GiaoDienDonTu" element={< GiaoDienDonTu/>} />
         <Route path="blog" element={< Blog/>} />
+        <Route path="HoSoNhanSu" element={< HoSoNhanSu/>} />
 
         {/* More router */}
         <Route path="more">
