@@ -27,6 +27,7 @@ import moment from "moment";
 import { initLocation } from "./recoil/location";
 import { initLoadLocationPopup } from "./recoil/loadLocationPopup";
 import GoogleMap from "./pages/GoogleMap";
+import Blog from "./pages/Blog";
 
 const Router = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -109,6 +110,7 @@ const Router = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="loginfake" element={<LoginFake />} />
         <Route path="GiaoDienDonTu" element={< GiaoDienDonTu/>} />
+        <Route path="blog" element={< Blog/>} />
 
         {/* More router */}
         <Route path="more">

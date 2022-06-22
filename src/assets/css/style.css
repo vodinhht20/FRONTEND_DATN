@@ -1040,3 +1040,51 @@ header {
 .login .or-login .social .icon:hover {
   color: var(--color-default);
 }
+
+/* BLog */
+.blog .ant-breadcrumb {
+  padding: 24px !important;
+  background: #fff !important;
+}
+.blog .ant-col {
+  padding: 0 !important;
+}
+.blog .top-blog .ant-card-body{
+  padding-top: 0 !important;
+}
+.blog .user-title {
+  margin-top: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.blog .user-title-content {
+  display: flex;
+}
+.blog .text-title{
+  font-size: 1.8em;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  justify-content: flex-start;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.name-role {
+  margin-left: 0.7em;
+}
+.blog .user-name {
+  font-size: 1rem;
+  text-rendering: optimizelegibility;
+  color: #0869eb;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  grid-column-gap: 5px;
+}
+/* BLog */

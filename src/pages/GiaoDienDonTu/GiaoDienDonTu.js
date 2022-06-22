@@ -108,6 +108,45 @@ const Checkin = () => {
       thoiGianBatDau:'10/02/2022',
       thoiGianKetThuc:'10/05/2022'
     },
+    {
+      stt: "2",
+      id: "#6037",
+      type: "Đơn nghỉ không lương",
+      status: "Đã hủy bỏ",
+      reason: "Hệ thống hủy đơn do quá hạn chốt đơn",
+      createBy: "Võ Văn Định",
+      DonVi: "FPT",
+      ViTri: "Sofware Engineer",
+      timeToCreate:"09/05/2022",
+      thoiGianBatDau:'10/02/2022',
+      thoiGianKetThuc:'10/05/2022'
+    },
+    {
+      stt: "3",
+      id: "#6037",
+      type: "Đơn nghỉ không lương",
+      status: "Đã hủy bỏ",
+      reason: "Hệ thống hủy đơn do quá hạn chốt đơn",
+      createBy: "Võ Văn Định",
+      DonVi: "FPT",
+      ViTri: "Sofware Engineer",
+      timeToCreate:"09/05/2022",
+      thoiGianBatDau:'10/02/2022',
+      thoiGianKetThuc:'10/05/2022'
+    },
+    {
+      stt: "4",
+      id: "#6037",
+      type: "Đơn nghỉ không lương",
+      status: "Đã hủy bỏ",
+      reason: "Hệ thống hủy đơn do quá hạn chốt đơn",
+      createBy: "Võ Văn Định",
+      DonVi: "FPT",
+      ViTri: "Sofware Engineer",
+      timeToCreate:"09/05/2022",
+      thoiGianBatDau:'10/02/2022',
+      thoiGianKetThuc:'10/05/2022'
+    },
   ];
 
   const { Option } = Select;
@@ -232,6 +271,7 @@ const Checkin = () => {
         className="timeTo"
           columns={columns}
           dataSource={data}
+          pagination={{ pageSize: 3 }}
           bordered
           scroll={{
             x: 1500,

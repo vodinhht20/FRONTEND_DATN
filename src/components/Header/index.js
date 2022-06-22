@@ -204,6 +204,16 @@ const Head = () => {
             </>
           ),
         },
+        {
+          label: (
+            <>
+              <QuestionCircleOutlined className="icon-dropdown" />
+              <Link rel="noopener noreferrer" to={"/blog"}>
+                BLog
+              </Link>
+            </>
+          ),
+        },
       ]}
     />
   );
