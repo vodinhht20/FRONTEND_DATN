@@ -194,6 +194,16 @@ const Head = () => {
             </>
           ),
         },
+        {
+          label: (
+            <>
+              <QuestionCircleOutlined className="icon-dropdown" />
+              <Link rel="noopener noreferrer" to={"/GiaoDienDonTu"}>
+                Giao diện đơn từ
+              </Link>
+            </>
+          ),
+        },
       ]}
     />
   );
