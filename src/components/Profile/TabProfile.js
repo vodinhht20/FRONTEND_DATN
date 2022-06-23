@@ -42,17 +42,6 @@ const TabProfile = ({profileProps}) => {
             });
             setLoadingProfile(false);
         })
-        // setTimeout(() => {
-        //     setProfileData({...profileData, ...values });
-        //     setDisabledInput(true);
-        //     setLoadingProfile(false);
-        //     //success
-        //     notification.success({
-        //         message: "Cập nhật thành công !",
-        //         description: "Hồ sơ của bạn đã được cập nhật",
-        //         placement: 'topRight'
-        //     });
-        // }, 2000)
     }
 
     // change avatar
@@ -63,7 +52,6 @@ const TabProfile = ({profileProps}) => {
         let fd = new FormData()
         fd.append("avatar", img);
 
-        // var reader = new FileReader();
         updateAvatar(fd)
             .then(({ data }) => {
                     setProfileData({...profileData, avatar: process.env.REACT_APP_LINK_SERVER+data.image_links});
@@ -127,6 +115,16 @@ const TabProfile = ({profileProps}) => {
                                     </Form.Item>
                                 </Col>
                                 <Col xs={24} md={24} lg={12}>
+                                    <Form.Item label="Mã nhân viên" name="employee_code"
+                                    tooltip={
+                                        <>Thông tin không được phép chỉnh sửa.
+                                            Vui lòng liên hệ <a href='/help'>Camel</a> để được hỗ trợ trực tiếp.
+                                        </>
+                                    }>
+                                        <Input placeholder="*******" disabled/>
+                                    </Form.Item>
+                                </Col>
+                                <Col xs={24} md={24} lg={12}>
                                     <Form.Item name="email" label="Email"
                                         tooltip={
                                             <>Thông tin không được phép chỉnh sửa.
@@ -173,11 +171,6 @@ const TabProfile = ({profileProps}) => {
                                             <Select.Option value="2">Nữ</Select.Option>
                                             <Select.Option value="0">Khác</Select.Option>
                                         </Select>
-                                    </Form.Item>
-                                </Col>
-                                <Col xs={24} md={24} lg={12}>
-                                    <Form.Item label="Mã số thuế cá nhân" name="TIN">
-                                        <Input placeholder="*******" disabled={ disabledInput }/>
                                     </Form.Item>
                                 </Col>
                                 <Col span={24} style={{ textAlign: "center", marginTop: "10px" }}>

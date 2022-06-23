@@ -12,7 +12,7 @@ import Profile from "~/pages/Profile";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken } from "~/recoil/atom";
+import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner } from "~/recoil/atom";
 import { checkAuth, getData, getData2 } from "~/api/BaseAPI";
 import { message, notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
@@ -40,12 +40,16 @@ const Router = () => {
   const setHomeStatistic = useSetRecoilState(initHomeStatistic);
   const setLocation = useSetRecoilState(initLocation);
   const setLoadingLocation = useSetRecoilState(initLoadLocationPopup);
+  const setBanner = useSetRecoilState(initBanner);
 
   const routesLogin = useRecoilValue(initRoutesLogin);
   useEffect(() => {
     setAccessToken(reactLocalStorage.get('access_token'));
     checkAuth().then(() => {
       (async () => {
+          let banner = await getData2("banner");
+          setBanner(banner.data);
+
           let orderData = await getData("list-don");
           setlistOrder(orderData.data);
 

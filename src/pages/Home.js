@@ -10,9 +10,10 @@ import Skeleton from '@mui/material/Skeleton';
 import { Row, Col, Card, Typography, Progress, Carousel, Avatar } from "antd";
 import { banner01, banner02, banner03, banner04 } from "~/components/images";
 import { SliderEvent, SkeletonLine, RankList } from "~/components/Home";
-import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic } from "~/recoil/atom";
+import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner } from "~/recoil/atom";
 import { useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 const { Title } = Typography;
 
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
   const profileData = useRecoilValue(initProfile);
   const dataHome = useRecoilValue(initHomeStatistic);
   const rankData = useRecoilValue(initRankCheckin);
+  const banner = useRecoilValue(initBanner);
   useEffect(() => {
   }, [])
   const personnelRecord = (
@@ -115,18 +117,16 @@ const Home = () => {
               </>
               :
               <Carousel autoplay autoplaySpeed={5000} speed={2000} dots={{ className: "dot-slider" }} loading={loading} className="home-slide">
-                <div className="slider-item">
-                  <img src={banner01}/>
-                </div>
-                <div className="slider-item">
-                  <img src={banner02}/>
-                </div>
-                <div className="slider-item">
-                  <img src={banner03}/>
-                </div>
-                <div className="slider-item">
-                  <img src={banner04}/>
-                </div>
+                {
+                  banner.data ? banner.data.map((item, index) => 
+                    <Link to={item.links ? item.links : ''} key={index} className="slider-item">
+                        <img src={item.image}/>
+                    </Link>
+                  ) : 
+                    <div className="slider-item">
+                      <img src={banner02}/>
+                    </div>
+                }
               </Carousel>
             }
         </Col>
