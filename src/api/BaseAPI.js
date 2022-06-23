@@ -70,3 +70,9 @@ export const updateAvatar = (avatar) => {
   const url = "update-avatar";
   return instance2.post(url, avatar, { headers });
 };
+
+export const updateProfile = (profile) => {
+  const headers = requestHeader();
+  const url = "update-profile";
+  return instance2.post(url, profile, { headers });
+};

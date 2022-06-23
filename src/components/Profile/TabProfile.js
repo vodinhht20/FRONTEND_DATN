@@ -1,6 +1,6 @@
 import 'moment/locale/vi';
 import locale from 'antd/es/date-picker/locale/vi_VN';
-import { updateAvatar } from '~/api/BaseAPI';
+import { updateAvatar, updateProfile } from '~/api/BaseAPI';
 const { EditOutlined, CheckOutlined, CloudUploadOutlined } = require("@ant-design/icons")
 const { Col, Row, Image, Button, Form, DatePicker, Select, Input, Typography, Spin, notification } = require("antd")
 const { Title, Paragraph, Text } = Typography;
@@ -18,23 +18,41 @@ const TabProfile = ({profileProps}) => {
     ] = profileProps;
     const [formChangeProfile] = Form.useForm();
     let inputAvatar= '';
-    console.log(profileData);
     // change profile
     const handleSubmitProfile = (values) => {
-
-        //call api update profile
         setLoadingProfile(true);
-        setTimeout(() => {
-            setProfileData({...profileData, ...values });
-            setDisabledInput(true);
-            setLoadingProfile(false);
-            //success
+        //call api update profile
+        updateProfile(values)
+        .then(() => {
+            setProfileData({...profileData, ...values});
+        })
+        .then(() => {
             notification.success({
                 message: "Cập nhật thành công !",
                 description: "Hồ sơ của bạn đã được cập nhật",
                 placement: 'topRight'
             });
-        }, 2000)
+            setLoadingProfile(false);
+        })
+        .catch((error) => {
+            notification.warning({
+                message: "Cập nhật thất bại !",
+                description: error.response.data.message,
+                placement: 'topRight'
+            });
+            setLoadingProfile(false);
+        })
+        // setTimeout(() => {
+        //     setProfileData({...profileData, ...values });
+        //     setDisabledInput(true);
+        //     setLoadingProfile(false);
+        //     //success
+        //     notification.success({
+        //         message: "Cập nhật thành công !",
+        //         description: "Hồ sơ của bạn đã được cập nhật",
+        //         placement: 'topRight'
+        //     });
+        // }, 2000)
     }
 
     // change avatar
