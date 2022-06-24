@@ -33,7 +33,7 @@ const Profile = () => {
         loadChangePass,
         setLoadChangePass
     ];
-
+    console.log(profileData.email);
     return (
         <>
             <Card className="wr-container profile-page">
@@ -43,6 +43,10 @@ const Profile = () => {
                     </TabPane>
                     <TabPane tab={<><KeyOutlined className="tab-icon"/><span className="tab-icon-lable">Thay đổi mật khẩu</span></>} key="2">
                         <TabChangePassWord passwordProps={passwordProps()}/>
+                    </TabPane>
+                    <TabPane disabled tab={<>
+                        <Image src={`https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=email: ${profileData.email} - Mã NV: ${profileData.employee_code} - Họ và tên: ${profileData.fullname} - Số điện thoại: ${profileData.phone}`}/>
+                        <span className="tab-icon-lable">QR Code</span></>} key="3">
                     </TabPane>
                 </Tabs>
             </Card>

@@ -120,7 +120,12 @@ const TabProfile = ({profileProps}) => {
                                         <>Thông tin không được phép chỉnh sửa.
                                             Vui lòng liên hệ <a href='/help'>Camel</a> để được hỗ trợ trực tiếp.
                                         </>
-                                    }>
+                                    }
+                                    rules={[{
+                                        required: true,
+                                        message: 'Vui lòng nhập mã nhân viên'
+                                    }]}
+                                    >
                                         <Input placeholder="*******" disabled/>
                                     </Form.Item>
                                 </Col>
