@@ -32,6 +32,7 @@ const Login = () => {
     console.log('loi:',result )
   }
   const handleLogin = (googleData)=>{
+    setLoading("active");
     let tokenId = googleData.tokenId
     LoginGG(tokenId)
       .then((res)=>{
