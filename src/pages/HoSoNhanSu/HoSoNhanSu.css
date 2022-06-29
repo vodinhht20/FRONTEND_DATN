@@ -1,5 +1,38 @@
-.btn_submit{
-    margin-top: 15px;
+.document-page{
+    height: 100vh;
+    /* background-image: url('https://s3.cloud.cmctelecom.vn/tinhte2/2020/04/4968501_1.jpg') !important; */
+    background-position: center;
+    background-size: cover;
+}
+.wr-document{
+    height: 100%;
+    background: transparent;
+}
+.wr-document .ant-card-head-title{
+    color: #fff;
+}
+.box-document{
+    max-width: 500px;
+    margin: auto !important;
+    display: block;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+}
+.box-document .ant-card-head-title{
+    color: #000;
+}
+.select-document{
+    display: inline-block !important;
+    margin: auto !important;
+    padding: 5.5vw !important;
+    height: 100% !important;
+    border-style: dashed !important;
+    border-width: 2px !important;
+    font-size: 1.3em !important;
+}
+.btn-document{
+    width: 100%;
+    padding: 1vw !important;
+    height: 100% !important;
 }

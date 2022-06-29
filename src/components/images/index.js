@@ -16,3 +16,6 @@ export { default as imageLogin } from "~/assets/images/login-v2.svg";
 
 //icon map
 export { default as iconLocation } from "~/assets/images/location.png";
+
+//document
+export { default as documentbg } from "~/assets/images/bg-document.jpg";

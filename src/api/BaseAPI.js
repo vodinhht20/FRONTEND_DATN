@@ -76,3 +76,9 @@ export const updateProfile = (profile) => {
   const url = "update-profile";
   return instance2.post(url, profile, { headers });
 };
+
+export const kyc = (data) => {
+  const headers = requestHeader();
+  const url = "kyc";
+  return instance2.post(url, data, { headers });
+};
