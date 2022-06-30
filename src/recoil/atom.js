@@ -8,3 +8,4 @@ export { initRankCheckin } from "~/recoil/rankCheckin";
 export { initHomeStatistic } from "~/recoil/homeStatistic";
 export { initAccessToken } from "~/recoil/accessToken";
 export { initBanner } from "~/recoil/banner";
+export { initCheckKyc } from "~/recoil/checkkyc";

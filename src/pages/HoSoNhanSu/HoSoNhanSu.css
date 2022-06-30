@@ -1,15 +1,9 @@
 .document-page{
     height: 100vh;
-    /* background-image: url('https://s3.cloud.cmctelecom.vn/tinhte2/2020/04/4968501_1.jpg') !important; */
-    background-position: center;
-    background-size: cover;
 }
 .wr-document{
     height: 100%;
     background: transparent;
-}
-.wr-document .ant-card-head-title{
-    color: #fff;
 }
 .box-document{
     max-width: 500px;
@@ -18,9 +12,6 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-.box-document .ant-card-head-title{
-    color: #000;
 }
 .select-document{
     display: inline-block !important;

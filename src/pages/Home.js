@@ -10,10 +10,11 @@ import Skeleton from '@mui/material/Skeleton';
 import { Row, Col, Card, Typography, Progress, Carousel, Avatar } from "antd";
 import { banner01, banner02, banner03, banner04 } from "~/components/images";
 import { SliderEvent, SkeletonLine, RankList } from "~/components/Home";
-import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner } from "~/recoil/atom";
+import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner, initCheckKyc } from "~/recoil/atom";
 import { useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { kyc } from "~/api/BaseAPI";
 const { Title } = Typography;
 
 const Home = () => {
@@ -21,10 +22,19 @@ const Home = () => {
   const loading = useRecoilValue(initLoad);
   const profileData = useRecoilValue(initProfile);
   const dataHome = useRecoilValue(initHomeStatistic);
+  const checkKyc = useRecoilValue(initCheckKyc);
   const rankData = useRecoilValue(initRankCheckin);
   const banner = useRecoilValue(initBanner);
+  const [proDocument, setProDocument] = useState({text: '', numbers: 0});
   useEffect(() => {
-  }, [])
+    if(checkKyc== 1){
+      setProDocument({text: 'Hồ sơ đã được xác minh', numbers: 100});
+    }else if(checkKyc == 0) { 
+      setProDocument({text: 'Hồ sơ đang chờ duyệt', numbers: 50});
+    }else{
+      setProDocument({text: 'Cần bổ sung hồ sơ nhân sự', numbers: 0});
+    }
+  }, [checkKyc])
   const personnelRecord = (
     <Title level={4} className="title-worktime-current">Hồ sơ nhân sự</Title>
   );
@@ -100,8 +110,8 @@ const Home = () => {
                     </>
                     :
                     <>
-                      <Progress type="circle" className="progress-home" percent={dataHome ? dataHome.percent_pr : 0} format={ percent => `${percent}%`} />
-                      <p className="note-pr">Cần bổ sung hồ sơ nhân sự</p>
+                      <Progress type="circle" className="progress-home" percent={proDocument.numbers} format={ percent => `${percent}%`} />
+                      <p className="note-pr">{proDocument.text}</p>
                     </>
                   }
               </Card>

@@ -12,7 +12,7 @@ import Profile from "~/pages/Profile";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner } from "~/recoil/atom";
+import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc } from "~/recoil/atom";
 import { checkAuth, getData, getData2 } from "~/api/BaseAPI";
 import { message, notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
@@ -42,6 +42,7 @@ const Router = () => {
   const setLocation = useSetRecoilState(initLocation);
   const setLoadingLocation = useSetRecoilState(initLoadLocationPopup);
   const setBanner = useSetRecoilState(initBanner);
+  const setCheckKyc = useSetRecoilState(initCheckKyc);
 
   const routesLogin = useRecoilValue(initRoutesLogin);
   useEffect(() => {
@@ -50,6 +51,9 @@ const Router = () => {
       (async () => {
           let banner = await getData2("banner");
           setBanner(banner.data);
+
+          let checkkyc = await getData2("kyc-check");
+          setCheckKyc(checkkyc.data.status);
 
           let orderData = await getData("list-don");
           setlistOrder(orderData.data);
@@ -116,11 +120,11 @@ const Router = () => {
         <Route path="loginfake" element={<LoginFake />} />
         <Route path="GiaoDienDonTu" element={< GiaoDienDonTu/>} />
         <Route path="blog" element={< Blog/>} />
-        <Route path="HoSoNhanSu" element={< HoSoNhanSu/>} />
 
         {/* More router */}
         <Route path="more">
           <Route index element={<More />} />
+          <Route path="hosonhansu" element={< HoSoNhanSu/>} />
           <Route path="map" element={<GoogleMap />} />
           <Route path="create-order" element={<CreateOrderLayout />} >
             <Route index element={<CreateOrder />} />

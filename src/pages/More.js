@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import "~/assets/css/avatar-style.css";
-import { iconSetting, iconFile, iconShare, iconPlus, iconLocation2} from "~/components/images";
+import { iconSetting, iconFile, iconShare, iconPlus, iconLocation2, iconDocument} from "~/components/images";
 import { initLoad } from "~/recoil/load";
 
 const key = "updatable";
@@ -87,10 +87,12 @@ const More = () => {
               </Link>
               </Col>
               <Col xs={6} md={6} lg={4}>
-                <Badge count={""}>
-                  <Avatar className="icon-app-style" src={iconPlus} />
-                  <p>Example</p>
+              <Link to={"hosonhansu"}>
+              <Badge count={"News"}>
+                  <Avatar className="icon-app-style" src={iconDocument} />
+                  <p>Hồ sơ nhân sự</p>
                 </Badge>
+              </Link>
               </Col>
               <Col xs={6} md={6} lg={4}>
                 <Badge count={""}>
