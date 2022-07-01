@@ -214,16 +214,6 @@ const Head = () => {
             </>
           ),
         },
-        {
-          label: (
-            <>
-              <QuestionCircleOutlined className="icon-dropdown" />
-              <Link rel="noopener noreferrer" to={"/hoSoNhanSu"}>
-                Hồ sơ nhân sự
-              </Link>
-            </>
-          ),
-        },
       ]}
     />
   );

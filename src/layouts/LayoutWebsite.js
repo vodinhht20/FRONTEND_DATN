@@ -5,15 +5,17 @@ import Head from "~/components/Header";
 import MenuBottom from "~/components/NavBottom";
 import { initLoad } from "~/recoil/load";
 import { useRecoilValue } from "recoil";
+import { initSettingDefault } from "~/recoil/settingDefault";
 
 const { Header, Footer, Sider, Content } = Layout;
 
 const LayoutWebsite = () => {
   const loading = useRecoilValue(initLoad);
+  const settingDefault = useRecoilValue(initSettingDefault);
   return (
     <>
       <Layout>
-        <Header>
+        <Header style={{backgroundColor: settingDefault.backgroundHead}}>
           <Head />
         </Header>
         <Content className="content-wrapper" style={{ marginBottom: '100px'}}>

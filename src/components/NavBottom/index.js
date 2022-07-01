@@ -7,10 +7,13 @@ import {
 } from "@ant-design/icons";
 import { Link, NavLink } from "react-router-dom";
 import { Row, Col } from "antd";
+import { initSettingDefault } from "~/recoil/settingDefault";
+import { useRecoilValue } from "recoil";
 
 const MenuBottom = () => {
+  const settingDefault = useRecoilValue(initSettingDefault);
   return (
-    <Row justify="center" className="nav-bottom">
+    <Row justify="center" className="nav-bottom" style={{backgroundColor: settingDefault.backgroundBottom}}>
       <Col xs={22} md={20} lg={18} className="wr-container wrap-item">
         <NavLink to={"/"} className="nav-item">
           <HomeFilled />

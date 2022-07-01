@@ -54,15 +54,6 @@ const LoginFake = () => {
       <Card className="section-content">
         <Button type="primary" onClick={GetDataFakeFunc}>Lấy dữ liệu</Button>
         <Button type="primary" onClick={clearData}>Clear Data</Button>
-        <Button type="primary">Thoát</Button>
-        <GoogleLogin
-          clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={'single_host_origin'}
-        />
-        <Link to={"/"}><Button type="primary">Login</Button></Link>
         {data && <Table dataSource={data} columns={columns} />}
       </Card>
     </div>

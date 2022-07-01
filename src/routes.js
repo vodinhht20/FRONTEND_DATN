@@ -12,7 +12,7 @@ import Profile from "~/pages/Profile";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc } from "~/recoil/atom";
+import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault } from "~/recoil/atom";
 import { checkAuth, getData, getData2 } from "~/api/BaseAPI";
 import { message, notification } from "antd";
 import { rankListData, homeStatisticData, checkinData } from "~/data-test";
@@ -43,10 +43,18 @@ const Router = () => {
   const setLoadingLocation = useSetRecoilState(initLoadLocationPopup);
   const setBanner = useSetRecoilState(initBanner);
   const setCheckKyc = useSetRecoilState(initCheckKyc);
+  const settingDefault = useSetRecoilState(initSettingDefault);
 
   const routesLogin = useRecoilValue(initRoutesLogin);
   useEffect(() => {
     setAccessToken(reactLocalStorage.get('access_token'));
+    const setting = reactLocalStorage.get('backgroundColor');
+    setting && 
+    settingDefault({
+      'backgroundHead': JSON.parse(setting).backgroundHead,
+      'backgroundBottom': JSON.parse(setting).backgroundBottom,
+    });
+
     checkAuth().then(() => {
       (async () => {
           let banner = await getData2("banner");

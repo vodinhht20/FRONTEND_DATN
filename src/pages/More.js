@@ -11,15 +11,19 @@ import {
 } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { reactLocalStorage } from "reactjs-localstorage";
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import "~/assets/css/avatar-style.css";
 import { iconSetting, iconFile, iconShare, iconPlus, iconLocation2, iconDocument} from "~/components/images";
 import { initLoad } from "~/recoil/load";
+import { initSettingDefault } from "~/recoil/settingDefault";
 
 const key = "updatable";
 
 const More = () => {
   const loading = useRecoilValue(initLoad);
+  const [setting, setSettingDefault] = useRecoilState(initSettingDefault);
+  const resetSettingDefault = useResetRecoilState(initSettingDefault);
 
   const openMessage = () => {
     message.loading({ content: "Loading...", key });
@@ -40,17 +44,36 @@ const More = () => {
     setVisible(false);
   };
 
-  const backgroundColor = (e) => {
-    setTimeout(() => {
-      localStorage.setItem("backgroundColor", e.target.value);
-    }, 2000);
+  //setting
+  const backgroundBottom = (e) => {
+    setSettingDefault({
+      ...setting,
+      'backgroundBottom': e.target.value,
+    });
+    reactLocalStorage.setObject("backgroundColor", {
+      ...setting,
+      'backgroundBottom': e.target.value,
+    })
+  };
+
+  const backgroundHead = (e) => {
+    setSettingDefault({
+      ...setting,
+      'backgroundHead': e.target.value,
+    });
+    reactLocalStorage.setObject("backgroundColor", {
+      ...setting,
+      'backgroundHead': e.target.value,
+    })
   };
 
   function confirm(e) {
-    console.log(e);
+    reactLocalStorage.remove("backgroundColor");
+    resetSettingDefault();
     message.success("Đã reset về mặc định");
-    localStorage.removeItem("backgroundColor");
   }
+
+  //setting
 
   return (
     <div className="wr-container more">
@@ -88,7 +111,7 @@ const More = () => {
               </Col>
               <Col xs={6} md={6} lg={4}>
               <Link to={"hosonhansu"}>
-              <Badge count={"News"}>
+              <Badge count={""}>
                   <Avatar className="icon-app-style" src={iconDocument} />
                   <p>Hồ sơ nhân sự</p>
                 </Badge>
@@ -233,16 +256,27 @@ const More = () => {
         onClose={onClose}
         visible={visible}
       >
-        <Badge.Ribbon text="Background">
-          <Card title="Cài đặt background" size="small">
-            Vui lòng chọn màu background muốn dùng
+        <Badge.Ribbon text="Design cá nhân">
+          <Card title="Cài đặt Design" size="small">
+            Vui lòng chọn màu menu header
             <p>
               <input
-                onChange={(e) => backgroundColor(e)}
+                onChange={(e) => backgroundHead(e)}
                 style={{ width: "100%", border: "none" }}
                 type="color"
+                value={setting.backgroundHead}
               ></input>
-              <Popconfirm
+            </p>
+            Vui lòng chọn màu footer Bottom
+            <p>
+              <input
+                onChange={(e) => backgroundBottom(e)}
+                style={{ width: "100%", border: "none" }}
+                type="color"
+                value={setting.backgroundBottom}
+              ></input>
+            </p>
+            <Popconfirm
                 title="Bạn có muốn reset về mặc định không?"
                 onConfirm={confirm}
                 onCancel={null}
@@ -256,7 +290,6 @@ const More = () => {
                   Reset
                 </Button>
               </Popconfirm>
-            </p>
           </Card>
         </Badge.Ribbon>
       </Drawer>
