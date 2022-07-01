@@ -128,11 +128,13 @@ const Home = () => {
               :
               <Carousel autoplay autoplaySpeed={5000} speed={2000} dots={{ className: "dot-slider" }} loading={loading} className="home-slide">
                 {
-                  banner.data ? banner.data.map((item, index) => 
-                    <Link to={item.links ? item.links : ''} key={index} className="slider-item">
-                        <img src={item.image}/>
-                    </Link>
-                  ) : 
+                  banner.data.length > 0 ? 
+                    banner.data.map((item, index) => 
+                      <Link to={item.links ? item.links : ''} key={index} className="slider-item">
+                          <img src={item.image}/>
+                      </Link>
+                    )
+                  : 
                     <div className="slider-item">
                       <img src={banner02}/>
                     </div>
