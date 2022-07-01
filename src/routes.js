@@ -63,11 +63,11 @@ const Router = () => {
           let checkkyc = await getData2("kyc-check");
           setCheckKyc(checkkyc.data.status);
 
-          // let orderData = await getData("list-don");
-          // setlistOrder(orderData.data);
+          let orderData = await getData("list-don");
+          setlistOrder(orderData.data);
 
-          // let dashboardData = await getData("dashboard");
-          // setDataChart(dashboardData.data);
+          let dashboardData = await getData("dashboard");
+          setDataChart(dashboardData.data);
 
           let profileData = await getData2("profile");
           setProfile({...profileData.data, avatar: profileData.data.avatar ? profileData.data.avatar : null, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});

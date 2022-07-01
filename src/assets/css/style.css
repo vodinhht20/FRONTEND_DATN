@@ -594,9 +594,10 @@ header {
   overflow-x: scroll;
 }
 
-.timesheet .ant-card-loading-content .ant-row:nth-child(-n + 3) {
+.timesheet .ant-skeleton-content .ant-skeleton-paragraph li:nth-child(-n+2) {
   display: none;
 }
+
 .ant-picker-content th,
 .ant-picker-content td {
   z-index: 1 !important;

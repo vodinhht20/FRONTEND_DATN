@@ -82,3 +82,9 @@ export const kyc = (data) => {
   const url = "kyc";
   return instance2.post(url, data, { headers });
 };
+
+export const timesheet = (month) => {
+  const headers = requestHeader();
+  const url = "timesheet";
+  return instance2.get(url, { headers, params: { month } });
+}

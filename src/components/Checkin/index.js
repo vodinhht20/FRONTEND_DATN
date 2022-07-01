@@ -78,7 +78,7 @@ const Checkin = ( { handleProps } ) => {
                 });
                 openNotification('success', 'Checkin thành công !', `Bạn đã ${ resDataCheckin.type ? 'checkin' : 'checkout' } thành công`);
               } else{
-                openNotification('warning', data.message + ' ip: ' + data.ip);
+                openNotification('warning', data.message);
               }
               setStatusRes(true);
               setCircleLoading(false);
@@ -93,7 +93,6 @@ const Checkin = ( { handleProps } ) => {
         }
     };
 
-
     const openNotification = (type, title, messsage) => {
         const data = {
         message: title,
@@ -106,7 +105,7 @@ const Checkin = ( { handleProps } ) => {
         notification.error(data);
         }
     };
-    console.log(dataCheckin.checkin);
+
     return (
         <CardAntd className="time-keep-main" loading={loadingCard}>
             <Row justify="center">
