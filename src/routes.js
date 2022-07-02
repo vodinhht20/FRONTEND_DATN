@@ -49,7 +49,7 @@ const Router = () => {
   useEffect(() => {
     setAccessToken(reactLocalStorage.get('access_token'));
     const setting = reactLocalStorage.get('backgroundColor');
-    setting && 
+    setting &&
     settingDefault({
       'backgroundHead': JSON.parse(setting).backgroundHead,
       'backgroundBottom': JSON.parse(setting).backgroundBottom,

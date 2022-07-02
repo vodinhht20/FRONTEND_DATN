@@ -2,6 +2,7 @@ import moment from "moment";
 import { MoreOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { formatDate } from "~/commons/formatDate";
+import { timesheet } from "~/api/BaseAPI";
 import {
   PageHeader,
   Button,
@@ -15,50 +16,35 @@ import {
   Modal,
   Form,
   Input,
+  Spin,
 } from "antd";
-const Timesheet = (value) => {
+const Timesheet = () => {
   const [dataTimeSheet, setDataTimeSheet] = useState({});
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
+  const [monthYear, setMonthYear] = useState();
   const [form] = Form.useForm();
   useEffect(() => {
     document.title = "Bảng công";
-    // call api set data
-    setDataTimeSheet({
-      date: formatDate(value, "MM/Y"),
-      workDay: 20,
-      holiday: 3,
-      leave: 5,
-      unpaidLeave: 3,
-      OT: 3,
-      late: 45,
-      countLate: 3,
-      early: 23,
-      countEarly: 3,
-      workingUnit: 0,
-      WFH: 3
-    });
-
-    // after call api
-    setTimeout(()=>{
-      setLoading(false);
-    }, 1000)
+    let currentMonth = formatDate(null, "MM/Y");
+    setMonthYear(currentMonth);
+    timesheet(currentMonth)
+      .then(({ data }) => {
+        setDataTimeSheet(data.data)
+        setLoading(false);
+      });
   }, []);
 
   function getListData(value) {
     let listData;
-    switch (formatDate(value, 'DD-MM')) {
-      case '30-04':
-        listData = [
-          { type: 'success', content: 'Nghỉ lễ 30/4' },
-        ];
-        break;
-      case '01-05':
-        listData = [
-          { type: 'success', content: 'Nghỉ lễ 1/5' },
-        ];
-        break;
-      default:
+    let valueCalendar = formatDate(value, 'DD-MM');
+    if (dataTimeSheet.timesheet && dataTimeSheet.timesheet[valueCalendar]) {
+      let dataItem = dataTimeSheet.timesheet[valueCalendar];
+      listData = [
+        { type: dataItem.checkin ? 'success' : 'warning', content: `Checkin: ${dataItem.checkin || "N/A"}` },
+        { type: dataItem.checkout ? 'success' : 'warning', content: `Checkout: ${dataItem.checkout || "N/A"}` },
+        { type: dataItem.worktime ? 'success' : 'warning', content: `Số công: ${dataItem.worktime || "N/A"}` }
+      ];
     }
     return listData || [];
   }
@@ -78,27 +64,14 @@ const Timesheet = (value) => {
 
   function getDate (date) {
     let monthYear = formatDate(date, "MM/Y");
-    // call API get data by monthYear
+    setMonthYear(monthYear);
     setLoading(true);
-    setDataTimeSheet({
-      date: monthYear,
-      workDay: 20,
-      holiday: 3,
-      leave: 5,
-      unpaidLeave: 3,
-      OT: 3,
-      late: 45,
-      countLate: 3,
-      early: 23,
-      countEarly: 3,
-      workingUnit: 0,
-      WFH: 3
-    });
-
-    // after call api
-    setTimeout(()=>{
-      setLoading(false);
-    }, 1000)
+    timesheet(monthYear)
+      .then(({ data }) => {
+        setDataTimeSheet(data.data)
+        console.log("dataTimeSheet", data.data);
+        setLoading(false);
+      });
   }
 
   const DropdownMore = () => (
@@ -115,7 +88,6 @@ const Timesheet = (value) => {
   };
 
   const handleSubmitReport = (values) => {
-    // call api report
     console.log(values);
     setVisible(false);
   }
@@ -126,7 +98,7 @@ const Timesheet = (value) => {
         <PageHeader
           ghost={false}
           title="Thống kê bảng công"
-          subTitle={`Tháng ${dataTimeSheet.date}`}
+          subTitle={`Tháng ${monthYear}`}
           extra={[<DropdownMore key="move" />]}
         >
           <Modal
@@ -143,71 +115,73 @@ const Timesheet = (value) => {
           </Modal>
           <Descriptions>
             <Descriptions.Item label="Tổng công ghi nhận ">
-              <span className="text-info">23/27</span>
+              <span className="text-info">{ dataTimeSheet.sum_current_worktime || 0 }/27</span>
             </Descriptions.Item>
           </Descriptions>
           <div className="site-card-wrapper statistical-work-month">
             <Row gutter={[12,12]}>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Đi muộn" bordered={false} loading={loading} active>
-                  <span className="text-info">{dataTimeSheet.late} phút / {dataTimeSheet.countLate} lần</span>
+                  <span className="text-info">{ dataTimeSheet.sum_minute_late_worktime || 0 } phút</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Về sớm" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.early} phút / {dataTimeSheet.countEarly} lần</span>
+                  <span className="text-info">{ dataTimeSheet.sum_minute_early_worktime || 0 } phút</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công nghỉ phép" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.leave} ngày</span>
+                  <span className="text-info">{ dataTimeSheet.sum_leave_worktime  || 0 } công</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công giờ OT" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.OT} giờ</span>
+                  <span className="text-info">{ dataTimeSheet.sum_overtime_hour_worktime || 0 } giờ</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công nghỉ lễ" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.holiday} ngày</span>
+                  <span className="text-info">{ dataTimeSheet.sum_holiday_worktime || 0 } ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công công tác" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.workingUnit} ngày</span>
+                  <span className="text-info">{ 0 } ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công nghỉ không lương" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.unpaidLeave} ngày</span>
+                  <span className="text-info">{ dataTimeSheet.sum_no_salary_worktime || 0 } ngày</span>
                 </Card>
               </Col>
               <Col xs={12} md={8} lg={6}>
                 <Card title="Công work from home" bordered={false} loading={loading}>
-                  <span className="text-info">{dataTimeSheet.WFH} ngày</span>
+                  <span className="text-info">{ 0 } ngày</span>
                 </Card>
               </Col>
             </Row>
           </div>
-          <Calendar
-            onChange={e => getDate(e)}
-            dateCellRender={dateCellRender}
-            className="timesheet-calendar"
-            locale={{
-              lang: {
-                locale: "vi_VN",
-                month: "Tháng",
-                year: "Năm",
-                dayFormat: moment.updateLocale("vn", {
-                  weekdaysMin: ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7" ]
-                }),
-              },
-              monthFormat: moment.updateLocale("vn", {
-                monthsShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12' ]
-              })
-            }}
-          />
+          <Spin spinning={loading}>
+            <Calendar
+              onChange={e => getDate(e)}
+              dateCellRender={dateCellRender}
+              className="timesheet-calendar"
+              locale={{
+                lang: {
+                  locale: "vi_VN",
+                  month: "Tháng",
+                  year: "Năm",
+                  dayFormat: moment.updateLocale("vn", {
+                    weekdaysMin: ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7" ]
+                  }),
+                },
+                monthFormat: moment.updateLocale("vn", {
+                  monthsShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12' ]
+                })
+              }}
+            />
+          </Spin>
         </PageHeader>
       </div>
     </>
