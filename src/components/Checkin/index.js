@@ -111,7 +111,7 @@ const Checkin = ( { handleProps } ) => {
                 <Col xs={24} md={20} lg={16} style={{ textAlign: 'center' }}>
                 <Title level={3} style={{ marginBlock: '5px' }}>Công Ty Cổ Phần Quản Lý Nhân Sự Camel</Title>
                 <Text>
-                    Chi nhánh { profileData && profileData.branch.name }
+                    { profileData.branch ? 'Chi nhánh ' + profileData.branch.name : 'Không tìm thấy chi nhánh làm việc của bạn' }
                     <br></br>
                     Chúc bạn một ngày làm việc tốt lành 🎉
                 </Text>

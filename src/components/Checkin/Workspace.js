@@ -50,7 +50,7 @@ const Workspace = ( { handleProps } ) => {
                 <Row align='middle'>
                     <Col xs={22} md={20} lg={18}  className="wr-container wrap-item">
                     <Select {...propSelected}>
-                        <Option value="1">{ profileData && profileData.branch.address }</Option>
+                        <Option value="1">{ profileData.branch ? profileData.branch.address : 'Không tìm thấy cơ sở làm việc của bạn' }</Option>
                     </Select>
                     </Col>
                     <Col xs={2} md={4} lg={6} >
