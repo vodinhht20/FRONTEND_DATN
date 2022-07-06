@@ -8,6 +8,7 @@ import { initLocation } from '~/recoil/location';
 
 import PopupLocation from "~/components/Global/PopupLocation";
 import { initLoadLocationPopup } from "~/recoil/loadLocationPopup";
+import { initProfile } from '~/recoil/profile';
 
 const Checkin = () => {
 
@@ -18,26 +19,27 @@ const Checkin = () => {
   const [loading, setLoading] = useState(false);
   const location = useRecoilValue(initLocation);
   const locationpopup = useRecoilValue(initLoadLocationPopup);
+  const profileData = useRecoilValue(initProfile);
 
   useEffect(() => {
     document.title = "Chấm công";
   }, []);
-
   const exportPropWorkpaces = () => {
     return [
       setDisableSelect,
       disableSelect,
       dataCheckin,
+      profileData,
       setDataCheckin,
       setCircleLoading,
       setWorkSpace,
       setLoading
     ];
   }
-
   const exportPropAction = () => {
     return [
       dataCheckin,
+      profileData,
       setDataCheckin,
       setCircleLoading,
       loading,

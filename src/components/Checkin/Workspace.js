@@ -8,12 +8,12 @@ const Workspace = ( { handleProps } ) => {
         setDisableSelect,
         disableSelect,
         dataCheckin,
+        profileData,
         setDataCheckin,
         setLoading,
         setWorkSpace,
         setCircleLoading
     ] = handleProps;
-
     const propSelected = {
         defaultValue: dataCheckin.work_space || '1',
         suffix: (
@@ -50,10 +50,7 @@ const Workspace = ( { handleProps } ) => {
                 <Row align='middle'>
                     <Col xs={22} md={20} lg={18}  className="wr-container wrap-item">
                     <Select {...propSelected}>
-                        <Option value="1">Cơ sở 1 Nam Từ Liêm, HN</Option>
-                        <Option value="2">Cơ sở 2 Ba Đình, HN</Option>
-                        <Option value="3">Cơ sở 3 Gia Lâm, HN</Option>
-                        <Option value="4">Cơ sở 4 Cầu Giấy, HN</Option>
+                        <Option value="1">{ profileData && profileData.branch.address }</Option>
                     </Select>
                     </Col>
                     <Col xs={2} md={4} lg={6} >

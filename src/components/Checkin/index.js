@@ -22,6 +22,7 @@ const Checkin = ( { handleProps } ) => {
   const loadingCard = useRecoilValue(initLoad);
   const [
     dataCheckin,
+    profileData,
     setDataCheckin,
     setCircleLoading,
     loading,
@@ -30,7 +31,6 @@ const Checkin = ( { handleProps } ) => {
   ] = handleProps;
   const [statusRes, setStatusRes] = useState(true);
   const [locationAdress, setLocationAdress] = useState('Không thể xác định được vị trí');
-
   useEffect(() => {
     if (locationValue) {
       const query = `${locationValue.latitude}+${locationValue.longitude}`;
@@ -105,13 +105,14 @@ const Checkin = ( { handleProps } ) => {
         notification.error(data);
         }
     };
-
     return (
         <CardAntd className="time-keep-main" loading={loadingCard}>
             <Row justify="center">
                 <Col xs={24} md={20} lg={16} style={{ textAlign: 'center' }}>
-                <Title level={3} style={{ marginBlock: '5px' }}>Công Ty Cổ phần Quản Lý Nhân Sự Camel</Title>
+                <Title level={3} style={{ marginBlock: '5px' }}>Công Ty Cổ Phần Quản Lý Nhân Sự Camel</Title>
                 <Text>
+                    Chi nhánh { profileData && profileData.branch.name }
+                    <br></br>
                     Chúc bạn một ngày làm việc tốt lành 🎉
                 </Text>
                 <Title level={3} className="main-clock">
