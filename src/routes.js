@@ -29,6 +29,7 @@ import { initLocation } from "./recoil/location";
 import { initLoadLocationPopup } from "./recoil/loadLocationPopup";
 import GoogleMap from "./pages/GoogleMap";
 import Blog from "./pages/Blog";
+import SpinningWheel from "./components/Games/SpinningWheel";
 
 const Router = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -133,6 +134,7 @@ const Router = () => {
         <Route path="more">
           <Route index element={<More />} />
           <Route path="hosonhansu" element={< HoSoNhanSu/>} />
+          <Route path="game-spinning-wheel" element={<SpinningWheel />} />
           <Route path="map" element={<GoogleMap />} />
           <Route path="create-order" element={<CreateOrderLayout />} >
             <Route index element={<CreateOrder />} />

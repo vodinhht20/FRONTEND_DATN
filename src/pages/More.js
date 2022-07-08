@@ -174,10 +174,12 @@ const More = () => {
           <Card title="Hoạt động phần thưởng" bordered={true} loading={loading}>
             <Row gutter={[12, 12]}>
               <Col xs={6} md={6} lg={4}>
-                <Badge count={""}>
-                  <Avatar className="icon-app-style" src={iconPlus} />
-                  <p>Example</p>
-                </Badge>
+                <Link to={'game-spinning-wheel'}>
+                  <Badge count={""}>
+                    <Avatar className="icon-app-style" src={iconPlus} />
+                    <p>Spinning Wheel</p>
+                  </Badge>
+                </Link>
               </Col>
               <Col xs={6} md={6} lg={4}>
                 <Badge count={""}>

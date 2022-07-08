@@ -1119,3 +1119,23 @@ header {
   line-height: 1.8em;
 }
 /* BLog */
+
+/* game */
+.game{
+  height: 100vh;
+  background-color: #fff;
+}
+.game .ant-col {
+  padding: 0 !important;
+}
+.game-container {
+  margin: 0 !important;
+}
+.game-container .ant-card{
+  display: flex;
+  justify-content: center;
+}
+.game-container #wheel{
+  position: absolute;
+  left: calc(50% - 17vw);
+}
