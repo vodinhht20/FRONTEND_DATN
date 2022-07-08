@@ -42,7 +42,7 @@ const SpinningWheel = () => {
       <PageHeader ghost={false} title="Spinning Wheel Games" />
       <Row className="game-container" gutter={[12, 12]}>
         <Col xs={24} md={24} lg={24}>
-          <Card bordered={false} loading={loading}>
+          <Card onClick={playGame} bordered={false} loading={loading}>
             <WheelComponent
               segments={segments}
               segColors={segColors}
