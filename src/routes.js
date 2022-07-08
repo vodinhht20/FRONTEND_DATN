@@ -64,8 +64,8 @@ const Router = () => {
           let checkkyc = await getData2("kyc-check");
           setCheckKyc(checkkyc.data.status);
 
-          let orderData = await getData("list-don");
-          setlistOrder(orderData.data);
+          let orderData = await getData2("list-single-type");
+          setlistOrder(orderData.data.payload);
 
           let dashboardData = await getData("dashboard");
           setDataChart(dashboardData.data);
@@ -138,7 +138,7 @@ const Router = () => {
           <Route path="map" element={<GoogleMap />} />
           <Route path="create-order" element={<CreateOrderLayout />} >
             <Route index element={<CreateOrder />} />
-            <Route path="tao-don" element={<OrderPage />} />
+            <Route path="tao-don/:id" element={<OrderPage />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

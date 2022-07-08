@@ -8,6 +8,8 @@ import moment from 'moment';
 import 'moment/locale/vi';
 import locale from 'antd/es/date-picker/locale/vi_VN';
 import Loading from "~/components/Global/Loading";
+import { getData2 } from "~/api/BaseAPI";
+import { useParams } from "react-router-dom";
 const { RangePicker } = DatePicker;
 
 const OrderPage = () => {
@@ -15,32 +17,39 @@ const OrderPage = () => {
   const setLoading = useSetRecoilState(initLoad);
   const [totalVacations, setTotalVacations] = useState(0);
   const [active, setActive] = useState('');
-
+  const [approver, setApprover] = useState([]);
+  const [loadingApprover, setLoadingApprover] = useState(true);
+  
   const order = useRecoilValue(initOrder);
-
+  const { id } = useParams();
   useEffect(() => {
     document.title = order && order;
     // call API data
+    getData2('list-approver/'+id)
+    .then(({ data }) => {
+      setApprover(data.payload)
+      setLoadingApprover(false)
+    })
   }, []);
 
-  const data = [
-    {
-      name: "Trần Tiến",
-      position: "Hành chính nhân sự - CTO",
-    },
-    {
-      name: "Võ Văn Định",
-      position: "Hành chính nhân sự - CTO",
-    },
-    {
-      name: "Nguyễn Văn Đạt",
-      position: "Hành chính nhân sự",
-    },
-    {
-      name: "Vũ Lê Huy Hoàng",
-      position: "Hành chính nhân sự",
-    },
-  ];
+  // const data = [
+  //   {
+  //     name: "Trần Tiến",
+  //     position: "Hành chính nhân sự - CTO",
+  //   },
+  //   {
+  //     name: "Võ Văn Định",
+  //     position: "Hành chính nhân sự - CTO",
+  //   },
+  //   {
+  //     name: "Nguyễn Văn Đạt",
+  //     position: "Hành chính nhân sự",
+  //   },
+  //   {
+  //     name: "Vũ Lê Huy Hoàng",
+  //     position: "Hành chính nhân sự",
+  //   },
+  // ];
 
   const onFinish = (values) => {
     setLoading(true);
@@ -154,15 +163,15 @@ const OrderPage = () => {
             </Form.Item>
           </Card>
 
-          <Card title={"Cấp duyệt"} bordered={false} loading={loading}>
+          <Card title={"Cấp duyệt"} bordered={false} loading={loadingApprover}>
             <List
               itemLayout="horizontal"
-              dataSource={data}
+              dataSource={approver}
               renderItem={(item) => (
                 <List.Item>
                   <List.Item.Meta
-                    avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                    title={<a href="/">{item.name}</a>}
+                    avatar={ item.avatar ? <Avatar src={item.avatar} /> : <Avatar style={{ backgroundColor: '#f56a00' }}>{item.fullname[0]}</Avatar>}
+                    title={<a href="/">{item.fullname}</a>}
                     description={item.position}
                   />
                 </List.Item>
