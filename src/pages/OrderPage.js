@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Col, Form, List, message, Row, DatePicker, Spin, Alert, Input } from "antd";
+import { Avatar, Button, Card, Col, Form, List, message, Row, DatePicker, Spin, Alert, Input, Badge } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -31,25 +31,6 @@ const OrderPage = () => {
       setLoadingApprover(false)
     })
   }, []);
-
-  // const data = [
-  //   {
-  //     name: "Trần Tiến",
-  //     position: "Hành chính nhân sự - CTO",
-  //   },
-  //   {
-  //     name: "Võ Văn Định",
-  //     position: "Hành chính nhân sự - CTO",
-  //   },
-  //   {
-  //     name: "Nguyễn Văn Đạt",
-  //     position: "Hành chính nhân sự",
-  //   },
-  //   {
-  //     name: "Vũ Lê Huy Hoàng",
-  //     position: "Hành chính nhân sự",
-  //   },
-  // ];
 
   const onFinish = (values) => {
     setLoading(true);
@@ -169,11 +150,14 @@ const OrderPage = () => {
               dataSource={approver}
               renderItem={(item) => (
                 <List.Item>
-                  <List.Item.Meta
-                    avatar={ item.avatar ? <Avatar src={item.avatar} /> : <Avatar style={{ backgroundColor: '#f56a00' }}>{item.fullname[0]}</Avatar>}
-                    title={<a href="/">{item.fullname}</a>}
-                    description={item.position}
-                  />
+                  
+                    <List.Item.Meta
+                      avatar={ item.avatar ? <Avatar src={item.avatar} /> : <Avatar style={{ backgroundColor: '#f56a00' }}>{item.fullname[0]}</Avatar>}
+                      title={<a href="/">{item.fullname}</a>}
+                      description={item.position}
+                    />
+                    
+                  <div>{item.required_leader === 1 ? <Badge.Ribbon className="first-reviewer" text="Người duyệt đầu"></Badge.Ribbon> : null}</div>
                 </List.Item>
               )}
             />

@@ -729,6 +729,13 @@ header {
   line-height: 13vh;
   font-size: 14px;
 }
+.OrderPage-container .ant-list-item{
+  align-items: flex-start !important;
+}
+.OrderPage-container .ant-list-split .ant-list-item{
+  border: 1px solid #f0f0f0;
+  border-width: 0 1px 1px 0;
+}
 .CreateOrder-container .one-order {
   display: flex;
   width: 100%;

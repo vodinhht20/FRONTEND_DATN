@@ -31,7 +31,6 @@ const SpinningWheel = () => {
     message.success(winner);
   };
   const playGame = () => {
-    console.log(111);
     getData2('spinning-game')
     .then(({ data }) =>  setSpin(data.spin))
     .catch((error) => message.error('Lỗi'))
