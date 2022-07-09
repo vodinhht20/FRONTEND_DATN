@@ -31,6 +31,7 @@ const SpinningWheel = () => {
     message.success(winner);
   };
   const playGame = () => {
+    console.log(111);
     getData2('spinning-game')
     .then(({ data }) =>  setSpin(data.spin))
     .catch((error) => message.error('Lỗi'))
@@ -46,6 +47,11 @@ const SpinningWheel = () => {
             <WheelComponent
               segments={segments}
               segColors={segColors}
+              onClick={
+                getData2('spinning-game')
+                .then(({ data }) =>  setSpin(data.spin))
+                .catch((error) => message.error('Lỗi'))
+              }
               winningSegment={spin}
               onFinished={(winner) => onFinished(winner)}
               primaryColor="#F37220"
@@ -54,7 +60,7 @@ const SpinningWheel = () => {
               isOnlyOnce={false}
               size={290}
               upDuration={500}
-              downDuration={3000}
+              downDuration={300}
               fontFamily="Arial"
             />
           </Card>
