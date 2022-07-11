@@ -13,9 +13,9 @@ import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault } from "~/recoil/atom";
-import { checkAuth, getData, getData2 } from "~/api/BaseAPI";
+import { checkAuth, getData, getData2, timekeepRanking } from "~/api/BaseAPI";
 import { message, notification } from "antd";
-import { rankListData, homeStatisticData, checkinData } from "~/data-test";
+import { homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
 import GiaoDienDonTu from "./pages/GiaoDienDonTu/GiaoDienDonTu";
 import HoSoNhanSu from "./pages/HoSoNhanSu/HoSoNhanSu";
@@ -76,7 +76,8 @@ const Router = () => {
           let checkinData = await getData2('checkin/data-checkin');
           setCheckin(checkinData.data.data);
 
-          setRankCheckin(rankListData);
+          let rankData = await timekeepRanking()
+          setRankCheckin(rankData.data.data);
 
           setHomeStatistic(homeStatisticData);
 
