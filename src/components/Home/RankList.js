@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { List, message, Avatar } from 'antd';
 import VirtualList from 'rc-virtual-list';
-import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
+// import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { SkeletonListRank } from '~/components/Home';
 
 const RankList = ({data, loading}) => {

@@ -11,7 +11,7 @@ import { Row, Col, Card, Typography, Progress, Carousel, Avatar } from "antd";
 import { banner01, banner02, banner03, banner04 } from "~/components/images";
 import { SliderEvent, SkeletonLine, RankList } from "~/components/Home";
 import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner, initCheckKyc } from "~/recoil/atom";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import firebase, { message } from '~/firebase';
@@ -26,6 +26,8 @@ const Home = () => {
   const checkKyc = useRecoilValue(initCheckKyc);
   const rankData = useRecoilValue(initRankCheckin);
   const banner = useRecoilValue(initBanner);
+  const setRankCheckin = useSetRecoilState(initRankCheckin);
+
   const [proDocument, setProDocument] = useState({text: '', numbers: 0});
   useEffect(() => {
     if (checkKyc == 1) {
@@ -50,11 +52,11 @@ const Home = () => {
   }, [])
 
   message?.onMessage(function({data:{body, title}}) {
-    if (title === 'data_raw') {
+    if (title === 'timekeep_ranking') {
       let bodyJson = JSON.parse(body);
-        console.log("Data response: ", bodyJson);
-    } else {
-      new Notification(title, {body});
+      console.log("Data parse: ", bodyJson);
+      console.log("Data response: ", bodyJson.data);
+      setRankCheckin(bodyJson.data);
     }
   });
   const personnelRecord = (
