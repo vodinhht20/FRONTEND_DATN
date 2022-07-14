@@ -2,13 +2,13 @@ import firebase from "firebase/app";
 import '@firebase/messaging'
 
 const config = {
-    apiKey: "AIzaSyAOnORzzr2YgLvnR2cXfs0XqfihF1yq9EM",
-    authDomain: "du-an-tot-nghiep-a61be.firebaseapp.com",
-    databaseURL: "https://du-an-tot-nghiep-a61be-default-rtdb.firebaseio.com",
-    projectId: "du-an-tot-nghiep-a61be",
-    storageBucket: "du-an-tot-nghiep-a61be.appspot.com",
-    messagingSenderId: "115764973780",
-    appId: "1:115764973780:web:248788f1c9c1f002112b41"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_ID
 };
 
 firebase.initializeApp(config)

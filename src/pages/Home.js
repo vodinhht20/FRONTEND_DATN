@@ -53,9 +53,8 @@ const Home = () => {
 
   message?.onMessage(function({data:{body, title}}) {
     if (title === 'timekeep_ranking') {
+      console.log("fire base render", body);
       let bodyJson = JSON.parse(body);
-      console.log("Data parse: ", bodyJson);
-      console.log("Data response: ", bodyJson.data);
       setRankCheckin(bodyJson.data);
     }
   });

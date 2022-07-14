@@ -103,7 +103,7 @@ const Router = () => {
             });
             setAccessToken("");
             reactLocalStorage.clear();
-          }else if(error.response.data.error_code == 70){
+          } else if(error.response.data.error_code == 70){
             setAccessToken("");
             reactLocalStorage.clear();
           }

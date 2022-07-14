@@ -41,9 +41,9 @@ const Timesheet = () => {
     if (dataTimeSheet.timesheet && dataTimeSheet.timesheet[valueCalendar]) {
       let dataItem = dataTimeSheet.timesheet[valueCalendar];
       listData = [
-        { type: dataItem.checkin ? 'success' : 'warning', content: `Checkin: ${dataItem.checkin || "N/A"}` },
-        { type: dataItem.checkout ? 'success' : 'warning', content: `Checkout: ${dataItem.checkout || "N/A"}` },
-        { type: dataItem.worktime ? 'success' : 'warning', content: `Số công: ${dataItem.worktime || "N/A"}` }
+        { type: dataItem.checkin ? 'success' : 'warning', content: `Checkin: ${dataItem.checkin || 0}` },
+        { type: dataItem.checkout ? 'success' : 'warning', content: `Checkout: ${dataItem.checkout || 0}` },
+        { type: dataItem.worktime ? 'success' : 'warning', content: `Số công: ${dataItem.worktime || 0}` }
       ];
     }
     return listData || [];
