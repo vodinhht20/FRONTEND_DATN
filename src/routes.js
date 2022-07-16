@@ -30,7 +30,7 @@ import { initLoadLocationPopup } from "./recoil/loadLocationPopup";
 import GoogleMap from "./pages/GoogleMap";
 import Blog from "./pages/Blog";
 import SpinningWheel from "./components/Games/SpinningWheel";
-import firebase, { message } from '~/firebase';
+import firebase from '~/firebase';
 import { tokenFirebase } from "~/api/BaseAPI";
 
 const Router = () => {
