@@ -35,6 +35,7 @@ export const GetDataFake = () => {
   const url = "users";
   return instance2.get(url, { headers });
 };
+
 export const GetDataLogin = () => {
   const headers = requestHeader();
   const url = "login-google";
@@ -87,4 +88,16 @@ export const timesheet = (month) => {
   const headers = requestHeader();
   const url = "timesheet";
   return instance2.get(url, { headers, params: { month } });
+}
+
+export const tokenFirebase = (token) => {
+  const headers = requestHeader();
+  const url = "update-fcm-token";
+  return instance2.patch(url, token, { headers });
+}
+
+export const timekeepRanking = () => {
+  const headers = requestHeader();
+  const url = "timekeep-ranking";
+  return instance2.get(url, { headers });
 }

@@ -11,10 +11,10 @@ import { Row, Col, Card, Typography, Progress, Carousel, Avatar } from "antd";
 import { banner01, banner02, banner03, banner04 } from "~/components/images";
 import { SliderEvent, SkeletonLine, RankList } from "~/components/Home";
 import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner, initCheckKyc } from "~/recoil/atom";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { kyc } from "~/api/BaseAPI";
+import { message } from '~/firebase';
 const { Title } = Typography;
 
 const Home = () => {
@@ -25,16 +25,26 @@ const Home = () => {
   const checkKyc = useRecoilValue(initCheckKyc);
   const rankData = useRecoilValue(initRankCheckin);
   const banner = useRecoilValue(initBanner);
+  const setRankCheckin = useSetRecoilState(initRankCheckin);
+
   const [proDocument, setProDocument] = useState({text: '', numbers: 0});
   useEffect(() => {
-    if(checkKyc== 1){
+    if (checkKyc == 1) {
       setProDocument({text: 'Hồ sơ đã được xác minh', numbers: 100});
-    }else if(checkKyc == 0) { 
+    } else if(checkKyc == 0) {
       setProDocument({text: 'Hồ sơ đang chờ duyệt', numbers: 50});
-    }else{
+    } else {
       setProDocument({text: 'Cần bổ sung hồ sơ nhân sự', numbers: 0});
     }
   }, [checkKyc])
+
+  message?.onMessage(function({data:{body, title}}) {
+    if (title === 'timekeep_ranking') {
+      console.log("fire base render", body);
+      let bodyJson = JSON.parse(body);
+      setRankCheckin(bodyJson.data);
+    }
+  });
   const personnelRecord = (
     <Title level={4} className="title-worktime-current">Hồ sơ nhân sự</Title>
   );
@@ -128,13 +138,13 @@ const Home = () => {
               :
               <Carousel autoplay autoplaySpeed={5000} speed={2000} dots={{ className: "dot-slider" }} loading={loading} className="home-slide">
                 {
-                  banner.data.length > 0 ? 
-                    banner.data.map((item, index) => 
+                  banner.data.length > 0 ?
+                    banner.data.map((item, index) =>
                       <Link to={item.links ? item.links : ''} key={index} className="slider-item">
                           <img src={item.image}/>
                       </Link>
                     )
-                  : 
+                  :
                     <div className="slider-item">
                       <img src={banner02}/>
                     </div>
@@ -157,7 +167,7 @@ const Home = () => {
                     <Title level={4} className="title-home-top title-rank-tab bg-success">Top Đến Sớm</Title>
                   }
                 </div>
-                <RankList data={rankData.top_go_early} loading={loading} />
+                <RankList data={rankData.timekeep_early} loading={loading} />
               </Col>
               <Col xs={24} md={12} lg={12} className="col-list-rank">
                 <div className="box-title-tab">
@@ -168,7 +178,7 @@ const Home = () => {
                     <Title level={4} className="title-home-top title-rank-tab bg-danger">Top Đi Muộn</Title>
                   }
                 </div>
-                <RankList data={rankData.top_go_late} loading={loading} />
+                <RankList data={rankData.timekeep_late} loading={loading} />
               </Col>
             </Row>
           </Card>
