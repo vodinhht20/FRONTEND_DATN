@@ -14,8 +14,7 @@ import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic,
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import firebase, { message } from '~/firebase';
-import { tokenFirebase } from "~/api/BaseAPI";
+import { message } from '~/firebase';
 const { Title } = Typography;
 
 const Home = () => {
@@ -37,19 +36,7 @@ const Home = () => {
     } else {
       setProDocument({text: 'Cần bổ sung hồ sơ nhân sự', numbers: 0});
     }
-    const messaging = firebase.messaging();
-    messaging.requestPermission().then(function () {
-      return messaging.getToken()
-    }).then(function(token) {
-      tokenFirebase({ token }).then(({data})=>{
-            console.log(data)
-      }).catch(({response:{data}})=>{
-          console.error(data)
-      })
-    }).catch(function (err) {
-        console.log(`Token Error :: ${err}`);
-    });
-  }, [])
+  }, [checkKyc])
 
   message?.onMessage(function({data:{body, title}}) {
     if (title === 'timekeep_ranking') {

@@ -30,6 +30,8 @@ import { initLoadLocationPopup } from "./recoil/loadLocationPopup";
 import GoogleMap from "./pages/GoogleMap";
 import Blog from "./pages/Blog";
 import SpinningWheel from "./components/Games/SpinningWheel";
+import firebase, { message } from '~/firebase';
+import { tokenFirebase } from "~/api/BaseAPI";
 
 const Router = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -91,6 +93,20 @@ const Router = () => {
               setLoadingLocation('active');
             },
           )
+
+          // init fire base
+          const messaging = firebase.messaging();
+          messaging.requestPermission().then(function () {
+            return messaging.getToken()
+          }).then(function(token) {
+            tokenFirebase({ token }).then(({data})=>{
+                  console.log(data)
+            }).catch(({response:{data}})=>{
+                console.error(data)
+            })
+          }).catch(function (err) {
+              console.log(`Token Error :: ${err}`);
+          });
 
           setLoading(false);
       })()
