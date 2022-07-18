@@ -8,7 +8,7 @@ import moment from 'moment';
 import 'moment/locale/vi';
 import locale from 'antd/es/date-picker/locale/vi_VN';
 import Loading from "~/components/Global/Loading";
-import { getData2 } from "~/api/BaseAPI";
+import { getData2, requests } from "~/api/BaseAPI";
 import { useParams } from "react-router-dom";
 const { RangePicker } = DatePicker;
 
@@ -35,17 +35,21 @@ const OrderPage = () => {
   const onFinish = (values) => {
     setLoading(true);
     setActive('active');
+    
+    requests(values)
+    .then(({ data }) => {
 
-    setTimeout(() => {
-      setLoading(false);
-      setActive('');
-      if (order) {
-        message.success('gửi đơn thành công');
-        console.log("Success:", [values, {"loaidon": order}]);
-      }else{
-        message.warning('gửi đơn lỗi vui lòng chọn loại đơn');
-      }
-    },2000)
+    })
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   setActive('');
+    //   if (order) {
+    //     message.success('gửi đơn thành công');
+    //     console.log("Success:", [values, {"loaidon": order}]);
+    //   }else{
+    //     message.warning('gửi đơn lỗi vui lòng chọn loại đơn');
+    //   }
+    // },2000)
   };
 
   const onFinishFailed = (errorInfo) => {
