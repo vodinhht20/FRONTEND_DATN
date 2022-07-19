@@ -1,7 +1,7 @@
 import { Avatar, Button, Card, Col, Form, List, message, Row, DatePicker, Spin, Alert, Input, Badge } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { useEffect, useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { initLoad } from "~/recoil/load";
 import { initOrder } from "~/recoil/order";
 import moment from 'moment';
@@ -9,7 +9,7 @@ import 'moment/locale/vi';
 import locale from 'antd/es/date-picker/locale/vi_VN';
 import Loading from "~/components/Global/Loading";
 import { getData2, requests } from "~/api/BaseAPI";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const { RangePicker } = DatePicker;
 
 const OrderPage = () => {
@@ -20,10 +20,17 @@ const OrderPage = () => {
   const [approver, setApprover] = useState([]);
   const [loadingApprover, setLoadingApprover] = useState(true);
   
-  const order = useRecoilValue(initOrder);
+  const [order, setOrder] = useRecoilState(initOrder);
   const { id } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
-    document.title = order && order;
+    if (!order) {
+      getData2("list-single-type/"+id)
+      .then(({ data }) => {
+        setOrder(data.payload);
+      });
+    };
+    document.title = order && order.name;
     // call API data
     getData2('list-approver/'+id)
     .then(({ data }) => {
@@ -35,26 +42,29 @@ const OrderPage = () => {
   const onFinish = (values) => {
     setLoading(true);
     setActive('active');
-    
-    requests(values)
+    const date = [
+      moment(values.date[0]).format("YYYY-MM-DD"),
+      moment(values.date[1]).format("YYYY-MM-DD")
+    ];
+    requests({...values, date, id})
     .then(({ data }) => {
-
+      setLoading(false);
+      setActive('');
+      message.success(data.message);
     })
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   setActive('');
-    //   if (order) {
-    //     message.success('gửi đơn thành công');
-    //     console.log("Success:", [values, {"loaidon": order}]);
-    //   }else{
-    //     message.warning('gửi đơn lỗi vui lòng chọn loại đơn');
-    //   }
-    // },2000)
+    .then(() => {
+      navigate('/more/create-order');
+    })
+    .catch((error) => {
+      setLoading(false);
+      setActive('');
+      message.warning(error.response.data.message);
+    })
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-    message.warning("Gửi đơn lỗi " + errorInfo.errorFields[0].errors);
+    message.warning(errorInfo.errorFields[0].errors);
   };
 
   function disabledDate(current) {
@@ -78,7 +88,8 @@ const OrderPage = () => {
       <Loading loading={active} />
       <Col xs={24} md={24} lg={24}>
         <Card bordered={false} loading={loading}>
-          <p className="text-info">Mẫu đơn {order && order}</p>
+          <h3 className="text-info">Mẫu đơn: {order && order.name}</h3>
+          <p className="text-info" style={{textAlign: 'justify'}}>Mô tả:  {order && order.description}</p>
         </Card>
         <Form
           name="basic"
