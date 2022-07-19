@@ -13,9 +13,9 @@ import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault } from "~/recoil/atom";
-import { checkAuth, getData, getData2 } from "~/api/BaseAPI";
+import { checkAuth, getData, getData2, timekeepRanking } from "~/api/BaseAPI";
 import { message, notification } from "antd";
-import { rankListData, homeStatisticData, checkinData } from "~/data-test";
+import { homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
 import GiaoDienDonTu from "./pages/GiaoDienDonTu/GiaoDienDonTu";
 import HoSoNhanSu from "./pages/HoSoNhanSu/HoSoNhanSu";
@@ -30,6 +30,8 @@ import { initLoadLocationPopup } from "./recoil/loadLocationPopup";
 import GoogleMap from "./pages/GoogleMap";
 import Blog from "./pages/Blog";
 import SpinningWheel from "./components/Games/SpinningWheel";
+import firebase from '~/firebase';
+import { tokenFirebase } from "~/api/BaseAPI";
 
 const Router = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
@@ -76,7 +78,8 @@ const Router = () => {
           let checkinData = await getData2('checkin/data-checkin');
           setCheckin(checkinData.data.data);
 
-          setRankCheckin(rankListData);
+          let rankData = await timekeepRanking()
+          setRankCheckin(rankData.data.data);
 
           setHomeStatistic(homeStatisticData);
 
@@ -91,6 +94,20 @@ const Router = () => {
             },
           )
 
+          // init fire base
+          const messaging = firebase.messaging();
+          messaging.requestPermission().then(function () {
+            return messaging.getToken()
+          }).then(function(token) {
+            tokenFirebase({ token }).then(({data})=>{
+                  console.log(data)
+            }).catch(({response:{data}})=>{
+                console.error(data)
+            })
+          }).catch(function (err) {
+              console.log(`Token Error :: ${err}`);
+          });
+
           setLoading(false);
       })()
     })
@@ -102,7 +119,7 @@ const Router = () => {
             });
             setAccessToken("");
             reactLocalStorage.clear();
-          }else if(error.response.data.error_code == 70){
+          } else if(error.response.data.error_code == 70){
             setAccessToken("");
             reactLocalStorage.clear();
           }
