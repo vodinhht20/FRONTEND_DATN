@@ -101,3 +101,9 @@ export const timekeepRanking = () => {
   const url = "timekeep-ranking";
   return instance2.get(url, { headers });
 }
+
+export const requests = (data) => {
+  const headers = requestHeader();
+  const url = "requests";
+  return instance2.post(url, data, { headers });
+}
