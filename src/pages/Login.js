@@ -1,4 +1,4 @@
-import { Button, Form, Input, Card, message } from "antd";
+import { Button, Form, Input, Card, message, Alert } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { initAccessToken } from "~/recoil/accessToken";
@@ -11,6 +11,8 @@ import { reactLocalStorage } from "reactjs-localstorage";
 import { initRoutesLogin } from "~/recoil/routesLogin";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useRef } from "react";
 
 const Login = () => {
   // const handelLogout =()=>{
@@ -26,6 +28,7 @@ const Login = () => {
   const setAccessToken = useSetRecoilState(initAccessToken);
   const [routesLogin, setRoutesLogin] = useRecoilState(initRoutesLogin);
   let navigate = useNavigate();
+  const recaptchaRef = useRef();
 
   // login google
   const handleFailure = (result) =>{
@@ -53,7 +56,10 @@ const Login = () => {
   // login google
   
   const onFinish = (values) => {
-    setLoading("active");
+    values['g-recaptcha-response'] = recaptchaRef.current.getValue();
+    if (recaptchaRef.current.getValue()) {
+      setLoading("active");
+    };
     LoginApi(values)
       .then(({ data }) => {
         const accessToken = data.access_token;
@@ -64,10 +70,11 @@ const Login = () => {
       .then(() => message.success("Đăng nhập thành công"))
       .then(() => navigate("/"))
       .catch((error) => {
+        recaptchaRef.current.reset();
         setTimeout(() => {
           setLoading("");
           return message.warning(error.response.data.message);
-        }, 5000);
+        }, 100);
       });
   };
 
@@ -151,6 +158,14 @@ const Login = () => {
             <Link to={"/"} style={{ float: "right" }}>
               Quên mật khẩu?
             </Link>
+          </Form.Item>
+
+          <Form.Item>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey="6LeAZPYgAAAAAAJWMIY2B-M_LKYmqhxcu_Wnwejx"
+              onChange={onFinish}
+            />
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
