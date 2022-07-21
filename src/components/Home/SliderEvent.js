@@ -115,19 +115,25 @@ const hide = () => {
                         </Button>
                         <Modal title="Danh sách sinh nhật" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} >
                             <p>
-                                <Popover
-                                content={ <><TextArea rows={2} />  <a onClick={hide}>Gửi</a></>}
-                                title="Gửi lời chúc"
-                                placement="rightTop"
-                                trigger="click"
-                                visible={visible}
-                                onVisibleChange={handleVisibleChange}
-                                >
-                                    <Tooltip placement="top" title={'Tiến Bịp-phòng IT'}> 
-                                        <Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} />
-                                    </Tooltip>
-                                </Popover>
-
+                            <Popover
+                      content={
+                        <>
+                          <TextArea rows={2} /> <a onClick={hide}>Gửi</a>
+                        </>
+                      }
+                      title="Gửi lời chúc"
+                      placement="rightTop"
+                      trigger="click"
+                      visible={visible}
+                      onVisibleChange={handleVisibleChange}
+                    >
+                      <Tooltip placement="top" title={"Tiến Bịp-phòng IT"}>
+                        <Avatar
+                          style={{ cursor: "pointer" }}
+                          icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                    </Popover>
                             </p>
                             <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
                             <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
