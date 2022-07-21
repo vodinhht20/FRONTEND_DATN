@@ -163,7 +163,7 @@ const Login = () => {
           <Form.Item>
             <ReCAPTCHA
               ref={recaptchaRef}
-              sitekey="6LeAZPYgAAAAAAJWMIY2B-M_LKYmqhxcu_Wnwejx"
+              sitekey={process.env.GOOGLE_RECAPTCHA_KEY}
               onChange={onFinish}
             />
           </Form.Item>
