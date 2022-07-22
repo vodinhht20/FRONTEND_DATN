@@ -102,7 +102,7 @@ const Home = () => {
                               </div>
                               <div className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><SnippetsOutlined className="section-icon" /> Đơn từ</span>
-                                <span className="content-item">{ dataHome && dataHome.requests  }</span>
+                                <span className="content-item">{ profileData && profileData.single_word  }</span>
                               </div>
                             </>
                           }

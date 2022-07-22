@@ -16,6 +16,7 @@ const OrderPage = () => {
   const loading = useRecoilValue(initLoad);
   const setLoading = useSetRecoilState(initLoad);
   const [totalVacations, setTotalVacations] = useState(0);
+  const [totalText, setTotalText] = useState('Ngày');
   const [active, setActive] = useState('');
   const [approver, setApprover] = useState([]);
   const [loadingApprover, setLoadingApprover] = useState(true);
@@ -43,8 +44,8 @@ const OrderPage = () => {
     setLoading(true);
     setActive('active');
     const date = [
-      moment(values.date[0]).format("YYYY-MM-DD"),
-      moment(values.date[1]).format("YYYY-MM-DD")
+      moment(values.date[0]).format("YYYY-MM-DD H:m:s"),
+      moment(values.date[1]).format("YYYY-MM-DD H:m:s")
     ];
     requests({...values, date, id})
     .then(({ data }) => {
@@ -73,12 +74,21 @@ const OrderPage = () => {
   }
 
   const CountTotal = (value) => {
-    if (value[0] != null && value[1] != null) {
-      const minute = 1000 * 60;
-      const hour = minute * 60;
-      const day = hour * 24;
-      let tong = Math.round((value[1]._d.getTime() - value[0]._d.getTime()) / day);
-      setTotalVacations(tong);
+    setTotalVacations(0);
+    if (value) {
+      if (value[0] != null && value[1] != null) {
+        const minute = 1000 * 60;
+        const hour = minute * 60;
+        const day = hour * 24;
+        let tong = Math.round((value[1]._d.getTime() - value[0]._d.getTime()) / day);
+        if (tong <= 0) {
+          tong = ((value[1]._d.getTime() - value[0]._d.getTime()) / hour).toFixed(1);
+          setTotalText('Giờ');
+        }else{
+          setTotalText('Ngày');
+        }
+        setTotalVacations(tong);
+      }
     }
   }
 
@@ -110,7 +120,7 @@ const OrderPage = () => {
             loading={loading}
             size="small"
             title="Chọn ngày nghỉ"
-            extra={`Tổng số công nghỉ: ${totalVacations && totalVacations}`}
+            extra={`Tổng số công nghỉ: ${totalVacations && totalVacations} ${totalText}`}
           >
             <Form.Item
               name="date"
@@ -123,14 +133,15 @@ const OrderPage = () => {
               ]}
             >
               <RangePicker
-              allowClear={false}
+              // allowClear={false}
               onCalendarChange={CountTotal}
               showToday
               disabledDate={disabledDate}
-              format="DD/MM/YYYY"
+              format="DD/MM/YYYY H:m"
               placeholder={["Ngày bắt đầu", "Ngày kết thúc"]}
               style={{ width: "100%", border: "none" }}
               locale={locale}
+              showTime
               />
             </Form.Item>
           </Card>

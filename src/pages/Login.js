@@ -162,9 +162,9 @@ const Login = () => {
 
           <Form.Item>
             <ReCAPTCHA
+              className="recapcha-google"
               ref={recaptchaRef}
-              // sitekey={process.env.GOOGLE_RECAPTCHA_KEY && process.env.GOOGLE_RECAPTCHA_KEY}
-              sitekey='6LeAZPYgAAAAAAJWMIY2B-M_LKYmqhxcu_Wnwejx'
+              sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}
               onChange={onFinish}
             />
           </Form.Item>
