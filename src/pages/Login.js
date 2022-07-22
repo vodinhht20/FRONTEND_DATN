@@ -135,6 +135,10 @@ const Login = () => {
             name="email"
             rules={[
               {
+                type: 'email',
+                message: 'Email không hợp lệ!',
+              },
+              {
                 required: true,
                 message: "Vui lòng điền email!",
               },
