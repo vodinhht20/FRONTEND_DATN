@@ -711,6 +711,9 @@ header {
 .OrderPage-container {
   margin: 0 !important;
 }
+.OrderPage-container .ant-upload{
+  width: 100% !important;
+}
 .OrderPage-container .btn {
   margin: 0 !important;
   font-size: 16px;
