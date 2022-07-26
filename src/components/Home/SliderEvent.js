@@ -3,7 +3,7 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import Typography from '@mui/material/Typography';
 import { FreeMode, Pagination, Navigation, Autoplay } from "swiper";
-import { Avatar, Card, Tooltip, Button, Modal,Input ,Popover } from "antd";
+import { Avatar, Checkbox , Tooltip, Button, Modal,Input ,Popover } from "antd";
 import { GiftOutlined, UserOutlined } from "@ant-design/icons";
 import { CardActionArea, CardActions } from '@mui/material';
 import { useEffect, useState } from "react";
@@ -16,10 +16,14 @@ import { SkeletonCard } from "~/components/Home";
 import bannerBirthDay from "~/assets/images/banner/happy_birth_day.png";
 import bannerVaccine from "~/assets/images/banner/banner-vaccine.png";
 import bannerMeet from "~/assets/images/banner/banner_meet.png";
+import './SlideEvent.css'
 
 const SliderEvent = ({ loading }) => {
 
-    const { TextArea } = Input;
+const onChangeSendMess=(e)=>{
+console.log(`checked = ${e.target.checked}`)
+    }
+const { TextArea } = Input;
 const [isModalVisible, setIsModalVisible] = useState(false);
 const [visible, setVisible] = useState(false);
 const showModal = () => {
@@ -114,9 +118,10 @@ const hide = () => {
                             Gửi lời chúc
                         </Button>
                         <Modal title="Danh sách sinh nhật" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} >
+                            <p><Checkbox onChange={onChangeSendMess}>Gửi lười chúc đến tất cả mọi người</Checkbox></p> 
                             <p>
                             <Popover
-                                content={ <><TextArea rows={2} /> <a onClick={hide}>Gửi</a> </>}
+                                content={ <><TextArea rows={2} /> <Button className="sendMess" onClick={hide} type="primary">Gửi</Button> </>}
                                 title="Gửi lời chúc"
                                 placement="rightTop"
                                 trigger="click"
