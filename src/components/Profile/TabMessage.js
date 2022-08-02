@@ -55,7 +55,42 @@ const tabMessage = () => {
           </Collapse>
         </TabPane>
         <TabPane tab="Lời nhắn đã gửi" key="2">
-          Content of Tab Pane 2
+        <Collapse
+            onChange={onChange}
+            expandIconPosition="end"
+            className="result"
+          >
+            <Panel
+              header={
+                <>
+                  <Avatar icon={<UserOutlined />} />
+                  <span>Tiến Không Bịp-Phòng IT</span>
+                </>
+              }
+              key="1"
+            >
+              <Card className="result">
+                <div>
+                  {" "}
+                  <span>Thời gian: </span> {time}
+                </div>
+                <div>
+                  <span>Nội dung: </span>
+                  {text}
+                </div>
+              </Card>
+              <Card>
+                <div>
+                  {" "}
+                  <span>Thời gian: </span> {time}
+                </div>
+                <div>
+                  <span>Nội dung: </span>
+                  {text}
+                </div>
+              </Card>
+            </Panel>
+          </Collapse>
         </TabPane>
       </Tabs>
     </div>

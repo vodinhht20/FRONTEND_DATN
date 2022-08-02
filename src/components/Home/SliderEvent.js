@@ -3,8 +3,8 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import Typography from '@mui/material/Typography';
 import { FreeMode, Pagination, Navigation, Autoplay } from "swiper";
-import { Avatar, Card, Tooltip, Button } from "antd";
-import { GiftOutlined } from "@ant-design/icons";
+import { Avatar, Checkbox , Tooltip, Button, Modal,Input ,Popover } from "antd";
+import { GiftOutlined, UserOutlined } from "@ant-design/icons";
 import { CardActionArea, CardActions } from '@mui/material';
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,8 +16,35 @@ import { SkeletonCard } from "~/components/Home";
 import bannerBirthDay from "~/assets/images/banner/happy_birth_day.png";
 import bannerVaccine from "~/assets/images/banner/banner-vaccine.png";
 import bannerMeet from "~/assets/images/banner/banner_meet.png";
+import './SlideEvent.css'
 
 const SliderEvent = ({ loading }) => {
+
+const onChangeSendMess=(e)=>{
+console.log(`checked = ${e.target.checked}`)
+    }
+const { TextArea } = Input;
+const [isModalVisible, setIsModalVisible] = useState(false);
+const [visible, setVisible] = useState(false);
+const showModal = () => {
+  setIsModalVisible(true);
+};
+
+const handleOk = () => {
+  setIsModalVisible(false);
+};
+
+const handleCancel = () => {
+  setIsModalVisible(false);
+};
+const hide = () => {
+    setVisible(false);
+  };
+
+  const handleVisibleChange = (newVisible) => {
+    setVisible(newVisible);
+  };
+
     const [widthScreen, setWidthScreen] = useState(window.innerWidth);
     useEffect(() => {
         window.addEventListener("resize", () => setWidthScreen(window.innerWidth));
@@ -87,9 +114,31 @@ const SliderEvent = ({ loading }) => {
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button type="primary" className="btn-section-event  btn-section-warring">
+                        <Button type="primary" onClick={showModal} className="btn-section-event  btn-section-warring">
                             Gửi lời chúc
                         </Button>
+                        <Modal title="Danh sách sinh nhật" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} >
+                            <p><Checkbox onChange={onChangeSendMess}>Gửi lười chúc đến tất cả mọi người</Checkbox></p> 
+                            <p>
+                            <Popover
+                                content={ <><TextArea rows={2} /> <Button className="sendMess" onClick={hide} type="primary">Gửi</Button> </>}
+                                title="Gửi lời chúc"
+                                placement="rightTop"
+                                trigger="click"
+                                visible={visible}
+                                onVisibleChange={handleVisibleChange}
+                            >
+                      <Tooltip placement="top" title={"Tiến Bịp-phòng IT"}>
+                        <Avatar
+                          style={{ cursor: "pointer" }}
+                          icon={<UserOutlined />}
+                        />
+                      </Tooltip>
+                    </Popover>
+                            </p>
+                            <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
+                            <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
+                        </Modal>
                     </CardActions>
                 </CarMUI>
             }
