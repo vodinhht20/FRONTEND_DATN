@@ -3,18 +3,29 @@ import { Avatar, Badge, Button, Card, Col, DatePicker, Form, List, message, Row,
 import moment from "moment";
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
+import { getTimeKeep } from "~/api/BaseAPI";
 import { initLoad } from "~/recoil/load";
 
 const Order2 = ({loading, order, onFinish, onFinishFailed, totalVacations, totalText, RangePicker, CountTotal, disabledDate, locale, TextArea, Upload, props, loadingApprover, approver}) => {
   const setLoading = useSetRecoilState(initLoad);
   const [timeServer, setTimeServer] = useState(null);
-  const onChange = () => {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        setTimeServer(["09:30:00", "17:00:00"]);
-        message.success('Lấy dữ liệu thành công');
-      }, 2000);
+  const onChange = (value) => {
+      if (value) {
+        const date = {
+          currentDate: moment(value).format("YYYY-MM-DD")
+        };
+        getTimeKeep(date).then(({ data }) => {
+          if (!data.data.checkin) {
+            setTimeServer([null, null]); 
+            return message.warning(`Ngày ${date.currentDate} chưa có dữ liệu trên hệ thống`);
+          }
+          setTimeServer([data.data?.checkin, data.data?.checkout]); 
+        })
+        .catch((error) => {
+          console.log(error);
+          message.warning('Lấy dữ liệu thất bại');
+        });
+      }
     }
   return (
     <Col xs={24} md={24} lg={24}>
@@ -44,7 +55,20 @@ const Order2 = ({loading, order, onFinish, onFinishFailed, totalVacations, total
         loading={loading}
         size="small"
         title="Chọn ngày cần khôi phục"
-        extra={<DatePicker onChange={onChange} format="DD/MM/YYYY" locale={locale} />}
+        extra={
+          <Form.Item
+            name="date"
+            style={{ width: "100%", border: "none" }}
+            rules={[
+              {
+                required: true,
+                message: "Chọn ngày khôi phục!",
+              },
+            ]}
+          >
+            <DatePicker onChange={onChange} format="DD/MM/YYYY" locale={locale} />
+          </Form.Item>
+        }
       >
       </Card>
       <Row style={{ maxWidth: "100%", margin: 0}} gutter={[12, 12]}>
@@ -66,7 +90,23 @@ const Order2 = ({loading, order, onFinish, onFinishFailed, totalVacations, total
               size="small"
               title="Giờ chấm công thực tế cần sửa"
             >
-              <TimePicker.RangePicker style={{ width: "100%" }} onChange={onChange} placeholder={["Giờ checkin", "Giờ checkout"]} format="HH:mm:ss" locale={locale} />
+              <Form.Item
+                name="times"
+                style={{ width: "100%", border: "none", margin: "0"}}
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng chọn giờ chấm công thực tế cần sửa!",
+                  },
+                ]}
+              >
+                <TimePicker.RangePicker 
+                  style={{ width: "100%" }} 
+                  placeholder={["Giờ checkin", "Giờ checkout"]} 
+                  format="HH:mm:ss" 
+                  locale={locale} 
+                />
+              </Form.Item>
           </Card>
         </Col>
       </Row>

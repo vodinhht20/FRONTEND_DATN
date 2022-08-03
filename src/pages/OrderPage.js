@@ -14,6 +14,7 @@ import { FileImageFilled, UploadOutlined } from "@ant-design/icons";
 import { ImageListItem } from "@mui/material";
 import Order1 from "./templateOrders/Order1";
 import Order2 from "./templateOrders/Order2";
+import Order3 from "./templateOrders/Order3";
 const { RangePicker } = DatePicker;
 
 const OrderPage = () => {
@@ -49,10 +50,22 @@ const OrderPage = () => {
     console.log(values);
     setLoading(true);
     setActive('active');
-    const date = [
-      moment(values.date[0]).format("YYYY-MM-DD H:m:s"),
-      moment(values.date[1]).format("YYYY-MM-DD H:m:s")
-    ];
+
+    let date = [];
+
+    if(order && order.type == 1){
+      date = [
+        moment(values.date[0]).format("YYYY-MM-DD 00:00:00"),
+        moment(values.date[1]).format("YYYY-MM-DD 23:59:59")
+      ];
+    } else {
+      const day = moment(values.date).format("YYYY-MM-DD");
+      date = [
+        moment(values.times[0]).format(`${day} H:m:s`),
+        moment(values.times[1]).format(`${day} H:m:s`)
+      ];
+    }
+    
 
     const formData = new FormData();
     fileList.forEach((file) => {
@@ -138,6 +151,24 @@ const OrderPage = () => {
         loadingApprover={loadingApprover}
         approver={approver}
       />
+    }else if(order && order.type == 3){
+      return <Order3 
+        loading={loading} 
+        order={order} 
+        onFinish={onFinish} 
+        onFinishFailed={onFinishFailed} 
+        totalVacations={totalVacations} 
+        totalText={totalText} 
+        RangePicker={RangePicker}
+        CountTotal={CountTotal}
+        disabledDate={disabledDate}
+        locale={locale}
+        TextArea={TextArea}
+        Upload={Upload}
+        props={props}
+        loadingApprover={loadingApprover}
+        approver={approver}
+        />
     }else{
       return <Order1 
         loading={loading} 

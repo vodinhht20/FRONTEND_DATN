@@ -1,12 +1,25 @@
 import { FileImageFilled } from "@ant-design/icons";
-import { Avatar, Badge, Button, Card, Col, Form, List } from "antd";
+import { Avatar, Badge, Button, Card, Col, DatePicker, Form, List, message, Row, TimePicker } from "antd";
+import moment from "moment";
+import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { initLoad } from "~/recoil/load";
 
-const Order1 = ({loading, order, onFinish, onFinishFailed, totalVacations, totalText, RangePicker, CountTotal, disabledDate, locale, TextArea, Upload, props, loadingApprover, approver}) => {
-    
+const Order3 = ({loading, order, onFinish, onFinishFailed, totalVacations, totalText, RangePicker, CountTotal, disabledDate, locale, TextArea, Upload, props, loadingApprover, approver}) => {
+  const setLoading = useSetRecoilState(initLoad);
+  const [timeServer, setTimeServer] = useState(null);
+  const onChange = () => {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        setTimeServer(["09:30:00", "17:00:00"]);
+        message.success('Lấy dữ liệu thành công');
+      }, 2000);
+    }
   return (
     <Col xs={24} md={24} lg={24}>
       <Card bordered={false} loading={loading}>
-        <h3 className="text-info">Mẫu đơn 1: {order && order.name}</h3>
+        <h3 className="text-info">Mẫu đơn 3: {order && order.name}</h3>
         <p className="text-info" style={{ textAlign: "justify" }}>
           Mô tả: {order && order.description}
         </p>
@@ -26,41 +39,61 @@ const Order1 = ({loading, order, onFinish, onFinishFailed, totalVacations, total
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Card
-          loading={loading}
-          size="small"
-          title="Chọn ngày nghỉ"
-          extra={`Tổng số công nghỉ: ${
-            totalVacations && totalVacations
-          } ${totalText}`}
-        >
-          <Form.Item
+      <Card
+        bordered={false}
+        loading={loading}
+        size="small"
+        title="Chọn ngày làm thêm giờ"
+      >
+        <Form.Item
             name="date"
             style={{ width: "100%", border: "none" }}
             rules={[
               {
                 required: true,
-                message: "Vui lòng chọn ngày nghỉ!",
+                message: "Vui lòng điền lý do!",
               },
             ]}
           >
-            <RangePicker
-              // allowClear={false}
-              onCalendarChange={CountTotal}
-              showToday
-              disabledDate={disabledDate}
+            <DatePicker 
               format="DD/MM/YYYY"
-              placeholder={["Ngày bắt đầu", "Ngày kết thúc"]}
-              style={{ width: "100%", border: "none" }}
+              showToday
               locale={locale}
-              // showTime
+              style={{ width: "100%" }}
             />
           </Form.Item>
         </Card>
-
+      <Row style={{ maxWidth: "100%", margin: 0}} gutter={[12, 12]}>
+        <Col xs={24} md={24} lg={24}>
+          <Card
+              bordered={false}
+              loading={loading}
+              size="small"
+              title="Chọn khoảng thời gian làm thêm"
+            >
+              <Form.Item
+                name="times"
+                style={{ width: "100%", border: "none" }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng điền lý do!",
+                  },
+                ]}
+              >
+                <TimePicker.RangePicker 
+                  style={{ width: "100%" }} 
+                  placeholder={["Thời gian bắt đầu", "Thời gian kết thúc"]} 
+                  format="HH:mm" 
+                  locale={locale} 
+                />
+              </Form.Item>
+          </Card>
+        </Col>
+      </Row>
         <Card
           style={{ marginTop: 10, marginBottom: 10 }}
-          title={"Lý do nghỉ"}
+          title={"Lý do làm thêm giờ"}
           bordered={false}
           loading={loading}
         >
@@ -88,7 +121,7 @@ const Order1 = ({loading, order, onFinish, onFinishFailed, totalVacations, total
           loading={loading}
         >
           <Upload
-            accept="image/png, image/jpeg, image/jpg, .doc, .docx, .pdf , .xlx, .csv"
+            accept="image/png, image/jpeg, image/jpg"
             {...props}
           >
             <Button
@@ -147,4 +180,4 @@ const Order1 = ({loading, order, onFinish, onFinishFailed, totalVacations, total
   );
 };
 
-export default Order1;
+export default Order3;
