@@ -76,11 +76,13 @@ const Checkin = ( { handleProps } ) => {
                   working_time: resDataCheckin.working_time
 
                 });
-                openNotification('success', 'Checkin thành công !', `Bạn đã ${ resDataCheckin.type ? 'checkin' : 'checkout' } thành công`);
+                openNotification('success', 'Thành công !', `Bạn đã ${ resDataCheckin.type != 1 ? 'checkin' : 'checkout' } thành công`);
               } else{
                 openNotification('warning', data.message);
               }
-              setStatusRes(true);
+              setTimeout(() => {
+                setStatusRes(true);
+              }, 60000);
               setCircleLoading(false);
             })
             .catch((error) => {
@@ -89,7 +91,7 @@ const Checkin = ( { handleProps } ) => {
               setCircleLoading(false);
             })
         } else {
-          message.warning('Hành động này chúng tôi đang xử lý');
+          message.warning('Khoảng cách mỗi lần chấm công là 1 phút, vui lòng quay lại sau');
         }
     };
 

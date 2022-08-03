@@ -43,7 +43,9 @@ const Timesheet = () => {
       listData = [
         { type: dataItem.checkin ? 'success' : 'warning', content: `Checkin: ${dataItem.checkin || 0}` },
         { type: dataItem.checkout ? 'success' : 'warning', content: `Checkout: ${dataItem.checkout || 0}` },
-        { type: dataItem.worktime ? 'success' : 'warning', content: `Số công: ${dataItem.worktime || 0}` }
+        { type: dataItem.worktime ? 'success' : 'warning', content: `Số công: ${dataItem.worktime || 0}` },
+        { type: dataItem.minute_early ? 'success' : 'warning', content: `Về sớm: ${dataItem.minute_early || 0} phút`},
+        { type: dataItem.minute_late ? 'success' : 'warning', content: `Đi muộn: ${dataItem.minute_late || 0} phút` }
       ];
     }
     return listData || [];
@@ -115,7 +117,7 @@ const Timesheet = () => {
           </Modal>
           <Descriptions>
             <Descriptions.Item label="Tổng công ghi nhận ">
-              <span className="text-info">{ dataTimeSheet.sum_current_worktime || 0 }/27</span>
+              <span className="text-info">{ dataTimeSheet.sum_current_worktime && dataTimeSheet.sum_current_worktime || 0 }/{ dataTimeSheet.totalDayMonth && dataTimeSheet.totalDayMonth || 0 }</span>
             </Descriptions.Item>
           </Descriptions>
           <div className="site-card-wrapper statistical-work-month">

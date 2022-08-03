@@ -98,7 +98,7 @@ const Home = () => {
                               </div>
                               <div className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><ReconciliationOutlined className="section-icon" /> Số công</span>
-                                <span className="content-item"> {dataHome &&  `${dataHome.work_day}/${dataHome.total_work_day}` }</span>
+                                <span className="content-item"> {checkinData.worktime &&  `${checkinData.worktime}/${checkinData.totalDayMonth && checkinData.totalDayMonth}` }</span>
                               </div>
                               <div className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><SnippetsOutlined className="section-icon" /> Đơn từ</span>
