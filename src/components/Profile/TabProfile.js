@@ -46,32 +46,34 @@ const TabProfile = ({profileProps}) => {
 
     // change avatar
     const uploadAvatar = (event) => {
-        setLoadUpImage(true);
-        //call api change image
-        let img = event.target.files[0];
-        let fd = new FormData()
-        fd.append("avatar", img);
+        if (event.target.files.length > 0) {
+            setLoadUpImage(true);
+            //call api change image
+            let img = event.target.files[0];
+            let fd = new FormData()
+            fd.append("avatar", img);
 
-        updateAvatar(fd)
-            .then(({ data }) => {
-                    setProfileData({...profileData, avatar: process.env.REACT_APP_LINK_SERVER+data.image_links});
-            })
-            .then(() => {
-                notification.success({
-                    message: "Cập nhật thành công !",
-                    description: "Ảnh đại diện đã được thay đổi",
-                    placement: 'topRight'
-                });
-                setLoadUpImage(false);
-            })
-            .catch((error) => {
-                notification.warning({
-                    message: "Cập nhật thất bại !",
-                    description: error.response.data.message,
-                    placement: 'topRight'
-                });
-                setLoadUpImage(false);
-            })
+            updateAvatar(fd)
+                .then(({ data }) => {
+                        setProfileData({...profileData, avatar: process.env.REACT_APP_LINK_SERVER+data.image_links});
+                })
+                .then(() => {
+                    notification.success({
+                        message: "Cập nhật thành công !",
+                        description: "Ảnh đại diện đã được thay đổi",
+                        placement: 'topRight'
+                    });
+                    setLoadUpImage(false);
+                })
+                .catch((error) => {
+                    notification.warning({
+                        message: "Cập nhật thất bại !",
+                        description: error.response.data.message,
+                        placement: 'topRight'
+                    });
+                    setLoadUpImage(false);
+                })
+        }
     };
 
     return (

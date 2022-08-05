@@ -108,6 +108,12 @@ export const requests = (data) => {
   return instance2.post(url, data, { headers });
 }
 
+export const requestAddImage = (image) => {
+  const headers = requestHeader();
+  const url = "requests-image";
+  return instance2.post(url, image, { headers });
+};
+
 export const getTimeKeep = (data) => {
   const headers = requestHeader();
   const url = "get-time-keep";

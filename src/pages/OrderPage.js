@@ -8,7 +8,7 @@ import moment from 'moment';
 import 'moment/locale/vi';
 import locale from 'antd/es/date-picker/locale/vi_VN';
 import Loading from "~/components/Global/Loading";
-import { getData2, requests } from "~/api/BaseAPI";
+import { getData2, requestAddImage, requests } from "~/api/BaseAPI";
 import { useNavigate, useParams } from "react-router-dom";
 import { FileImageFilled, UploadOutlined } from "@ant-design/icons";
 import { ImageListItem } from "@mui/material";
@@ -26,6 +26,10 @@ const OrderPage = () => {
   const [approver, setApprover] = useState([]);
   const [loadingApprover, setLoadingApprover] = useState(true);
   const [fileList, setFileList] = useState([]);
+  const [loadingSingle, setLoadingSingle] = useState(false);
+
+  const [fileImage, setFileImage] = useState('');
+  let inputImage= '';
   
   const [order, setOrder] = useRecoilState(initOrder);
   const { id } = useParams();
@@ -45,6 +49,26 @@ const OrderPage = () => {
       setLoadingApprover(false)
     })
   }, []);
+
+  const onchangleUpload = (event) => {
+    if (event.target.files.length > 0) {
+      setLoadingSingle(true);
+      let img = event.target.files[0];
+      let fd = new FormData();
+      fd.append("image", img);
+
+      requestAddImage(fd)
+      .then(({ data }) => {
+        setLoadingSingle(false);
+        setFileImage(data.image_links);
+        message.success(data.message);
+      })
+      .catch((error) => {
+        setLoadingSingle(false);
+        message.warning(error.response.data.message);
+      })
+    }
+  };
 
   const onFinish = (values) => {
     console.log(values);
@@ -66,14 +90,7 @@ const OrderPage = () => {
       ];
     }
     
-
-    const formData = new FormData();
-    fileList.forEach((file) => {
-      console.log(file);
-      formData.append('file[]', file);
-    });
-
-    requests({...values, date, id, formData})
+    requests({...values, date, id, fileImage})
     .then(({ data }) => {
       setLoading(false);
       setActive('');
@@ -147,9 +164,13 @@ const OrderPage = () => {
         locale={locale}
         TextArea={TextArea}
         Upload={Upload}
-        props={props}
+        // props={props}
         loadingApprover={loadingApprover}
         approver={approver}
+        onchangleUpload={onchangleUpload}
+        fileImage={fileImage}
+        inputImage={inputImage}
+        loadingSingle={loadingSingle}
       />
     }else if(order && order.type == 3){
       return <Order3 
@@ -168,6 +189,10 @@ const OrderPage = () => {
         props={props}
         loadingApprover={loadingApprover}
         approver={approver}
+        onchangleUpload={onchangleUpload}
+        fileImage={fileImage}
+        inputImage={inputImage}
+        loadingSingle={loadingSingle}
         />
     }else{
       return <Order1 
@@ -186,6 +211,10 @@ const OrderPage = () => {
         props={props}
         loadingApprover={loadingApprover}
         approver={approver}
+        onchangleUpload={onchangleUpload}
+        fileImage={fileImage}
+        inputImage={inputImage}
+        loadingSingle={loadingSingle}
         />
     }
   }
