@@ -12,8 +12,8 @@ import Profile from "~/pages/Profile";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault } from "~/recoil/atom";
-import { checkAuth, getData, getData2, timekeepRanking } from "~/api/BaseAPI";
+import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault, initNotification } from "~/recoil/atom";
+import { checkAuth, getData, getData2, getNotification, timekeepRanking } from "~/api/BaseAPI";
 import { message, notification } from "antd";
 import { homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
@@ -47,6 +47,7 @@ const Router = () => {
   const setBanner = useSetRecoilState(initBanner);
   const setCheckKyc = useSetRecoilState(initCheckKyc);
   const settingDefault = useSetRecoilState(initSettingDefault);
+  const setNotification = useSetRecoilState(initNotification);
 
   const routesLogin = useRecoilValue(initRoutesLogin);
   useEffect(() => {
@@ -60,6 +61,9 @@ const Router = () => {
 
     checkAuth().then(() => {
       (async () => {
+          let notifications = await getNotification();
+          setNotification(notifications.data.data);
+
           let banner = await getData2("banner");
           setBanner(banner.data);
 

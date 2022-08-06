@@ -10,3 +10,4 @@ export { initAccessToken } from "~/recoil/accessToken";
 export { initBanner } from "~/recoil/banner";
 export { initCheckKyc } from "~/recoil/checkkyc";
 export { initSettingDefault } from "~/recoil/settingDefault";
+export { initNotification } from "~/recoil/notification";

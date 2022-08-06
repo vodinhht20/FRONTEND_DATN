@@ -92,7 +92,7 @@ header {
   width: 300px;
   height: 400px;
   overflow: auto;
-  padding: 0 16px;
+  padding: 0 10px;
   border: 1px solid rgba(140, 140, 140, 0.35);
   border-radius: 0 0 10px 10px;
 }
@@ -1151,4 +1151,12 @@ header {
 .game-container #wheel{
   position: absolute;
   left: calc(50% - 17vw);
+}
+.noti{
+  padding: 2px 10px !important;
+  border-radius: 5px !important;
+  margin-bottom: 3px;
+}
+.noti.active {
+  background-color: #f0f0f0ff;
 }

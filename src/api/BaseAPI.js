@@ -119,3 +119,21 @@ export const getTimeKeep = (data) => {
   const url = "get-time-keep";
   return instance2.post(url, data, { headers });
 }
+
+export const getNotification = () => {
+  const headers = requestHeader();
+  const url = "notification";
+  return instance2.get(url, { headers });
+}
+
+export const watchedNoti = (id) => {
+  const headers = requestHeader();
+  const url = "notification-watch";
+  return instance2.post(url, id , { headers });
+}
+
+export const watchedNotiAll = () => {
+  const headers = requestHeader();
+  const url = "notification-watch-all";
+  return instance2.post(url, [], { headers });
+}
