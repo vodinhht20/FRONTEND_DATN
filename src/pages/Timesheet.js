@@ -1,5 +1,5 @@
 import moment from "moment";
-import { MoreOutlined } from "@ant-design/icons";
+import { CheckCircleTwoTone, ImportOutlined, MoreOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { formatDate } from "~/commons/formatDate";
 import { timesheet } from "~/api/BaseAPI";
@@ -17,13 +17,17 @@ import {
   Form,
   Input,
   Spin,
+  Tag,
 } from "antd";
+
 const Timesheet = () => {
   const [dataTimeSheet, setDataTimeSheet] = useState({});
+  const [totalDayMonth, setTotalDayMonth] = useState(0);
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
   const [monthYear, setMonthYear] = useState();
   const [form] = Form.useForm();
+
   useEffect(() => {
     document.title = "Bảng công";
     let currentMonth = formatDate(null, "MM/Y");
@@ -31,21 +35,33 @@ const Timesheet = () => {
     timesheet(currentMonth)
       .then(({ data }) => {
         setDataTimeSheet(data.data)
+        setTotalDayMonth(data.totalDayMonth)
         setLoading(false);
       });
   }, []);
 
   function getListData(value) {
     let listData;
+    let listDataCheckSystem;
     let valueCalendar = formatDate(value, 'DD-MM');
     if (dataTimeSheet.timesheet && dataTimeSheet.timesheet[valueCalendar]) {
       let dataItem = dataTimeSheet.timesheet[valueCalendar];
+
+      listDataCheckSystem = dataItem.type == 1 ? 
+        [
+          { type: dataItem.checkin ? 'success' : 'warning', content: `Checkin: ${dataItem.checkin || 0}` },
+          { type: dataItem.checkout ? 'success' : 'warning', content: `Checkout: ${dataItem.checkout || 0}` },
+          { type: dataItem.minute_early ? 'success' : 'warning', content: `Về sớm: ${dataItem.minute_early || 0} phút`},
+          { type: dataItem.minute_late ? 'success' : 'warning', content: `Đi muộn: ${dataItem.minute_late || 0} phút` },
+          { type: dataItem.worktime ? 'success' : 'warning', content: `Số công: ${dataItem.worktime || 0}` }
+        ] : 
+          [
+            { type: '', content: <Tag color="#2db7f5">#Data import</Tag>},
+            { type: '', content: `Số công: ${dataItem.worktime || 0}` }
+          ]
+
       listData = [
-        { type: dataItem.checkin ? 'success' : 'warning', content: `Checkin: ${dataItem.checkin || 0}` },
-        { type: dataItem.checkout ? 'success' : 'warning', content: `Checkout: ${dataItem.checkout || 0}` },
-        { type: dataItem.worktime ? 'success' : 'warning', content: `Số công: ${dataItem.worktime || 0}` },
-        { type: dataItem.minute_early ? 'success' : 'warning', content: `Về sớm: ${dataItem.minute_early || 0} phút`},
-        { type: dataItem.minute_late ? 'success' : 'warning', content: `Đi muộn: ${dataItem.minute_late || 0} phút` }
+        ...listDataCheckSystem
       ];
     }
     return listData || [];
@@ -71,7 +87,7 @@ const Timesheet = () => {
     timesheet(monthYear)
       .then(({ data }) => {
         setDataTimeSheet(data.data)
-        console.log("dataTimeSheet", data.data);
+        setTotalDayMonth(data.totalDayMonth)
         setLoading(false);
       });
   }
@@ -117,7 +133,7 @@ const Timesheet = () => {
           </Modal>
           <Descriptions>
             <Descriptions.Item label="Tổng công ghi nhận ">
-              <span className="text-info">{ dataTimeSheet.sum_current_worktime && dataTimeSheet.sum_current_worktime || 0 }/{ dataTimeSheet.totalDayMonth && dataTimeSheet.totalDayMonth || 0 }</span>
+              <span className="text-info">{ dataTimeSheet && dataTimeSheet?.sum_current_worktime || 0 }/{totalDayMonth && totalDayMonth}</span>
             </Descriptions.Item>
           </Descriptions>
           <div className="site-card-wrapper statistical-work-month">
@@ -174,13 +190,13 @@ const Timesheet = () => {
                   locale: "vi_VN",
                   month: "Tháng",
                   year: "Năm",
-                  dayFormat: moment.updateLocale("vn", {
-                    weekdaysMin: ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7" ]
-                  }),
+                  // dayFormat: moment.updateLocale("vn", {
+                  //   weekdaysMin: ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7" ]
+                  // }),
                 },
-                monthFormat: moment.updateLocale("vn", {
-                  monthsShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12' ]
-                })
+                // monthFormat: moment.updateLocale("vn", {
+                //   monthsShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12' ]
+                // })
               }}
             />
           </Spin>
