@@ -1,4 +1,5 @@
 import {
+  FieldTimeOutlined,
   FundProjectionScreenOutlined,
   NodeCollapseOutlined,
   NodeExpandOutlined,
@@ -102,7 +103,7 @@ const Home = () => {
                                 <span className="content-item"> {checkinData.worktime &&  `${checkinData.worktime}/${checkinData.totalDayMonth && checkinData.totalDayMonth}` }</span>
                               </div>
                               <div className="ant-row ant-row-space-between statistic-home-item">
-                                <span className="lable-item"><SnippetsOutlined className="section-icon" /> Số giờ OT</span>
+                                <span className="lable-item"><FieldTimeOutlined className="section-icon" /> Số giờ OT</span>
                                 <span className="content-item">20h</span>
                               </div>
                               <div className="ant-row ant-row-space-between statistic-home-item">
