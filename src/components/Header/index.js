@@ -282,15 +282,15 @@ const Head = () => {
           <InputSearch />
         </Col>
         <Col xs={12} md={12} lg={7} className="nav-top-right">
-          <IconButton
+          {/* <IconButton
             size="large"
             aria-label="show 4 new mails"
             color="warning"
           >
-            <Badge badgeContent={4} color="warning">
+            <Badge badgeContent={47} color="warning">
               <MailIcon className="icon-nav-top" />
             </Badge>
-          </IconButton>
+          </IconButton> */}
           <Dropdown
             overlay={listNotify}
             placement="bottomLeft"

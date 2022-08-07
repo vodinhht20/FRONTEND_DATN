@@ -232,10 +232,10 @@ header {
   box-shadow: 1px -1px 10px var(--color-box-shadow);
 }
 .row-content-left {
-  height: 250px;
+  height: 100%;
 }
 .home-page .box-content-middle .section-content {
-  height: 250px;
+  height: 100%;
 }
 .home-page .box-content-middle .skeleton-personnel-record {
   width: 130px;
@@ -325,9 +325,14 @@ header {
 .home-page .box-content-right .home-slide {
   box-shadow: 1px -1px 10px var(--color-box-shadow);
 }
-.home-page .box-content-right .home-slide .slider-item img,
+.home-page .box-content-right .home-slide .slider-item img {
+  height: 269px;
+  width: 100%;
+  object-fit: cover;
+  -webkit-transform: unset;
+}
 .home-page .box-content-right .skeleton-banner {
-  height: 250px;
+  height: 274px;
   width: 100%;
   object-fit: cover;
   -webkit-transform: unset;

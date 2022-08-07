@@ -89,16 +89,21 @@ const Home = () => {
                   <Card className="section-content">
                           {
                             loading ?
-                              <SkeletonLine length={5}/>
+                              <SkeletonLine length={6}/>
                             :
                             <>
-                              <div className="ant-row ant-row-space-between statistic-home-item">
+                              <Title level={4} className="title-checkin-current">Tháng này</Title>
+                              {/* <div className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><FundProjectionScreenOutlined className="section-icon"/> Hạng</span>
                                 <span className="content-item"><RiseOutlined className="rank-up"/> { dataHome && dataHome.current_rank }</span>
-                              </div>
+                              </div> */}
                               <div className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><ReconciliationOutlined className="section-icon" /> Số công</span>
                                 <span className="content-item"> {checkinData.worktime &&  `${checkinData.worktime}/${checkinData.totalDayMonth && checkinData.totalDayMonth}` }</span>
+                              </div>
+                              <div className="ant-row ant-row-space-between statistic-home-item">
+                                <span className="lable-item"><SnippetsOutlined className="section-icon" /> Số giờ OT</span>
+                                <span className="content-item">20h</span>
                               </div>
                               <div className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><SnippetsOutlined className="section-icon" /> Đơn từ</span>
