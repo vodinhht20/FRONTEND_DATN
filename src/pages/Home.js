@@ -16,6 +16,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { message } from '~/firebase';
+import { getData2 } from "~/api/BaseAPI";
 const { Title } = Typography;
 
 const Home = () => {
@@ -27,6 +28,7 @@ const Home = () => {
   const rankData = useRecoilValue(initRankCheckin);
   const banner = useRecoilValue(initBanner);
   const setRankCheckin = useSetRecoilState(initRankCheckin);
+  const [ordersperMonth, setOrdersperMonth] = useState(0);
 
   const [proDocument, setProDocument] = useState({text: '', numbers: 0});
   useEffect(() => {
@@ -38,6 +40,11 @@ const Home = () => {
       setProDocument({text: 'Cần bổ sung hồ sơ nhân sự', numbers: 0});
     }
   }, [checkKyc])
+
+  useEffect(() => {
+    getData2("count-of-orders-per-month")
+    .then(({ data }) => setOrdersperMonth(data.orders_perMonth))
+  },[]);
 
   message?.onMessage(function({data:{body, title}}) {
     if (title === 'timekeep_ranking') {
@@ -108,7 +115,7 @@ const Home = () => {
                               </div>
                               <div className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><SnippetsOutlined className="section-icon" /> Đơn từ</span>
-                                <span className="content-item">{ profileData && profileData.single_word  }</span>
+                                <span className="content-item">{ ordersperMonth && ordersperMonth  }</span>
                               </div>
                             </>
                           }
