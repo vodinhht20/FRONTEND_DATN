@@ -113,10 +113,10 @@ const Home = () => {
                                 <span className="lable-item"><FieldTimeOutlined className="section-icon" /> Số giờ OT</span>
                                 <span className="content-item">20h</span>
                               </div>
-                              <div className="ant-row ant-row-space-between statistic-home-item">
+                              <Link to="more/don-tu-cua-ban" className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><SnippetsOutlined className="section-icon" /> Đơn từ</span>
                                 <span className="content-item">{ ordersperMonth && ordersperMonth  }</span>
-                              </div>
+                              </Link>
                             </>
                           }
                     </Card>

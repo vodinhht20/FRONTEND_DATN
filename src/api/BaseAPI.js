@@ -137,3 +137,9 @@ export const watchedNotiAll = () => {
   const url = "notification-watch-all";
   return instance2.post(url, [], { headers });
 }
+
+export const singleWordPesonalList = ($data) => {
+  const headers = requestHeader();
+  const url = "single-word-personal-list";
+  return instance2.post(url, $data, { headers });
+}

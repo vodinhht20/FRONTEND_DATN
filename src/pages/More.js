@@ -118,10 +118,12 @@ const More = () => {
               </Link>
               </Col>
               <Col xs={6} md={6} lg={4}>
+              <Link to={"don-tu-cua-ban"}>
                 <Badge count={""}>
-                  <Avatar className="icon-app-style" src={iconPlus} />
-                  <p>Example</p>
+                  <Avatar className="icon-app-style" src={iconDocument} />
+                  <p>Đơn từ của bạn</p>
                 </Badge>
+              </Link>
               </Col>
               <Col xs={6} md={6} lg={4}>
                 <Badge count={""}>

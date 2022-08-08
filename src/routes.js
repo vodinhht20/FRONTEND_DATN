@@ -148,7 +148,6 @@ const Router = () => {
         <Route path="thong-ke" element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
         <Route path="loginfake" element={<LoginFake />} />
-        <Route path="GiaoDienDonTu" element={< GiaoDienDonTu/>} />
         <Route path="blog" element={< Blog/>} />
 
         {/* More router */}
@@ -157,6 +156,7 @@ const Router = () => {
           <Route path="hosonhansu" element={< HoSoNhanSu/>} />
           <Route path="game-spinning-wheel" element={<SpinningWheel />} />
           <Route path="map" element={<GoogleMap />} />
+          <Route path="don-tu-cua-ban" element={< GiaoDienDonTu/>} />
           <Route path="create-order" element={<CreateOrderLayout />} >
             <Route index element={<CreateOrder />} />
             <Route path="tao-don/:id" element={<OrderPage />} />

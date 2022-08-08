@@ -1165,3 +1165,6 @@ header {
 .noti.active {
   background-color: #f0f0f0ff;
 }
+.title-singleword{
+  text-transform: uppercase;
+}

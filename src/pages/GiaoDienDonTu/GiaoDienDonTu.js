@@ -8,53 +8,76 @@ import {
   Row,
   Col,
   Card,
-  Avatar 
+  Avatar, 
+  Button,
+  Tag,
+  Spin
 } from "antd";
-import { SearchOutlined,UserOutlined  } from "@ant-design/icons";
+import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, SearchOutlined,SyncOutlined,UserOutlined, WarningOutlined  } from "@ant-design/icons";
 // import { useState } from "react";
 import './GiaoDienDonTu.css'
+import { useRecoilState, useRecoilValue } from "recoil";
+import { initProfile } from "~/recoil/profile";
+import 'moment/locale/vi';
+import locale from 'antd/es/date-picker/locale/vi_VN';
+import { initSingleWordList } from "~/recoil/atom";
+import { useEffect, useState } from "react";
+import { singleWordPesonalList } from "~/api/BaseAPI";
+import { formatDate } from "~/commons/formatDate";
 
 const Checkin = () => {
-  //   const [state, setState] = useState("hello world");
+  const profileData = useRecoilValue(initProfile);
+  const [singleWordList, setSingleWordList] = useRecoilState(initSingleWordList);
+  const [singleLoading, setSingleLoading] = useState(true);
+
+  useEffect(() => {
+    singleWordPesonalList([])
+    .then(({ data }) => {
+      setSingleWordList(data.data);
+      setSingleLoading(false);
+    })
+  }, []);
 
   const columns = [
     {
       title: "STT",
-      width: 40,
+      width: 10,
       dataIndex: "stt",
       key: "stt",
     },
     {
       title: "Mã đơn",
-      width: 50,
+      width: 15,
       dataIndex: "id",
       key: "id",
+      render: (id) => {
+        return <Tag color="cyan">#{id}</Tag>
+      }
     },
     {
-      title: "Loại đơn",
-      dataIndex: "type",
-      key: "type",
-      width: 150,
-      render: (text, record) => (
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
+      width: 30,
+      render: (status, record) => (
         <div>
-          {" "}
-          <p>{text}</p>
-          <p className="trangThaiDon">{record.status}</p>
-          <p className="lyDoTuChoi">{record.reason}</p>
+          {record.statusInt === 1 && <Tag className="trangThaiDon" icon={<SyncOutlined spin />} color="processing"> {record.status} </Tag>}
+          {record.statusInt === 2 && <Tag className="trangThaiDon" icon={<ClockCircleOutlined spin />} color="default"> {record.status} </Tag>}
+          {record.statusInt === 3 && <Tag className="trangThaiDon" icon={<CheckCircleOutlined />} color="success"> {record.status} </Tag>}
+          {record.statusInt === 4 && <Tag className="trangThaiDon" icon={<CloseCircleOutlined />} color="error"> {record.status} </Tag>}
+          {record.statusInt === 0 && <Tag className="trangThaiDon" icon={<WarningOutlined />} color="warning"> {record.status} </Tag>}
         </div>
       ),
     },
     {
-      title: "Người tạo",
-      dataIndex: "createBy",
-      key: "createBy",
-      width: 100,
+      title: "Lý do",
+      dataIndex: "content",
+      key: "content",
+      width: 80,
       render: (text, record) => (
         <div>
           {" "}
           <p>{text}</p>
-          <p>{record.DonVi}</p>
-          <p className="ViTri">{record.ViTri}</p>
         </div>
       ),
     },
@@ -62,13 +85,13 @@ const Checkin = () => {
       title: "Thời gian tạo",
       dataIndex: "timeToCreate",
       key: "timeToCreate",
-      width: 70,
+      width: 30,
     },
     {
       title: "Thời gian áp dụng",
       dataIndex: "timeToApply",
       key: "timeToApply",
-      width: 150,
+      width: 45,
       render: (_, record) => (
         <div>
           {" "}
@@ -76,97 +99,30 @@ const Checkin = () => {
           <p>Kết thúc nghỉ:<strong>{record.thoiGianKetThuc}</strong></p>
         </div>
       ),
-    },
-    {
-      title: "người theo dõi",
-      dataIndex: "followBy",
-      key: "followBy",
-      width: 80,
-      render:()=>(
-        <Avatar icon={<UserOutlined />} />
-        
-      )
-    },
-    {
-      title: "Action",
-      key: "operation",
-      width: 60,
-      render: () => ( <p>action</p>),
-    },
-  ];
-  const data = [
-    {
-      stt: "1",
-      id: "#6037",
-      type: "Đơn nghỉ không lương",
-      status: "Đã hủy bỏ",
-      reason: "Hệ thống hủy đơn do quá hạn chốt đơn",
-      createBy: "Võ Văn Định",
-      DonVi: "FPT",
-      ViTri: "Sofware Engineer",
-      timeToCreate:"09/05/2022",
-      thoiGianBatDau:'10/02/2022',
-      thoiGianKetThuc:'10/05/2022'
-    },
-    {
-      stt: "2",
-      id: "#6037",
-      type: "Đơn nghỉ không lương",
-      status: "Đã hủy bỏ",
-      reason: "Hệ thống hủy đơn do quá hạn chốt đơn",
-      createBy: "Võ Văn Định",
-      DonVi: "FPT",
-      ViTri: "Sofware Engineer",
-      timeToCreate:"09/05/2022",
-      thoiGianBatDau:'10/02/2022',
-      thoiGianKetThuc:'10/05/2022'
-    },
-    {
-      stt: "3",
-      id: "#6037",
-      type: "Đơn nghỉ không lương",
-      status: "Đã hủy bỏ",
-      reason: "Hệ thống hủy đơn do quá hạn chốt đơn",
-      createBy: "Võ Văn Định",
-      DonVi: "FPT",
-      ViTri: "Sofware Engineer",
-      timeToCreate:"09/05/2022",
-      thoiGianBatDau:'10/02/2022',
-      thoiGianKetThuc:'10/05/2022'
-    },
-    {
-      stt: "4",
-      id: "#6037",
-      type: "Đơn nghỉ không lương",
-      status: "Đã hủy bỏ",
-      reason: "Hệ thống hủy đơn do quá hạn chốt đơn",
-      createBy: "Võ Văn Định",
-      DonVi: "FPT",
-      ViTri: "Sofware Engineer",
-      timeToCreate:"09/05/2022",
-      thoiGianBatDau:'10/02/2022',
-      thoiGianKetThuc:'10/05/2022'
-    },
+    }
   ];
 
   const { Option } = Select;
   const { RangePicker } = DatePicker;
   const onFinish = (values) => {
-    console.log("Success:", values);
+    setSingleLoading(true);
+    singleWordPesonalList({...values, 'date': values.date ? formatDate(values.date, 'YYYY-MM-DD') : ''})
+    .then(({ data }) => {
+      setSingleWordList(data.data);
+      setSingleLoading(false);
+    })
   };
 
   const onFinishFailed = (errorInfo) => {
+    setSingleLoading(false);
     console.log("Failed:", errorInfo);
   };
 
   return (
     <div className="wr-container home-page">
-      {/* <h2>{state}</h2>
-      <Button onClick={() => setState("change State suss")}>changeState</Button> */}
-
       <Card>
         <h2>
-          <strong>DANH SÁCH ĐƠN TỪ</strong>
+          <strong className="title-singleword">DANH SÁCH ĐƠN TỪ CỦA: { profileData && profileData?.fullname }</strong>
         </h2>
         <Form
           name="basic"
@@ -178,7 +134,7 @@ const Checkin = () => {
           autoComplete="off"
         >
           <div>
-            <Form.Item name="username">
+            <Form.Item name="search">
               <Input
                 placeholder="Nhập nội dung bạn muốn tìm kiếm"
                 suffix={<SearchOutlined />}
@@ -187,97 +143,46 @@ const Checkin = () => {
           </div>
 
           <Row gutter={[12, 12]}>
-            <Col xs={24} sm={12} lg={6}>
-              {" "}
-              <Form.Item name="password">
+            <Col xs={24} sm={10} lg={10}>
+              <span ><strong>Trạng thái</strong> </span>
+              <Form.Item name="status">
                 <Select defaultValue="">
-                  <Option value="jack">Jack</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="disabled" disabled>
-                    Disabled
-                  </Option>
-                  <Option value="Yiminghe">yiminghe</Option>
+                  <Option value="">---All---</Option>
+                  <Option value="1">Đơn đang xử lý</Option>
+                  <Option value="2">đơn đã được duyệt bởi leader</Option>
+                  <Option value="3">Đơn đã được duyệt</Option>
+                  <Option value="4">Đơn bị từ chối</Option>
                 </Select>
               </Form.Item>
             </Col>
-            <Col xs={24} sm={12} lg={6}>
-              {" "}
-              <Form.Item name="password">
-                <Select defaultValue="">
-                  <Option value="jack">Jack</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="disabled" disabled>
-                    Disabled
-                  </Option>
-                  <Option value="Yiminghe">yiminghe</Option>
-                </Select>
+            <Col xs={24} sm={10} lg={10}>
+              <span ><strong>Thời gian tạo</strong> </span>
+              <Form.Item name="date">
+                <DatePicker allowClear locale={locale} style={{ width: "100%" }} picker="month" />
               </Form.Item>
             </Col>
-            <Col xs={24} sm={12} lg={6}>
-              {" "}
-              <Form.Item name="password">
-                <Select defaultValue="">
-                  <Option value="jack">Jack</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="disabled" disabled>
-                    Disabled
-                  </Option>
-                  <Option value="Yiminghe">yiminghe</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12} lg={6}>
-              {" "}
-              <Form.Item name="password">
-                <Select defaultValue="">
-                  <Option value="jack">Jack</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="disabled" disabled>
-                    Disabled
-                  </Option>
-                  <Option value="Yiminghe">yiminghe</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={[12, 12]}>
-            <Col sm={24} lg={8}>
-              <Form.Item>
-                <span ><strong>Thời gian tạo đơn</strong> </span>
-                <Space direction="vertical" size={12} className="timeTo">
-                  <RangePicker />
-                </Space>
-              </Form.Item>
-            </Col>
-            <Col sm={24} lg={8}>
-              <Form.Item>
-                <span ><strong>Thời gian áp dụng</strong> </span>
-                <Space direction="vertical" size={12} className="timeTo">
-                  <RangePicker />
-                </Space>
-              </Form.Item>
-            </Col>
-            <Col sm={24} lg={8}>
-              {/* <Form.Item>
-              <Button type="primary" htmlType="submit">
+            <Col xs={24} sm={4} lg={4} style={{ display: "flex", alignItems: "center" }}>
+              <Button style={{ width: "100%", margin: "auto" }} type="primary" htmlType="submit">
                 Tìm kiếm
               </Button>
-            </Form.Item> */}
             </Col>
           </Row>
         </Form>
-        <span >Có <strong>1</strong> đơn từ trong danh sách</span>
-        <Table
-        className="timeTo"
-          columns={columns}
-          dataSource={data}
-          pagination={{ pageSize: 3 }}
-          bordered
-          scroll={{
-            x: 1500,
-            y: 1300,
-          }}
-        />
+
+        <span >Có <strong>{singleWordList && singleWordList?.length}</strong> đơn từ trong danh sách</span>
+        <Spin spinning={singleLoading}>
+          <Table
+          className="timeTo"
+            columns={columns}
+            dataSource={singleWordList}
+            pagination={{ pageSize: 3 }}
+            bordered
+            scroll={{
+              x: 1500,
+              y: 1300,
+            }}
+          />
+        </Spin>
       </Card>
     </div>
   );
