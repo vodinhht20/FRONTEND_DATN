@@ -95,8 +95,8 @@ const Checkin = () => {
       render: (_, record) => (
         <div>
           {" "}
-          <p>Bắt đầu nghỉ:<strong>{record.thoiGianBatDau}</strong></p>
-          <p>Kết thúc nghỉ:<strong>{record.thoiGianKetThuc}</strong></p>
+          <p>Bắt đầu: <strong>{record.thoiGianBatDau}</strong></p>
+          <p>Kết thúc: <strong>{record.thoiGianKetThuc}</strong></p>
         </div>
       ),
     }
