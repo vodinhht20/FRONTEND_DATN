@@ -14,7 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { reactLocalStorage } from "reactjs-localstorage";
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
 import "~/assets/css/avatar-style.css";
-import { iconSetting, iconFile, iconShare, iconPlus, iconLocation2, iconDocument} from "~/components/images";
+import { iconSetting, iconFile, iconShare, iconPlus, iconLocation2, iconDocument, iconOrder} from "~/components/images";
 import { initLoad } from "~/recoil/load";
 import { initSettingDefault } from "~/recoil/settingDefault";
 
@@ -120,7 +120,7 @@ const More = () => {
               <Col xs={6} md={6} lg={4}>
               <Link to={"don-tu-cua-ban"}>
                 <Badge count={""}>
-                  <Avatar className="icon-app-style" src={iconDocument} />
+                  <Avatar className="icon-app-style" src={iconOrder} />
                   <p>Đơn từ của bạn</p>
                 </Badge>
               </Link>

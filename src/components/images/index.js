@@ -20,3 +20,6 @@ export { default as iconLocation } from "~/assets/images/location.png";
 
 //document
 export { default as documentbg } from "~/assets/images/bg-document.jpg";
+
+//iconOrder
+export { default as iconOrder } from "~/assets/images/icons-svg/purchase-order.png";

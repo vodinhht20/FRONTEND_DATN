@@ -50,8 +50,8 @@ const Head = () => {
   const resetHomeStatistic = useResetRecoilState(initHomeStatistic);
 
   const [notifications, setNotifications] = useRecoilState(initNotification);
-  const notiPersonal = notifications && notifications.filter(noti => noti.type == 1);
-  const notiGlobal = notifications && notifications.filter(noti => noti.type == 2);
+  const notiPersonal = notifications && notifications.filter(noti => noti.type == 2);
+  const notiGlobal = notifications && notifications.filter(noti => noti.type == 1);
   
   const [notiNotWached, setNotiNotWached] = useState(null);
 
@@ -271,7 +271,7 @@ const Head = () => {
         <Col xs={0} md={0} lg={10}>
           <InputSearch />
         </Col>
-        <Col xs={12} md={12} lg={7} className="nav-top-right">
+        <Col xs={12} md={12} lg={7} style={{ alignItems: "center" }} className="nav-top-right">
           {/* <IconButton
             size="large"
             aria-label="show 4 new mails"
