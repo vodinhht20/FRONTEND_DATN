@@ -11,7 +11,7 @@ import Skeleton from '@mui/material/Skeleton';
 import { Row, Col, Card, Typography, Progress, Carousel, Avatar } from "antd";
 import { banner01, banner02, banner03, banner04 } from "~/components/images";
 import { SliderEvent, SkeletonLine, RankList } from "~/components/Home";
-import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner, initCheckKyc } from "~/recoil/atom";
+import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner, initCheckKyc, initOT } from "~/recoil/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -23,6 +23,7 @@ const Home = () => {
   const checkinData = useRecoilValue(initCheckin);
   const loading = useRecoilValue(initLoad);
   const profileData = useRecoilValue(initProfile);
+  const otPersonal = useRecoilValue(initOT);
   const dataHome = useRecoilValue(initHomeStatistic);
   const checkKyc = useRecoilValue(initCheckKyc);
   const rankData = useRecoilValue(initRankCheckin);
@@ -111,7 +112,7 @@ const Home = () => {
                               </div>
                               <div className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><FieldTimeOutlined className="section-icon" /> Số giờ OT</span>
-                                <span className="content-item">20h</span>
+                                <span className="content-item">{ otPersonal && otPersonal }h</span>
                               </div>
                               <Link to="more/don-tu-cua-ban" className="ant-row ant-row-space-between statistic-home-item">
                                 <span className="lable-item"><SnippetsOutlined className="section-icon" /> Đơn từ</span>

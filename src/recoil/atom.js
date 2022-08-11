@@ -12,3 +12,4 @@ export { initCheckKyc } from "~/recoil/checkkyc";
 export { initSettingDefault } from "~/recoil/settingDefault";
 export { initNotification } from "~/recoil/notification";
 export { initSingleWordList } from "~/recoil/singleWordList";
+export { initOT } from "~/recoil/otPersonal";

@@ -12,7 +12,7 @@ import Profile from "~/pages/Profile";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault, initNotification } from "~/recoil/atom";
+import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault, initNotification, initOT } from "~/recoil/atom";
 import { checkAuth, getData, getData2, getNotification, timekeepRanking } from "~/api/BaseAPI";
 import { message, notification } from "antd";
 import { homeStatisticData, checkinData } from "~/data-test";
@@ -48,6 +48,7 @@ const Router = () => {
   const setCheckKyc = useSetRecoilState(initCheckKyc);
   const settingDefault = useSetRecoilState(initSettingDefault);
   const setNotification = useSetRecoilState(initNotification);
+  const setOt = useSetRecoilState(initOT);
 
   const routesLogin = useRecoilValue(initRoutesLogin);
   useEffect(() => {
@@ -78,6 +79,9 @@ const Router = () => {
 
           let profileData = await getData2("profile");
           setProfile({...profileData.data, avatar: profileData.data.avatar ? profileData.data.avatar : null, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});
+
+          let otPersonal = await getData2("timesheet");
+          setOt(otPersonal?.data?.ot || 0);
 
           let checkinData = await getData2('checkin/data-checkin');
           setCheckin(checkinData.data.data);
