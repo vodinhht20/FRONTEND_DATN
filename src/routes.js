@@ -74,8 +74,8 @@ const Router = () => {
           let orderData = await getData2("list-single-type");
           setlistOrder(orderData.data.payload);
 
-          let dashboardData = await getData("dashboard");
-          setDataChart(dashboardData.data);
+          let dashboardData = await getData2("dashboard");
+          setDataChart(dashboardData.data.data);
 
           let profileData = await getData2("profile");
           setProfile({...profileData.data, avatar: profileData.data.avatar ? profileData.data.avatar : null, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});

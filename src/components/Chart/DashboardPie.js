@@ -1,24 +1,27 @@
-import { Pie } from "@ant-design/plots";
+import { Line, Pie } from "@ant-design/plots";
 const DashboardPie = ({ data }) => {
-    const config = {
-      appendPadding: 10,
-      data,
-      angleField: "value",
-      colorField: "type",
-      radius: 0.8,
+  const config = {
+    data,
+    xField: 'day',
+    yField: 'm',
+    seriesField: 'name',
+    yAxis: {
       label: {
-        type: "outer",
-        content: "{name} {percentage}",
+        formatter: (v) => `${v} Phút`,
       },
-      interactions: [
-        {
-          type: "pie-legend-active",
-        },
-        {
-          type: "element-active",
-        },
-      ],
-    };
-    return <Pie {...config} />;
+    },
+    legend: {
+      position: 'top',
+    },
+    smooth: true,
+    // @TODO 后续会换一种动画方式
+    animation: {
+      appear: {
+        animation: 'path-in',
+        duration: 5000,
+      },
+    },
+  };
+  return <Line {...config} />;
 };
 export default DashboardPie;
