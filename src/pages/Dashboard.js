@@ -15,8 +15,8 @@ const Dashboard = () => {
   const [visible, setVisible] = useState(false);
   const loading = useRecoilValue(initLoad);
   const [monthYear, setMonthYear] = useState();
-  const [dataTimeSheet, setDataTimeSheet] = useState({});
-  const [totalDayMonth, setTotalDayMonth] = useState(0);
+  // const [dataTimeSheet, setDataTimeSheet] = useState({});
+  const [sumTime, setSumTime] = useState({});
   // const [loading, setLoading] = useState(true);
 
   // const [dataPie, setDataPie] = useRecoilState(initDataChart);
@@ -28,12 +28,11 @@ const Dashboard = () => {
     document.title = "Thống kê";
     let currentMonth = formatDate(null, "MM/Y");
     setMonthYear(currentMonth);
-    timesheet(currentMonth)
+
+      getData2('dashboard?date='+formatDate(null, 'MM/YYYY'))
       .then(({ data }) => {
-        setDataTimeSheet(data.data)
-        setTotalDayMonth(data.totalDayMonth)
-        // setLoading(false);
-      });
+        setSumTime(data.sumTime);
+      })
   }, []);
 
   const onChange = (values) => {
@@ -45,6 +44,7 @@ const Dashboard = () => {
         message.warning('Không có dữ liệu');
       }
       setDataChart(data.data);
+      setSumTime(data.sumTime);
     })
   }
 
@@ -70,9 +70,9 @@ const Dashboard = () => {
       <Row className="dashboard-container" gutter={[12, 12]}>
         <Col xs={24} md={24} lg={24}>
           <Card bordered={false} loading={loading}>
-            {/* <p className="text-info"> Tổng số công ghi nhận: <span className="info-count">{ dataTimeSheet && dataTimeSheet?.sum_current_worktime || 0 }/{totalDayMonth && totalDayMonth}</span> </p> */}
-            {/* <p className="text-info"> Tổng số ngày nghỉ: <span className="info-count">5</span> </p>
-            <p className="text-info"> Tổng số ngày nghỉ lễ và thứ 7 chủ nhật: <span className="info-count">5</span> </p> */}
+            <p className="text-info"> Tổng số phút đi muộn: <span className="info-count">{ sumTime && sumTime?.minute_late || 0 } phút</span> </p>
+            <p className="text-info"> Tổng số phút về sớm: <span className="info-count">{ sumTime && sumTime?.minute_early || 0 } phút</span> </p>
+            <p className="text-info"> Tổng số Phút OT: <span className="info-count">{ sumTime && sumTime?.ot || 0 } ({ sumTime && (sumTime?.ot) / 60 } giờ)</span> </p>
           </Card>
         </Col>
         <Col xs={24} md={24} lg={24}>

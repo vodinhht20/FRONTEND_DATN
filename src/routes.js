@@ -81,7 +81,7 @@ const Router = () => {
           setProfile({...profileData.data, avatar: profileData.data.avatar ? profileData.data.avatar : null, birth_day: moment(profileData.data.birth_day ? profileData.data.birth_day : '0000-00-00', "YYYY-MM-DD")});
 
           let otPersonal = await getData2("timesheet");
-          setOt(otPersonal?.data?.ot || 0);
+          setOt((otPersonal?.data?.ot?.ot) / 60 || 0);
 
           let checkinData = await getData2('checkin/data-checkin');
           setCheckin(checkinData.data.data);
