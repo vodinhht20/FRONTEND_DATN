@@ -13,7 +13,7 @@ import locale from 'antd/es/date-picker/locale/vi_VN';
 
 const Dashboard = () => {
   const [visible, setVisible] = useState(false);
-  const loading = useRecoilValue(initLoad);
+  const [loading, setLoading] = useRecoilState(initLoad);
   const [monthYear, setMonthYear] = useState();
   // const [dataTimeSheet, setDataTimeSheet] = useState({});
   const [sumTime, setSumTime] = useState({});
@@ -25,6 +25,7 @@ const Dashboard = () => {
   const [dataChart, setDataChart] = useRecoilState(initDataChart);
 
   useEffect(() => {
+    setLoading(true);
     document.title = "Thống kê";
     let currentMonth = formatDate(null, "MM/Y");
     setMonthYear(currentMonth);
@@ -32,10 +33,12 @@ const Dashboard = () => {
       getData2('dashboard?date='+formatDate(null, 'MM/YYYY'))
       .then(({ data }) => {
         setSumTime(data.sumTime);
+        setLoading(false);
       })
   }, []);
 
   const onChange = (values) => {
+    setLoading(true);
     getData2('dashboard?date='+formatDate(values, 'MM/YYYY'))
     .then(({ data }) => {
       setMonthYear(formatDate(values, 'MM/YYYY'));
@@ -45,6 +48,7 @@ const Dashboard = () => {
       }
       setDataChart(data.data);
       setSumTime(data.sumTime);
+      setLoading(false);
     })
   }
 

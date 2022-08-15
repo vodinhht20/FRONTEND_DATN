@@ -1135,6 +1135,10 @@ header {
 .blog .blog-content{
   font-size: 1.11em;
   line-height: 1.8em;
+  text-align: justify;
+}
+.blog .blog-content img{
+  max-width: 100%;
 }
 /* BLog */
 

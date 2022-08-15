@@ -11,7 +11,7 @@ import Skeleton from '@mui/material/Skeleton';
 import { Row, Col, Card, Typography, Progress, Carousel, Avatar } from "antd";
 import { banner01, banner02, banner03, banner04 } from "~/components/images";
 import { SliderEvent, SkeletonLine, RankList } from "~/components/Home";
-import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner, initCheckKyc, initOT } from "~/recoil/atom";
+import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner, initCheckKyc, initOT, initBLog } from "~/recoil/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -28,6 +28,7 @@ const Home = () => {
   const checkKyc = useRecoilValue(initCheckKyc);
   const rankData = useRecoilValue(initRankCheckin);
   const banner = useRecoilValue(initBanner);
+  const blog = useRecoilValue(initBLog);
   const setRankCheckin = useSetRecoilState(initRankCheckin);
   const [ordersperMonth, setOrdersperMonth] = useState(0);
 
@@ -201,7 +202,7 @@ const Home = () => {
       <Row gutter={[12,12]} className="mt-3">
         <Col span={24} >
           <Title level={3} className="title-home-top">Workshop</Title>
-          <SliderEvent loading={loading}/>
+          <SliderEvent blog={blog} loading={loading}/>
         </Col>
       </Row>
     </div>

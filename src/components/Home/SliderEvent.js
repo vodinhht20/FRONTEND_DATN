@@ -17,8 +17,9 @@ import bannerBirthDay from "~/assets/images/banner/happy_birth_day.png";
 import bannerVaccine from "~/assets/images/banner/banner-vaccine.png";
 import bannerMeet from "~/assets/images/banner/banner_meet.png";
 import './SlideEvent.css'
+import { Link } from "react-router-dom";
 
-const SliderEvent = ({ loading }) => {
+const SliderEvent = ({ loading, blog }) => {
 
 const onChangeSendMess=(e)=>{
 console.log(`checked = ${e.target.checked}`)
@@ -71,7 +72,7 @@ const hide = () => {
         <SwiperSlide>
             {
                 loading ?
-                <SkeletonCard />
+                    <SkeletonCard />
                 :
                 <CarMUI >
                     <CardActionArea>
@@ -143,37 +144,51 @@ const hide = () => {
                 </CarMUI>
             }
         </SwiperSlide>
-        <SwiperSlide>
-            {
-                loading ?
-                <SkeletonCard />
-                :
-                <CarMUI >
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="160"
-                            image={bannerVaccine}
-                            alt="banner"
-                        />
-                        <CardContent className="box-card-content-event">
-                            <Typography variant="body2" color="text.secondary">
-                                <div className="content-event">
-                                    Nếu dữ liệu chưa cập nhật mới nhất, bạn vui lòng cập nhật thêm các mũi tiêm của mình,
-                                    kèm theo minh chứng là ảnh chụp của <b>"Giấy chứng nhận tiêm vaccine"</b>.
-                                </div>
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        <Button type="primary" className="btn-section-event  btn-section-warring">
-                            Cập nhật ngay
-                        </Button>
-                    </CardActions>
-                </CarMUI>
-            }
-        </SwiperSlide>
-        <SwiperSlide>
+
+        {loading ?
+            <>
+                <SwiperSlide>
+                    <SkeletonCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <SkeletonCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <SkeletonCard />
+                </SwiperSlide>
+            </>
+            :
+            blog && blog.map((item) => {
+                return (
+                    <SwiperSlide>
+                            <CarMUI >
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        height="160"
+                                        image={process.env.REACT_APP_LINK_SERVER+item?.images}
+                                        alt="banner"
+                                    />
+                                    <CardContent className="box-card-content-event">
+                                        <Typography variant="body2" color="text.secondary">
+                                            <div className="content-event">{item?.title}</div>
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                                <CardActions>
+                                        <Button type="primary" className="btn-section-event  btn-section-warring">
+                                            <Link to={`/blog/${item?.slug}`} >
+                                                Đọc ngay
+                                            </Link>
+                                        </Button>
+                                </CardActions>
+                            </CarMUI>
+                    </SwiperSlide>
+                )
+            })
+        }
+        
+        {/* <SwiperSlide>
             {
                 loading ?
                 <SkeletonCard />
@@ -321,7 +336,7 @@ const hide = () => {
                     </CardActions>
                 </CarMUI>
             }
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
     </>
   );

@@ -12,7 +12,7 @@ import Profile from "~/pages/Profile";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault, initNotification, initOT } from "~/recoil/atom";
+import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault, initNotification, initOT, initBLog } from "~/recoil/atom";
 import { checkAuth, getData, getData2, getNotification, timekeepRanking } from "~/api/BaseAPI";
 import { message, notification } from "antd";
 import { homeStatisticData, checkinData } from "~/data-test";
@@ -49,6 +49,7 @@ const Router = () => {
   const settingDefault = useSetRecoilState(initSettingDefault);
   const setNotification = useSetRecoilState(initNotification);
   const setOt = useSetRecoilState(initOT);
+  const setBlog = useSetRecoilState(initBLog);
 
   const routesLogin = useRecoilValue(initRoutesLogin);
   useEffect(() => {
@@ -86,8 +87,11 @@ const Router = () => {
           let checkinData = await getData2('checkin/data-checkin');
           setCheckin(checkinData.data.data);
 
-          let rankData = await timekeepRanking()
+          let rankData = await timekeepRanking();
           setRankCheckin(rankData.data.data);
+
+          let blogData = await getData2("blog");
+          setBlog(blogData.data.data);
 
           setHomeStatistic(homeStatisticData);
 
@@ -152,7 +156,7 @@ const Router = () => {
         <Route path="thong-ke" element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
         <Route path="loginfake" element={<LoginFake />} />
-        <Route path="blog" element={< Blog/>} />
+        <Route path="blog/:slug" element={< Blog/>} />
 
         {/* More router */}
         <Route path="more">
