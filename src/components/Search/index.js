@@ -1,7 +1,5 @@
 import { Empty, Select, Typography, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
-import jsonp from 'fetch-jsonp';
-import qs from 'qs';
 import React, { useState } from 'react';
 import { routeSearch } from '~/routeSearch';
 
@@ -17,7 +15,7 @@ const InputSearch = (props) => {
 
   const handleSearch = value => {
     if (value) {
-      setDataSearch(routeSearch.filter(data => data.name.toLowerCase().includes(value)));
+      setDataSearch(routeSearch.filter(data => data.name.toLowerCase().includes(value.toLowerCase())));
     } else {
       setDataSearch([]);
     }
@@ -26,7 +24,11 @@ const InputSearch = (props) => {
   const handleChange = value => {
     setDataSearch(value);
   };
-  const options = dataSearch.map(dataItem => <Option value={dataItem.name}><Link to={'/'+dataItem.link}>{dataItem.name}</Link></Option>)
+  const options = dataSearch.map((dataItem, index) => {
+    return (
+      <Option key={index++} value={dataItem.name}><Link to={'/'+dataItem.link}>{dataItem.name}</Link></Option>
+    )
+  });
     return (
       <Row>
         <Col span={4}>
