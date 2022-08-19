@@ -269,7 +269,7 @@ const Head = () => {
           </Link>
         </Col>
         <Col xs={0} md={0} lg={10}>
-          <InputSearch />
+          <InputSearch placeholder="Tìm kiếm" style={{width: "100%"}} />
         </Col>
         <Col xs={12} md={12} lg={7} style={{ alignItems: "center" }} className="nav-top-right">
           {/* <IconButton

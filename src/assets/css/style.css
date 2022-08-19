@@ -1172,3 +1172,7 @@ header {
 .title-singleword{
   text-transform: uppercase;
 }
+/* search head */
+.ant-select-dropdown{
+  z-index: 1050 !important;
+}

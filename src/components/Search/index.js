@@ -2,66 +2,31 @@ import { Empty, Select, Typography, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import jsonp from 'fetch-jsonp';
 import qs from 'qs';
-import React from 'react';
+import React, { useState } from 'react';
+import { routeSearch } from '~/routeSearch';
 
 const { Option } = Select;
 const { Text } = Typography;
 
-let timeout;
-let currentValue;
+const InputSearch = (props) => {
+  const [dataSearch, setDataSearch] = useState([
+    {name: 'Chấm công', link: "cham-cong"},
+    {name: 'Bảng công', link: "bang-cong"},
+    {name: 'Thống kê', link: "thong-ke"},
+  ]);
 
-function fetch(value, callback) {
-  if (timeout) {
-    clearTimeout(timeout);
-    timeout = null;
-  }
-  currentValue = value;
-
-  function fake() {
-    const str = qs.stringify({
-      code: 'utf-8',
-      q: value,
-    });
-    jsonp(`https://suggest.taobao.com/sug?${str}`)
-      .then(response => response.json())
-      .then(d => {
-        if (currentValue === value) {
-          const { result } = d;
-          const data = [];
-          result.forEach(r => {
-            data.push({
-              value: r[0],
-              text: r[0],
-            });
-          });
-          callback(data);
-        }
-      });
-  }
-
-  timeout = setTimeout(fake, 300);
-}
-
-class SearchInput extends React.Component {
-  state = {
-    data: [],
-    value: undefined,
-  };
-
-  handleSearch = value => {
+  const handleSearch = value => {
     if (value) {
-      fetch(value, data => this.setState({ data }));
+      setDataSearch(routeSearch.filter(data => data.name.toLowerCase().includes(value)));
     } else {
-      this.setState({ data: [] });
+      setDataSearch([]);
     }
   };
 
-  handleChange = value => {
-    this.setState({ value });
+  const handleChange = value => {
+    setDataSearch(value);
   };
-
-  render() {
-    const options = this.state.data.map(dataItem => <Option key={dataItem.value}><Link to={'/'+dataItem.text}>{dataItem.text}</Link></Option>);
+  const options = dataSearch.map(dataItem => <Option value={dataItem.name}><Link to={'/'+dataItem.link}>{dataItem.name}</Link></Option>)
     return (
       <Row>
         <Col span={4}>
@@ -70,21 +35,20 @@ class SearchInput extends React.Component {
         <Col span={20}>
           <Select
             showSearch
-            value={this.state.value}
-            placeholder={this.props.placeholder}
-            style={this.props.style}
+            value={dataSearch}
+            placeholder={props.placeholder}
+            style={props.style}
             showArrow={true}
             filterOption={true}
-            onSearch={this.handleSearch}
-            onChange={this.handleChange}
+            onSearch={handleSearch}
+            onChange={handleChange}
             notFoundContent={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
           >
-            {options}
+            { options }
           </Select>
         </Col>
       </Row>
     );
-  }
 }
 
-export default () => <SearchInput placeholder="Search ..." style={{ width: '100%' }} />;
+export default InputSearch;
