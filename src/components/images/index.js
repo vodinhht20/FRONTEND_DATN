@@ -26,3 +26,4 @@ export { default as iconOrder } from "~/assets/images/icons-svg/purchase-order.p
 
 // decord
 export { default as happyBirthday } from "~/assets/images/happy_birthday.png";
+export { default as birtday } from "~/assets/images/birtday.png";

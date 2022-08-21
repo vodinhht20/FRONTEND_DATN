@@ -15,7 +15,7 @@ import { SkeletonCard } from "~/components/Home";
 import VirtualList from 'rc-virtual-list';
 
 import bannerBirthDay from "~/assets/images/banner/happy_birth_day.png";
-import { happyBirthday } from "~/components/images";
+import { happyBirthday, birtday } from "~/components/images";
 import { Link } from "react-router-dom";
 
 const SliderEvent = ({ loading, blog, birthDay }) => {
@@ -120,6 +120,10 @@ const hide = () => {
                                 >
                                     {item => (
                                         <List.Item key={item.id} className="user-item">
+                                            <div class="age-birthday">
+                                                <img src={ birtday }/>
+                                                <span>{ item.age } Tuổi</span>
+                                            </div>
                                             <List.Item.Meta
                                                 avatar={<Avatar src={item?.avatar} size="large"/>}
                                                 title={<a href={item?.avatar}>{item?.fullname || 'Vô Danh'}</a>}
