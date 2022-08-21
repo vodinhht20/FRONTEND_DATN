@@ -23,3 +23,6 @@ export { default as documentbg } from "~/assets/images/bg-document.jpg";
 
 //iconOrder
 export { default as iconOrder } from "~/assets/images/icons-svg/purchase-order.png";
+
+// decord
+export { default as happyBirthday } from "~/assets/images/happy_birthday.png";

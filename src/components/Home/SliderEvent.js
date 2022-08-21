@@ -3,7 +3,7 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import Typography from '@mui/material/Typography';
 import { FreeMode, Pagination, Navigation, Autoplay } from "swiper";
-import { Avatar, Checkbox , Tooltip, Button, Modal,Input ,Popover } from "antd";
+import { Avatar, Tooltip, Button, Modal, Input, List } from "antd";
 import { GiftOutlined, UserOutlined } from "@ant-design/icons";
 import { CardActionArea, CardActions } from '@mui/material';
 import { useEffect, useState } from "react";
@@ -12,16 +12,14 @@ import CarMUI from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { SkeletonCard } from "~/components/Home";
+import VirtualList from 'rc-virtual-list';
 
 import bannerBirthDay from "~/assets/images/banner/happy_birth_day.png";
-import bannerVaccine from "~/assets/images/banner/banner-vaccine.png";
-import bannerMeet from "~/assets/images/banner/banner_meet.png";
+import { happyBirthday } from "~/components/images";
 import { Link } from "react-router-dom";
 
 const SliderEvent = ({ loading, blog, birthDay }) => {
-const onChangeSendMess=(e)=>{
-console.log(`checked = ${e.target.checked}`)
-    }
+
 const { TextArea } = Input;
 const [isModalVisible, setIsModalVisible] = useState(false);
 const [visible, setVisible] = useState(false);
@@ -109,29 +107,28 @@ const hide = () => {
                         </CardActionArea>
                         <CardActions>
                             <Button type="primary" onClick={showModal} className="btn-section-event  btn-section-warring">
-                                Gửi lời chúc
+                                Xem ngay
                             </Button>
-                            <Modal title="Danh sách sinh nhật" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} >
-                                <p><Checkbox onChange={onChangeSendMess} style={{ marginTop: "5px" }}>Gửi lười chúc đến tất cả mọi người</Checkbox></p>
-                                <p>
-                                <Popover
-                                    content={ <><TextArea rows={2} /> <Button className="sendMess" onClick={hide} type="primary">Gửi</Button> </>}
-                                    title="Gửi lời chúc"
-                                    placement="rightTop"
-                                    trigger="click"
-                                    visible={visible}
-                                    onVisibleChange={handleVisibleChange}
+                            <Modal title="Danh sách sinh nhật" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} className="modal-happy-birthday">
+                                <img src={ happyBirthday } style={{ position: "absolute", width: "90%", top: 0, zIndex: 10 }}/>
+                                <VirtualList
+                                    data={birthDay}
+                                    height={350}
+                                    itemHeight={47}
+                                    itemKey="email"
+                                    style={{ paddingTop: "10px" }}
                                 >
-                        <Tooltip placement="top" title={"Tiến Bịp-phòng IT"}>
-                            <Avatar
-                            style={{ cursor: "pointer" }}
-                            icon={<UserOutlined />}
-                            />
-                        </Tooltip>
-                        </Popover>
-                                </p>
-                                <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
-                                <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
+                                    {item => (
+                                        <List.Item key={item.id} className="user-item">
+                                            <List.Item.Meta
+                                                avatar={<Avatar src={item?.avatar} size="large"/>}
+                                                title={<a href={item?.avatar}>{item?.fullname || 'Vô Danh'}</a>}
+                                                description={item?.position?.name || ''}
+                                                className="user-info"
+                                            />
+                                        </List.Item>
+                                    )}
+                                </VirtualList>
                             </Modal>
                         </CardActions>
                     </CarMUI>

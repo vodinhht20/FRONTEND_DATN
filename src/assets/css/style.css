@@ -1181,3 +1181,7 @@ header {
   color: #32c343 !important;
   background-color: #32c3432e !important;
 }
+
+.modal-happy-birthday .ant-modal-body {
+  position: relative;
+}

@@ -34,6 +34,7 @@ const Home = () => {
 
   const [proDocument, setProDocument] = useState({text: '', numbers: 0});
   useEffect(() => {
+    document.title = "Trang chủ";
     if (checkKyc == 1) {
       setProDocument({text: 'Hồ sơ đã được xác minh', numbers: 100});
     } else if(checkKyc == 0) {
