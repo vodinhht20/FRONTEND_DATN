@@ -3,7 +3,7 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import Typography from '@mui/material/Typography';
 import { FreeMode, Pagination, Navigation, Autoplay } from "swiper";
-import { Avatar, Tooltip, Button, Modal, Input, List } from "antd";
+import { Avatar, Tooltip, Button, Modal, Input, List, Tag } from "antd";
 import { GiftOutlined, UserOutlined } from "@ant-design/icons";
 import { CardActionArea, CardActions } from '@mui/material';
 import { useEffect, useState } from "react";
@@ -116,13 +116,13 @@ const hide = () => {
                                     height={350}
                                     itemHeight={47}
                                     itemKey="email"
-                                    style={{ paddingTop: "10px" }}
+                                    style={{ paddingTop: "54px" }}
                                 >
                                     {item => (
                                         <List.Item key={item.id} className="user-item">
                                             <div class="age-birthday">
-                                                <img src={ birtday }/>
-                                                <span>{ item.age } Tuổi</span>
+                                                <img className="img-birtday" src={ birtday }/>
+                                                <Tag style={{margin: "0"}}color="cyan">{ item.age } Tuổi</Tag>
                                             </div>
                                             <List.Item.Meta
                                                 avatar={<Avatar src={item?.avatar} size="large"/>}

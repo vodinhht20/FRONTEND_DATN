@@ -52,7 +52,7 @@ const Order3 = ({ loadingSingle, fileImage, onchangleUpload, inputImage, loading
               rules={[
                 {
                   required: true,
-                  message: "Vui lòng điền lý do!",
+                  message: "Vui lòng chọn ngày làm thêm giờ!",
                 },
               ]}
             >
@@ -78,7 +78,7 @@ const Order3 = ({ loadingSingle, fileImage, onchangleUpload, inputImage, loading
                   rules={[
                     {
                       required: true,
-                      message: "Vui lòng điền lý do!",
+                      message: "Vui lòng chọn khoảng thời gian bắt đầu và kết thúc!",
                     },
                   ]}
                 >

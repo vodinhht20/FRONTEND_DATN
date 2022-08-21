@@ -58,7 +58,7 @@ const Blog = () => {
                 </div>
               </div>
               <div className="user-title-content">
-                  <Tag color="#f50">#Tin nội bộ</Tag>
+                  <Tag color="#f50">#{article && article?.category?.name}</Tag>
               </div>
             </div>
           </Card>

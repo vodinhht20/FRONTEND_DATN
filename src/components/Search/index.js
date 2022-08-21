@@ -2,33 +2,33 @@ import { Empty, Select, Typography, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { routeSearch } from '~/routeSearch';
+import { useRecoilState } from 'recoil';
+import { initSearch } from '~/recoil/search';
 
 const { Option } = Select;
 const { Text } = Typography;
 
 const InputSearch = (props) => {
-  const [dataSearch, setDataSearch] = useState([
-    {name: 'Chấm công', link: "cham-cong"},
-    {name: 'Bảng công', link: "bang-cong"},
-    {name: 'Thống kê', link: "thong-ke"},
-  ]);
+  const [dataSearch, setDataSearch] = useRecoilState(initSearch);
 
   const handleSearch = value => {
     if (value) {
       setDataSearch(routeSearch.filter(data => data.name.toLowerCase().includes(value.toLowerCase())));
     } else {
-      setDataSearch([]);
+      // setDataSearch([]);
     }
   };
 
   const handleChange = value => {
     setDataSearch(value);
   };
-  const options = dataSearch.map((dataItem, index) => {
+
+  const options = dataSearch && dataSearch instanceof Array && dataSearch?.map((dataItem, index) => {
     return (
       <Option key={index++} value={dataItem.name}><Link to={'/'+dataItem.link}>{dataItem.name}</Link></Option>
     )
   });
+
     return (
       <Row>
         <Col span={4}>
