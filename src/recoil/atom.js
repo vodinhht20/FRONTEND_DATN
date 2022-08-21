@@ -14,3 +14,4 @@ export { initNotification } from "~/recoil/notification";
 export { initSingleWordList } from "~/recoil/singleWordList";
 export { initOT } from "~/recoil/otPersonal";
 export { initBLog } from "~/recoil/blog";
+export { initBirthDay } from "~/recoil/birthDay";

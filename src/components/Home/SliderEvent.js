@@ -16,11 +16,9 @@ import { SkeletonCard } from "~/components/Home";
 import bannerBirthDay from "~/assets/images/banner/happy_birth_day.png";
 import bannerVaccine from "~/assets/images/banner/banner-vaccine.png";
 import bannerMeet from "~/assets/images/banner/banner_meet.png";
-import './SlideEvent.css'
 import { Link } from "react-router-dom";
 
-const SliderEvent = ({ loading, blog }) => {
-
+const SliderEvent = ({ loading, blog, birthDay }) => {
 const onChangeSendMess=(e)=>{
 console.log(`checked = ${e.target.checked}`)
     }
@@ -69,81 +67,77 @@ const hide = () => {
         modules={[FreeMode, Pagination , Navigation, Autoplay]}
         className="box-home-event"
       >
-        <SwiperSlide>
-            {
-                loading ?
-                    <SkeletonCard />
-                :
-                <CarMUI >
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="160"
-                            image={bannerBirthDay}
-                            alt="banner"
-                        />
-                        <CardContent className="box-card-content-event">
-                            <Typography variant="body2" color="text.secondary">
-                                <div className="content-event">
-                                <div className="title-event"><GiftOutlined className="section-icon"/> <b>6 đồng nghiệp </b>sinh nhật hôm nay</div>
-                                <div className="list-avatar">
-                                    <Avatar.Group
-                                        maxCount={4}
-                                        maxPopoverTrigger="click"
-                                        size="large"
-                                        maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf', cursor: 'pointer' }}
-                                        >
-                                        <Tooltip title="Võ Định" placement="top">
-                                            <Avatar style={{ backgroundColor: '#f56a00' }}>VĐ</Avatar>
-                                        </Tooltip>
-                                        <Tooltip title="Trần Tiến" placement="top">
-                                            <Avatar style={{ backgroundColor: '#3aa9ee' }}>TT</Avatar>
-                                        </Tooltip>
-                                        <Tooltip title="Trọng Anh" placement="top">
-                                            <Avatar style={{ backgroundColor: '#269e26' }}>TA</Avatar>
-                                        </Tooltip>
-                                        <Tooltip title="Huy Hoàng" placement="top">
-                                            <Avatar style={{ backgroundColor: '#1890ff' }}>HH</Avatar>
-                                        </Tooltip>
-                                        <Tooltip title="Lê Vân" placement="top">
-                                            <Avatar style={{ backgroundColor: '##f3c20e' }}>LV</Avatar>
-                                        </Tooltip>
-                                        </Avatar.Group>
+        {
+           loading ?
+           <SwiperSlide>
+                <SkeletonCard />
+            </SwiperSlide>
+            :
+            birthDay.length > 0 && (
+                <SwiperSlide>
+                    <CarMUI >
+                        <CardActionArea>
+                            <CardMedia
+                                component="img"
+                                height="160"
+                                image={bannerBirthDay}
+                                alt="banner"
+                            />
+                            <CardContent className="box-card-content-event">
+                                <Typography variant="body2" color="text.secondary">
+                                    <div className="content-event">
+                                    <div className="title-event"><GiftOutlined className="section-icon"/> <b>6 đồng nghiệp </b>sinh nhật hôm nay</div>
+                                    <div className="list-avatar">
+                                        <Avatar.Group
+                                            maxCount={4}
+                                            maxPopoverTrigger="click"
+                                            size="large"
+                                            maxStyle={{ color: '#f56a00', backgroundColor: '#fde3cf', cursor: 'pointer' }}
+                                            >
+                                            {
+                                                birthDay.map((item) => {
+                                                    return <Tooltip title={item.fullname} placement="top">
+                                                                <Avatar src={item.avatar} />
+                                                            </Tooltip>
+                                                })
+                                            }
+                                            </Avatar.Group>
+                                        </div>
                                     </div>
-                                </div>
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        <Button type="primary" onClick={showModal} className="btn-section-event  btn-section-warring">
-                            Gửi lời chúc
-                        </Button>
-                        <Modal title="Danh sách sinh nhật" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} >
-                            <p><Checkbox onChange={onChangeSendMess}>Gửi lười chúc đến tất cả mọi người</Checkbox></p> 
-                            <p>
-                            <Popover
-                                content={ <><TextArea rows={2} /> <Button className="sendMess" onClick={hide} type="primary">Gửi</Button> </>}
-                                title="Gửi lời chúc"
-                                placement="rightTop"
-                                trigger="click"
-                                visible={visible}
-                                onVisibleChange={handleVisibleChange}
-                            >
-                      <Tooltip placement="top" title={"Tiến Bịp-phòng IT"}>
-                        <Avatar
-                          style={{ cursor: "pointer" }}
-                          icon={<UserOutlined />}
-                        />
-                      </Tooltip>
-                    </Popover>
-                            </p>
-                            <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
-                            <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
-                        </Modal>
-                    </CardActions>
-                </CarMUI>
-            }
-        </SwiperSlide>
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            <Button type="primary" onClick={showModal} className="btn-section-event  btn-section-warring">
+                                Gửi lời chúc
+                            </Button>
+                            <Modal title="Danh sách sinh nhật" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} >
+                                <p><Checkbox onChange={onChangeSendMess} style={{ marginTop: "5px" }}>Gửi lười chúc đến tất cả mọi người</Checkbox></p>
+                                <p>
+                                <Popover
+                                    content={ <><TextArea rows={2} /> <Button className="sendMess" onClick={hide} type="primary">Gửi</Button> </>}
+                                    title="Gửi lời chúc"
+                                    placement="rightTop"
+                                    trigger="click"
+                                    visible={visible}
+                                    onVisibleChange={handleVisibleChange}
+                                >
+                        <Tooltip placement="top" title={"Tiến Bịp-phòng IT"}>
+                            <Avatar
+                            style={{ cursor: "pointer" }}
+                            icon={<UserOutlined />}
+                            />
+                        </Tooltip>
+                        </Popover>
+                                </p>
+                                <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
+                                <p><Avatar style={{cursor: 'pointer'}} icon={<UserOutlined />} /></p>
+                            </Modal>
+                        </CardActions>
+                    </CarMUI>
+                </SwiperSlide>
+            )
+        }
 
         {loading ?
             <>
@@ -187,7 +181,7 @@ const hide = () => {
                 )
             })
         }
-        
+
         {/* <SwiperSlide>
             {
                 loading ?

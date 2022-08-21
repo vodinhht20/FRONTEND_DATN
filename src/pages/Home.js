@@ -11,7 +11,7 @@ import Skeleton from '@mui/material/Skeleton';
 import { Row, Col, Card, Typography, Progress, Carousel, Avatar } from "antd";
 import { banner01, banner02, banner03, banner04 } from "~/components/images";
 import { SliderEvent, SkeletonLine, RankList } from "~/components/Home";
-import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner, initCheckKyc, initOT, initBLog } from "~/recoil/atom";
+import { initCheckin, initProfile, initLoad, initRankCheckin, initHomeStatistic, initBanner, initCheckKyc, initOT, initBLog, initBirthDay } from "~/recoil/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ const Home = () => {
   const rankData = useRecoilValue(initRankCheckin);
   const banner = useRecoilValue(initBanner);
   const blog = useRecoilValue(initBLog);
-  const setRankCheckin = useSetRecoilState(initRankCheckin);
+  const listBirthDay = useRecoilValue(initBirthDay);
   const [ordersperMonth, setOrdersperMonth] = useState(0);
 
   const [proDocument, setProDocument] = useState({text: '', numbers: 0});
@@ -48,13 +48,6 @@ const Home = () => {
     .then(({ data }) => setOrdersperMonth(data.orders_perMonth))
   },[]);
 
-  message?.onMessage(function({data:{body, title}}) {
-    if (title === 'timekeep_ranking') {
-      console.log("fire base render", body);
-      let bodyJson = JSON.parse(body);
-      setRankCheckin(bodyJson.data);
-    }
-  });
   const personnelRecord = (
     <Title level={4} className="title-worktime-current">Hồ sơ nhân sự</Title>
   );
@@ -170,7 +163,7 @@ const Home = () => {
       </Row>
       <Row gutter={[12,12]} className="box-rank-list mt-3">
         <Col span={24} >
-          <Title level={3} className="title-home-top">Xếp hạng hôm nay</Title>
+          <Title level={3} className="title-home-top">Nổi bật</Title>
           <Card className="section-content">
             <Row gutter={[12,12]}>
               <Col xs={24} md={12} lg={12} className="col-list-rank">
@@ -179,10 +172,10 @@ const Home = () => {
                     loading ?
                     <Skeleton className="load-line-title"/>
                     :
-                    <Title level={4} className="title-home-top title-rank-tab bg-success">Top Đến Sớm</Title>
+                    <Title level={4} className="title-home-top title-rank-tab bg-danger">Chào đón nhân sự mới</Title>
                   }
                 </div>
-                <RankList data={rankData.timekeep_early} loading={loading} />
+                <RankList data={rankData.member_onboard} type="onboard" loading={loading} />
               </Col>
               <Col xs={24} md={12} lg={12} className="col-list-rank">
                 <div className="box-title-tab">
@@ -190,10 +183,10 @@ const Home = () => {
                     loading ?
                     <Skeleton className="load-line-title"/>
                     :
-                    <Title level={4} className="title-home-top title-rank-tab bg-danger">Top Đi Muộn</Title>
+                    <Title level={4} className="title-home-top title-rank-tab bg-success">Top chuyên cần tháng</Title>
                   }
                 </div>
-                <RankList data={rankData.timekeep_late} loading={loading} />
+                <RankList data={rankData.rank_diligence} type="rank" loading={loading} />
               </Col>
             </Row>
           </Card>
@@ -202,7 +195,7 @@ const Home = () => {
       <Row gutter={[12,12]} className="mt-3">
         <Col span={24} >
           <Title level={3} className="title-home-top">Workshop</Title>
-          <SliderEvent blog={blog} loading={loading}/>
+          <SliderEvent blog={blog} loading={loading} birthDay={listBirthDay}/>
         </Col>
       </Row>
     </div>

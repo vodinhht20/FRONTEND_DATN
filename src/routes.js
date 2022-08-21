@@ -12,8 +12,8 @@ import Profile from "~/pages/Profile";
 import CreateOrderLayout from "./layouts/CreateOrderLayout";
 import OrderPage from "./pages/OrderPage";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault, initNotification, initOT, initBLog } from "~/recoil/atom";
-import { checkAuth, getData, getData2, getNotification, timekeepRanking } from "~/api/BaseAPI";
+import { initProfile, initLoad, initCheckin, initDataChart, initListOrder, initRankCheckin, initHomeStatistic, initAccessToken, initBanner, initCheckKyc, initSettingDefault, initNotification, initOT, initBLog, initBirthDay } from "~/recoil/atom";
+import { checkAuth, getBirthDay, getData, getData2, getNotification, timekeepRanking } from "~/api/BaseAPI";
 import { message, notification } from "antd";
 import { homeStatisticData, checkinData } from "~/data-test";
 import LoginFake from "./pages/LoginFake";
@@ -50,6 +50,7 @@ const Router = () => {
   const setNotification = useSetRecoilState(initNotification);
   const setOt = useSetRecoilState(initOT);
   const setBlog = useSetRecoilState(initBLog);
+  const setBirthDay = useSetRecoilState(initBirthDay);
 
   const routesLogin = useRecoilValue(initRoutesLogin);
   useEffect(() => {
@@ -92,6 +93,9 @@ const Router = () => {
 
           let blogData = await getData2("blog");
           setBlog(blogData.data.data);
+
+          let birthDay = await getBirthDay();
+          setBirthDay(birthDay.data.data);
 
           setHomeStatistic(homeStatisticData);
 

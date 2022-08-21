@@ -1176,3 +1176,8 @@ header {
 .ant-select-dropdown{
   z-index: 1050 !important;
 }
+
+.onboard {
+  color: #32c343 !important;
+  background-color: #32c3432e !important;
+}

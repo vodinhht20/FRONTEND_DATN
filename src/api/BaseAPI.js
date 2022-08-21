@@ -98,7 +98,7 @@ export const tokenFirebase = (token) => {
 
 export const timekeepRanking = () => {
   const headers = requestHeader();
-  const url = "timekeep-ranking";
+  const url = "notable-news";
   return instance2.get(url, { headers });
 }
 
@@ -142,4 +142,10 @@ export const singleWordPesonalList = ($data) => {
   const headers = requestHeader();
   const url = "single-word-personal-list";
   return instance2.post(url, $data, { headers });
+}
+
+export const getBirthDay = () => {
+  const headers = requestHeader();
+  const url = "birth-day";
+  return instance2.get(url, { headers });
 }

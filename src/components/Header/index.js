@@ -52,7 +52,7 @@ const Head = () => {
   const [notifications, setNotifications] = useRecoilState(initNotification);
   const notiPersonal = notifications && notifications.filter(noti => noti.type == 2);
   const notiGlobal = notifications && notifications.filter(noti => noti.type == 1);
-  
+
   const [notiNotWached, setNotiNotWached] = useState(null);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ const Head = () => {
     });
     setNotifications(notis);
   }
-  
+
   const listNotify = (
     <div id="scrollable-notify">
       <PageHeader className="header-notification" title="Thông báo" onClick={() => viewNoti} />
@@ -198,62 +198,12 @@ const Head = () => {
         },
         {
           label: (
-            <>
-              <SettingOutlined className="icon-dropdown" />
-              <Link target="_blank" rel="noopener noreferrer" to={"/"}>
-                Setting
-              </Link>
-            </>
-          ),
-        },
-        {
-          label: (
-            <>
-              <QuestionCircleOutlined className="icon-dropdown" />
-              <Link target="_blank" rel="noopener noreferrer" to={"/"}>
-                Trợ giúp
-              </Link>
-            </>
-          ),
-        },
-        {
-          label: (
             <div className="logout" onClick={LogoutFunc}>
               <LogoutOutlined className="icon-dropdown" />
                 Logout
             </div>
           ),
-        },
-        {
-          label: (
-            <>
-              <QuestionCircleOutlined className="icon-dropdown" />
-              <Link rel="noopener noreferrer" to={"/loginfake"}>
-                Test
-              </Link>
-            </>
-          ),
-        },
-        {
-          label: (
-            <>
-              <QuestionCircleOutlined className="icon-dropdown" />
-              <Link rel="noopener noreferrer" to={"/mxxxx"}>
-                404
-              </Link>
-            </>
-          ),
-        },
-        {
-          label: (
-            <>
-              <QuestionCircleOutlined className="icon-dropdown" />
-              <Link rel="noopener noreferrer" to={"/blog"}>
-                BLog
-              </Link>
-            </>
-          ),
-        },
+        }
       ]}
     />
   );

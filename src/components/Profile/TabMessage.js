@@ -1,6 +1,5 @@
 import { Tabs, Collapse, Avatar, Card } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import "./TabMessage.css";
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 const text = `

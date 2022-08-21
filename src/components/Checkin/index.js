@@ -14,7 +14,7 @@ import { checkIn, locationOCG } from "~/api/BaseAPI";
 import { initLoad } from "~/recoil/load";
 import { useRecoilValue } from "recoil";
 import { initLocation } from "~/recoil/location";
-import axios from "axios";
+import device from '~/commons/gen-device';
 
 const { Title, Text } = Typography;
 const Checkin = ( { handleProps } ) => {
@@ -41,8 +41,8 @@ const Checkin = ( { handleProps } ) => {
     }
   }, [locationValue]);
 
-    const circleLoadingStype = {
-        ...(dataCheckin.type && {
+  const circleLoadingStype = {
+        ...(dataCheckin.checkin && {
             color: `${orange[500]} !important`
         }),
         position: 'absolute',
@@ -64,7 +64,7 @@ const Checkin = ( { handleProps } ) => {
         if(statusRes) {
           setCircleLoading(true);
           setStatusRes(false);
-          checkIn(location)
+          checkIn({...location, device_id: device()})
             .then(({ data }) => {
               if (data.status == 'success') {
                 let resDataCheckin = data.data;

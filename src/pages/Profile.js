@@ -66,7 +66,7 @@ const Profile = () => {
           >
             <TabChangePassWord passwordProps={passwordProps()} />
           </TabPane>
-          <TabPane
+          {/* <TabPane
             tab={
               <>
                 <CommentOutlined className="tab-icon" />
@@ -76,7 +76,7 @@ const Profile = () => {
             key="3"
           >
             <TabMessage />
-          </TabPane>
+          </TabPane> */}
           {profileData && (
             <TabPane
               disabled
