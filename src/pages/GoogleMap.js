@@ -8,7 +8,8 @@ import { initLoadLocationPopup } from "~/recoil/loadLocationPopup";
 function GoogleMap() {
   const location = useRecoilValue(initLocation);
   const locationpopup = useRecoilValue(initLoadLocationPopup);
-  const key = 'AIzaSyD8LT8gzO2zMB71vwNEyd3ydezj3_VqHFo'
+  // const key = 'AIzaSyD8LT8gzO2zMB71vwNEyd3ydezj3_VqHFo'
+  const key = 'AIzaSyBIWSqJ5-3D-UviE0ZLO4U6AjhVcn58y4g'
 
   return (
 
