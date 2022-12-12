@@ -1,0 +1,29 @@
+.document-page{
+    height: 100vh;
+}
+.wr-document{
+    height: 100%;
+    background: transparent;
+}
+.box-document{
+    max-width: 500px;
+    margin: auto !important;
+    display: block;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.select-document{
+    display: inline-block !important;
+    margin: auto !important;
+    padding: 5.5vw !important;
+    height: 100% !important;
+    border-style: dashed !important;
+    border-width: 2px !important;
+    font-size: 1.3em !important;
+}
+.btn-document{
+    width: 100%;
+    padding: 1vw !important;
+    height: 100% !important;
+}
