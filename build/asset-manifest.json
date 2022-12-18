@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c80494ae.css",
+    "main.js": "/static/js/main.063a1fc1.js",
+    "static/js/787.cdcdca4b.chunk.js": "/static/js/787.cdcdca4b.chunk.js",
+    "static/media/banner_02.png": "/static/media/banner_02.d429c1638493f53eac7a.png",
+    "static/media/bg-night.jpg": "/static/media/bg-night.ade7e9420533a87549b3.jpg",
+    "static/media/happy_birthday.png": "/static/media/happy_birthday.d8bb8e15a59c989df4c1.png",
+    "static/media/banner_03.png": "/static/media/banner_03.0ab79a32b32551e21a07.png",
+    "static/media/banner_01.png": "/static/media/banner_01.112c494095efff28bcdf.png",
+    "static/media/banner_04.png": "/static/media/banner_04.04b2df2d3106996312dd.png",
+    "static/media/login-v2.svg": "/static/media/login-v2.a079e849f147155a2edd88f0fbdd7f97.svg",
+    "static/media/happy_birth_day.png": "/static/media/happy_birth_day.2ea444c7305a1869bf23.png",
+    "static/media/RadioCanada-Light.ttf": "/static/media/RadioCanada-Light.b62fc0a54e8dbd4ef19a.ttf",
+    "static/media/background.webp": "/static/media/background.7ca0ab623db89c18191a.webp",
+    "static/media/location.png": "/static/media/location.6d36a119ebc30d92f349.png",
+    "static/media/bg-document.jpg": "/static/media/bg-document.c3e70290ad72381188ec.jpg",
+    "static/media/logo.png": "/static/media/logo.aff80907a01e38f1beee.png",
+    "static/media/setting.svg": "/static/media/setting.fb17270b49791adafa80ff7bf644aca8.svg",
+    "static/media/file.svg": "/static/media/file.a8fd65a4dbb53e816d21961695e978d6.svg",
+    "static/media/document.svg": "/static/media/document.b2b70ce183553ad4e42a0531d8bc3baa.svg",
+    "static/media/share.svg": "/static/media/share.a406f5eece331a52fd167ab5b9c1b1d3.svg",
+    "static/media/plus.svg": "/static/media/plus.5bebe363a6c034882013e6bd1efbc37a.svg",
+    "index.html": "/index.html",
+    "main.c80494ae.css.map": "/static/css/main.c80494ae.css.map",
+    "main.063a1fc1.js.map": "/static/js/main.063a1fc1.js.map",
+    "787.cdcdca4b.chunk.js.map": "/static/js/787.cdcdca4b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c80494ae.css",
+    "static/js/main.063a1fc1.js"
+  ]
+}
